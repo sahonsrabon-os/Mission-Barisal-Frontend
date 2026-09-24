@@ -1,0 +1,4 @@
+Error: waitFor timeout: ai_chat_stream done (last=false)
+    at waitFor (/home/sahon/Videos/ui/server/test/qna_test.js:259:11)
+    at async doChat (/home/sahon/Videos/ui/server/test/qna_test.js:299:5)
+    at async main (/home/sahon/Videos/ui/server/test/qna_test.js:426:17)

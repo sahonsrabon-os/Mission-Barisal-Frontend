@@ -1,0 +1,49 @@
+# route: abort  line: 3889  method: POST
+# params(arg): {}
+# response field reads seen in callback: (none/indirect)
+# NOTE: best-effort regex scan; verify against this dump.
+----------------------------------------------------------------------
+3887: 	for(var k in _ss){if(_ss[k]&&_ss[k].streaming){anyStreaming=true;break;}}
+3888: 	if(anyStreaming||cS||lockActive){
+3889: 		api('abort',{},function(){});
+3890: 		e.preventDefault();
+3891: 		e.returnValue='';
+3892: 		return e.returnValue;
+3893: 	}
+3894: });
+3895: 
+3896: // Initial state
+3897: if(window.innerWidth<=768){
+3898: 	document.getElementById('ocSb').classList.add('hid');
+3899: }
+3900: 
+3901: var cs=localStorage.getItem('oc-cs')||'dark';
+3902: function applyCS(c){
+3903: 	document.documentElement.setAttribute('data-cs',c);
+3904: 	document.getElementById('hljs-theme').href=c==='dark'
+3905: 		?'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css'
+3906: 		:'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css';
+3907: 	localStorage.setItem('oc-cs',c);
+3908: 	var icon=document.getElementById('ocThIcon');
+3909: 	if(icon){
+3910: 		if(c==='dark'){
+3911: 			icon.innerHTML='<circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>';
+3912: 			document.getElementById('ocThBtn').title='Switch to light mode';
+3913: 		}else{
+3914: 			icon.innerHTML='<path d="M21.64 13a1 1 0 0 0-1.05-.14 8.05 8.05 0 0 1-3.37.73 8.15 8.15 0 0 1-8.14-8.1 8.59 8.59 0 0 1 .25-2A1 1 0 0 0 8 2.36 10.14 10.14 0 1 0 22 14.05a1 1 0 0 0-.36-1.05z"/>';
+3915: 			document.getElementById('ocThBtn').title='Switch to dark mode';
+3916: 		}
+3917: 	}
+3918: }
+3919: applyCS(cs);
+3920: document.getElementById('ocThBtn').addEventListener('click',function(){
+3921: 	cs=cs==='light'?'dark':'light';
+3922: 	applyCS(cs);
+3923: });
+3924: 
+3925: // ---- Sound toggle (wired to existing _soundEnabled) ----
+3926: function applySndIcon(on){
+3927: 	var icon=document.getElementById('ocSndIcon');
+3928: 	var btn=document.getElementById('ocSndBtn');
+3929: 	if(!icon||!btn) return;
+3930: 	if(on){

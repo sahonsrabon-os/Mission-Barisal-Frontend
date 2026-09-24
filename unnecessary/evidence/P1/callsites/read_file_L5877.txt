@@ -1,0 +1,49 @@
+# route: read_file  line: 5877  method: POST
+# params(arg): {path:el.dataset.path}
+# response field reads seen in callback: content
+# NOTE: best-effort regex scan; verify against this dump.
+----------------------------------------------------------------------
+5875: 	list.querySelectorAll('.ocFilesI').forEach(function(el){
+5876: 		el.addEventListener('click',function(){
+5877: 			api('read_file',{path:el.dataset.path},function(e,d){
+5878: 				if(!e&&d&&d.content!==undefined){
+5879: 					document.getElementById('ocFvT').textContent=el.dataset.path.replace(SP+'/','');
+5880: 					document.getElementById('ocFvPre').textContent=d.content;
+5881: 					document.getElementById('ocFv').classList.add('open');
+5882: 				}
+5883: 			});
+5884: 		});
+5885: 	});
+5886: }
+5887: // Diff modal close
+5888: document.getElementById('ocDiffC').addEventListener('click',function(){
+5889: 	document.getElementById('ocDiffMod').classList.remove('open');
+5890: });
+5891: document.getElementById('ocDiffMod').addEventListener('click',function(e){
+5892: 	if(e.target===this)this.classList.remove('open');
+5893: });
+5894: 
+5895: // ===== FEATURE: Configurable Keybindings =====
+5896: var _defaultKeybindings={
+5897: 	new_session:'Alt+Shift+N',
+5898: 	plan_mode:'Alt+Shift+P',
+5899: 	build_mode:'Alt+Shift+B',
+5900: 	settings:'Alt+Shift+S',
+5901: 	command_palette:'Ctrl+K',
+5902: 	toggle_sidebar:'Alt+Shift+L',
+5903: 	toggle_files:'Alt+Shift+F',
+5904: 	toggle_todos:'Alt+Shift+T',
+5905: 	toggle_modified:'Alt+Shift+M',
+5906: 	keybindings:'Alt+Shift+K',
+5907: 	sound:'Alt+Shift+O',
+5908: 	notifications:'Alt+Shift+D',
+5909: 	clear:'Alt+Shift+X',
+5910: 	compact:'Alt+Shift+C',
+5911: 	export:'Alt+Shift+E',
+5912: 	copy:'Alt+Shift+Y',
+5913: 	help:'Alt+Shift+H',
+5914: 	stop:'Escape',
+5915: 	send:'Enter',
+5916: 	newline:'Shift+Enter',
+5917: 	prev_prompt:'Up',
+5918: 	next_prompt:'Down'

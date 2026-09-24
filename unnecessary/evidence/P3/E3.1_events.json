@@ -1,0 +1,1029 @@
+{
+  "expected_events": [
+    "iteration-start",
+    "reasoning-delta",
+    "text-delta",
+    "tool-call",
+    "tool-result",
+    "permission-request",
+    "todos",
+    "question",
+    "title",
+    "usage",
+    "done",
+    "error"
+  ],
+  "observed_union": [
+    "done",
+    "error",
+    "iteration-start",
+    "permission-request",
+    "question",
+    "reasoning-delta",
+    "text-delta",
+    "title",
+    "todos",
+    "tool-call",
+    "tool-result",
+    "usage"
+  ],
+  "missing": [],
+  "all_lines_data_prefix": true,
+  "total_events": 92,
+  "scenarios": [
+    {
+      "scenario": "S1_warmup",
+      "status": 200,
+      "contentType": "text/plain; charset=utf-8",
+      "lines": 13,
+      "prefix_ok": true,
+      "bad_lines": [],
+      "events": [
+        {
+          "i": 0,
+          "event": "iteration-start",
+          "keys": [
+            "_event",
+            "conversation_id",
+            "iteration"
+          ]
+        },
+        {
+          "i": 1,
+          "event": "reasoning-delta",
+          "keys": [
+            "_event",
+            "text",
+            "conversation_id"
+          ]
+        },
+        {
+          "i": 2,
+          "event": "text-delta",
+          "keys": [
+            "_event",
+            "text",
+            "conversation_id"
+          ]
+        },
+        {
+          "i": 3,
+          "event": "text-delta",
+          "keys": [
+            "_event",
+            "text",
+            "conversation_id"
+          ]
+        },
+        {
+          "i": 4,
+          "event": "text-delta",
+          "keys": [
+            "_event",
+            "text",
+            "conversation_id"
+          ]
+        },
+        {
+          "i": 5,
+          "event": "text-delta",
+          "keys": [
+            "_event",
+            "text",
+            "conversation_id"
+          ]
+        },
+        {
+          "i": 6,
+          "event": "text-delta",
+          "keys": [
+            "_event",
+            "text",
+            "conversation_id"
+          ]
+        },
+        {
+          "i": 7,
+          "event": "text-delta",
+          "keys": [
+            "_event",
+            "text",
+            "conversation_id"
+          ]
+        },
+        {
+          "i": 8,
+          "event": "text-delta",
+          "keys": [
+            "_event",
+            "text",
+            "conversation_id"
+          ]
+        },
+        {
+          "i": 9,
+          "event": "text-delta",
+          "keys": [
+            "_event",
+            "text",
+            "conversation_id"
+          ]
+        },
+        {
+          "i": 10,
+          "event": "usage",
+          "keys": [
+            "_event",
+            "conversation_id",
+            "usage",
+            "context_tokens",
+            "tool_calls",
+            "iterations",
+            "cost"
+          ]
+        },
+        {
+          "i": 11,
+          "event": "title",
+          "keys": [
+            "_event",
+            "title",
+            "conversation_id"
+          ]
+        },
+        {
+          "i": 12,
+          "event": "done",
+          "keys": [
+            "_event",
+            "conversation_id",
+            "usage",
+            "context_tokens",
+            "tool_calls",
+            "iterations",
+            "cost",
+            "auto_title"
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "S1b_warmup2",
+      "status": 200,
+      "contentType": "text/plain; charset=utf-8",
+      "lines": 12,
+      "prefix_ok": true,
+      "bad_lines": [],
+      "events": [
+        {
+          "i": 0,
+          "event": "iteration-start",
+          "keys": [
+            "_event",
+            "conversation_id",
+            "iteration"
+          ]
+        },
+        {
+          "i": 1,
+          "event": "reasoning-delta",
+          "keys": [
+            "_event",
+            "text",
+            "conversation_id"
+          ]
+        },
+        {
+          "i": 2,
+          "event": "text-delta",
+          "keys": [
+            "_event",
+            "text",
+            "conversation_id"
+          ]
+        },
+        {
+          "i": 3,
+          "event": "text-delta",
+          "keys": [
+            "_event",
+            "text",
+            "conversation_id"
+          ]
+        },
+        {
+          "i": 4,
+          "event": "text-delta",
+          "keys": [
+            "_event",
+            "text",
+            "conversation_id"
+          ]
+        },
+        {
+          "i": 5,
+          "event": "text-delta",
+          "keys": [
+            "_event",
+            "text",
+            "conversation_id"
+          ]
+        },
+        {
+          "i": 6,
+          "event": "text-delta",
+          "keys": [
+            "_event",
+            "text",
+            "conversation_id"
+          ]
+        },
+        {
+          "i": 7,
+          "event": "text-delta",
+          "keys": [
+            "_event",
+            "text",
+            "conversation_id"
+          ]
+        },
+        {
+          "i": 8,
+          "event": "text-delta",
+          "keys": [
+            "_event",
+            "text",
+            "conversation_id"
+          ]
+        },
+        {
+          "i": 9,
+          "event": "text-delta",
+          "keys": [
+            "_event",
+            "text",
+            "conversation_id"
+          ]
+        },
+        {
+          "i": 10,
+          "event": "usage",
+          "keys": [
+            "_event",
+            "conversation_id",
+            "usage",
+            "context_tokens",
+            "tool_calls",
+            "iterations",
+            "cost"
+          ]
+        },
+        {
+          "i": 11,
+          "event": "done",
+          "keys": [
+            "_event",
+            "conversation_id",
+            "usage",
+            "context_tokens",
+            "tool_calls",
+            "iterations",
+            "cost"
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "S2_tool",
+      "status": 200,
+      "contentType": "text/plain; charset=utf-8",
+      "lines": 19,
+      "prefix_ok": true,
+      "bad_lines": [],
+      "events": [
+        {
+          "i": 0,
+          "event": "iteration-start",
+          "keys": [
+            "_event",
+            "conversation_id",
+            "iteration"
+          ]
+        },
+        {
+          "i": 1,
+          "event": "usage",
+          "keys": [
+            "_event",
+            "conversation_id",
+            "usage",
+            "context_tokens",
+            "tool_calls",
+            "iterations",
+            "cost"
+          ]
+        },
+        {
+          "i": 2,
+          "event": "tool-call",
+          "keys": [
+            "_event",
+            "id",
+            "name",
+            "input",
+            "conversation_id"
+          ]
+        },
+        {
+          "i": 3,
+          "event": "tool-result",
+          "keys": [
+            "_event",
+            "id",
+            "name",
+            "input",
+            "output",
+            "is_error",
+            "conversation_id"
+          ]
+        },
+        {
+          "i": 4,
+          "event": "iteration-start",
+          "keys": [
+            "_event",
+            "conversation_id",
+            "iteration"
+          ]
+        },
+        {
+          "i": 5,
+          "event": "reasoning-delta",
+          "keys": [
+            "_event",
+            "text",
+            "conversation_id"
+          ]
+        },
+        {
+          "i": 6,
+          "event": "text-delta",
+          "keys": [
+            "_event",
+            "text",
+            "conversation_id"
+          ]
+        },
+        {
+          "i": 7,
+          "event": "text-delta",
+          "keys": [
+            "_event",
+            "text",
+            "conversation_id"
+          ]
+        },
+        {
+          "i": 8,
+          "event": "text-delta",
+          "keys": [
+            "_event",
+            "text",
+            "conversation_id"
+          ]
+        },
+        {
+          "i": 9,
+          "event": "text-delta",
+          "keys": [
+            "_event",
+            "text",
+            "conversation_id"
+          ]
+        },
+        {
+          "i": 10,
+          "event": "text-delta",
+          "keys": [
+            "_event",
+            "text",
+            "conversation_id"
+          ]
+        },
+        {
+          "i": 11,
+          "event": "text-delta",
+          "keys": [
+            "_event",
+            "text",
+            "conversation_id"
+          ]
+        },
+        {
+          "i": 12,
+          "event": "text-delta",
+          "keys": [
+            "_event",
+            "text",
+            "conversation_id"
+          ]
+        },
+        {
+          "i": 13,
+          "event": "text-delta",
+          "keys": [
+            "_event",
+            "text",
+            "conversation_id"
+          ]
+        },
+        {
+          "i": 14,
+          "event": "text-delta",
+          "keys": [
+            "_event",
+            "text",
+            "conversation_id"
+          ]
+        },
+        {
+          "i": 15,
+          "event": "text-delta",
+          "keys": [
+            "_event",
+            "text",
+            "conversation_id"
+          ]
+        },
+        {
+          "i": 16,
+          "event": "usage",
+          "keys": [
+            "_event",
+            "conversation_id",
+            "usage",
+            "context_tokens",
+            "tool_calls",
+            "iterations",
+            "cost"
+          ]
+        },
+        {
+          "i": 17,
+          "event": "title",
+          "keys": [
+            "_event",
+            "title",
+            "conversation_id"
+          ]
+        },
+        {
+          "i": 18,
+          "event": "done",
+          "keys": [
+            "_event",
+            "conversation_id",
+            "usage",
+            "context_tokens",
+            "tool_calls",
+            "iterations",
+            "cost",
+            "auto_title"
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "S3_write",
+      "status": 200,
+      "contentType": "text/plain; charset=utf-8",
+      "lines": 20,
+      "prefix_ok": true,
+      "bad_lines": [],
+      "events": [
+        {
+          "i": 0,
+          "event": "iteration-start",
+          "keys": [
+            "_event",
+            "conversation_id",
+            "iteration"
+          ]
+        },
+        {
+          "i": 1,
+          "event": "usage",
+          "keys": [
+            "_event",
+            "conversation_id",
+            "usage",
+            "context_tokens",
+            "tool_calls",
+            "iterations",
+            "cost"
+          ]
+        },
+        {
+          "i": 2,
+          "event": "tool-call",
+          "keys": [
+            "_event",
+            "id",
+            "name",
+            "input",
+            "conversation_id"
+          ]
+        },
+        {
+          "i": 3,
+          "event": "permission-request",
+          "keys": [
+            "_event",
+            "tool",
+            "input",
+            "conversation_id"
+          ]
+        },
+        {
+          "i": 4,
+          "event": "tool-result",
+          "keys": [
+            "_event",
+            "id",
+            "name",
+            "input",
+            "output",
+            "is_error",
+            "conversation_id"
+          ]
+        },
+        {
+          "i": 5,
+          "event": "iteration-start",
+          "keys": [
+            "_event",
+            "conversation_id",
+            "iteration"
+          ]
+        },
+        {
+          "i": 6,
+          "event": "reasoning-delta",
+          "keys": [
+            "_event",
+            "text",
+            "conversation_id"
+          ]
+        },
+        {
+          "i": 7,
+          "event": "text-delta",
+          "keys": [
+            "_event",
+            "text",
+            "conversation_id"
+          ]
+        },
+        {
+          "i": 8,
+          "event": "text-delta",
+          "keys": [
+            "_event",
+            "text",
+            "conversation_id"
+          ]
+        },
+        {
+          "i": 9,
+          "event": "text-delta",
+          "keys": [
+            "_event",
+            "text",
+            "conversation_id"
+          ]
+        },
+        {
+          "i": 10,
+          "event": "text-delta",
+          "keys": [
+            "_event",
+            "text",
+            "conversation_id"
+          ]
+        },
+        {
+          "i": 11,
+          "event": "text-delta",
+          "keys": [
+            "_event",
+            "text",
+            "conversation_id"
+          ]
+        },
+        {
+          "i": 12,
+          "event": "text-delta",
+          "keys": [
+            "_event",
+            "text",
+            "conversation_id"
+          ]
+        },
+        {
+          "i": 13,
+          "event": "text-delta",
+          "keys": [
+            "_event",
+            "text",
+            "conversation_id"
+          ]
+        },
+        {
+          "i": 14,
+          "event": "text-delta",
+          "keys": [
+            "_event",
+            "text",
+            "conversation_id"
+          ]
+        },
+        {
+          "i": 15,
+          "event": "text-delta",
+          "keys": [
+            "_event",
+            "text",
+            "conversation_id"
+          ]
+        },
+        {
+          "i": 16,
+          "event": "text-delta",
+          "keys": [
+            "_event",
+            "text",
+            "conversation_id"
+          ]
+        },
+        {
+          "i": 17,
+          "event": "usage",
+          "keys": [
+            "_event",
+            "conversation_id",
+            "usage",
+            "context_tokens",
+            "tool_calls",
+            "iterations",
+            "cost"
+          ]
+        },
+        {
+          "i": 18,
+          "event": "title",
+          "keys": [
+            "_event",
+            "title",
+            "conversation_id"
+          ]
+        },
+        {
+          "i": 19,
+          "event": "done",
+          "keys": [
+            "_event",
+            "conversation_id",
+            "usage",
+            "context_tokens",
+            "tool_calls",
+            "iterations",
+            "cost",
+            "auto_title"
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "S4_todos",
+      "status": 200,
+      "contentType": "text/plain; charset=utf-8",
+      "lines": 20,
+      "prefix_ok": true,
+      "bad_lines": [],
+      "events": [
+        {
+          "i": 0,
+          "event": "iteration-start",
+          "keys": [
+            "_event",
+            "conversation_id",
+            "iteration"
+          ]
+        },
+        {
+          "i": 1,
+          "event": "usage",
+          "keys": [
+            "_event",
+            "conversation_id",
+            "usage",
+            "context_tokens",
+            "tool_calls",
+            "iterations",
+            "cost"
+          ]
+        },
+        {
+          "i": 2,
+          "event": "tool-call",
+          "keys": [
+            "_event",
+            "id",
+            "name",
+            "input",
+            "conversation_id"
+          ]
+        },
+        {
+          "i": 3,
+          "event": "todos",
+          "keys": [
+            "_event",
+            "todos",
+            "conversation_id"
+          ]
+        },
+        {
+          "i": 4,
+          "event": "tool-result",
+          "keys": [
+            "_event",
+            "id",
+            "name",
+            "input",
+            "output",
+            "is_error",
+            "conversation_id"
+          ]
+        },
+        {
+          "i": 5,
+          "event": "iteration-start",
+          "keys": [
+            "_event",
+            "conversation_id",
+            "iteration"
+          ]
+        },
+        {
+          "i": 6,
+          "event": "reasoning-delta",
+          "keys": [
+            "_event",
+            "text",
+            "conversation_id"
+          ]
+        },
+        {
+          "i": 7,
+          "event": "text-delta",
+          "keys": [
+            "_event",
+            "text",
+            "conversation_id"
+          ]
+        },
+        {
+          "i": 8,
+          "event": "text-delta",
+          "keys": [
+            "_event",
+            "text",
+            "conversation_id"
+          ]
+        },
+        {
+          "i": 9,
+          "event": "text-delta",
+          "keys": [
+            "_event",
+            "text",
+            "conversation_id"
+          ]
+        },
+        {
+          "i": 10,
+          "event": "text-delta",
+          "keys": [
+            "_event",
+            "text",
+            "conversation_id"
+          ]
+        },
+        {
+          "i": 11,
+          "event": "text-delta",
+          "keys": [
+            "_event",
+            "text",
+            "conversation_id"
+          ]
+        },
+        {
+          "i": 12,
+          "event": "text-delta",
+          "keys": [
+            "_event",
+            "text",
+            "conversation_id"
+          ]
+        },
+        {
+          "i": 13,
+          "event": "text-delta",
+          "keys": [
+            "_event",
+            "text",
+            "conversation_id"
+          ]
+        },
+        {
+          "i": 14,
+          "event": "text-delta",
+          "keys": [
+            "_event",
+            "text",
+            "conversation_id"
+          ]
+        },
+        {
+          "i": 15,
+          "event": "text-delta",
+          "keys": [
+            "_event",
+            "text",
+            "conversation_id"
+          ]
+        },
+        {
+          "i": 16,
+          "event": "text-delta",
+          "keys": [
+            "_event",
+            "text",
+            "conversation_id"
+          ]
+        },
+        {
+          "i": 17,
+          "event": "usage",
+          "keys": [
+            "_event",
+            "conversation_id",
+            "usage",
+            "context_tokens",
+            "tool_calls",
+            "iterations",
+            "cost"
+          ]
+        },
+        {
+          "i": 18,
+          "event": "title",
+          "keys": [
+            "_event",
+            "title",
+            "conversation_id"
+          ]
+        },
+        {
+          "i": 19,
+          "event": "done",
+          "keys": [
+            "_event",
+            "conversation_id",
+            "usage",
+            "context_tokens",
+            "tool_calls",
+            "iterations",
+            "cost",
+            "auto_title"
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "S5_question",
+      "status": 200,
+      "contentType": "text/plain; charset=utf-8",
+      "lines": 5,
+      "prefix_ok": true,
+      "bad_lines": [],
+      "events": [
+        {
+          "i": 0,
+          "event": "iteration-start",
+          "keys": [
+            "_event",
+            "conversation_id",
+            "iteration"
+          ]
+        },
+        {
+          "i": 1,
+          "event": "usage",
+          "keys": [
+            "_event",
+            "conversation_id",
+            "usage",
+            "context_tokens",
+            "tool_calls",
+            "iterations",
+            "cost"
+          ]
+        },
+        {
+          "i": 2,
+          "event": "tool-call",
+          "keys": [
+            "_event",
+            "id",
+            "name",
+            "input",
+            "conversation_id"
+          ]
+        },
+        {
+          "i": 3,
+          "event": "question",
+          "keys": [
+            "_event",
+            "conversation_id",
+            "question",
+            "header",
+            "options",
+            "multiple",
+            "custom",
+            "customPlaceholder"
+          ]
+        },
+        {
+          "i": 4,
+          "event": "done",
+          "keys": [
+            "_event",
+            "conversation_id",
+            "usage",
+            "context_tokens",
+            "tool_calls",
+            "iterations",
+            "cost",
+            "pending_question"
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "S6_fail",
+      "status": 200,
+      "contentType": "text/plain; charset=utf-8",
+      "lines": 3,
+      "prefix_ok": true,
+      "bad_lines": [],
+      "events": [
+        {
+          "i": 0,
+          "event": "iteration-start",
+          "keys": [
+            "_event",
+            "conversation_id",
+            "iteration"
+          ]
+        },
+        {
+          "i": 1,
+          "event": "error",
+          "keys": [
+            "_event",
+            "message",
+            "conversation_id"
+          ]
+        },
+        {
+          "i": 2,
+          "event": "done",
+          "keys": [
+            "_event",
+            "conversation_id",
+            "usage",
+            "context_tokens",
+            "tool_calls",
+            "iterations",
+            "cost",
+            "error"
+          ]
+        }
+      ]
+    }
+  ]
+}

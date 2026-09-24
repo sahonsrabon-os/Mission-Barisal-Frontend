@@ -1,0 +1,49 @@
+# route: read_file  line: 6407  method: POST
+# params(arg): {path:f}
+# response field reads seen in callback: content
+# NOTE: best-effort regex scan; verify against this dump.
+----------------------------------------------------------------------
+6405: 								var f=this.dataset.file;
+6406: 								var l=parseInt(this.dataset.line);
+6407: 								api('read_file',{path:f},function(e,r){
+6408: 									if(!e&&r&&r.content){
+6409: 										var viewer=document.getElementById('ocFv');
+6410: 										if(viewer){
+6411: 											viewer.classList.add('open');
+6412: 											var pre=document.getElementById('ocFvPre');
+6413: 											var lines=r.content.split('\n');
+6414: 											var start=Math.max(0,l-5);
+6415: 											var end=Math.min(lines.length,l+5);
+6416: 											pre.innerHTML=lines.slice(start,end).map(function(line,i){
+6417: 												var ln=start+i+1;
+6418: 												var cls=ln===l?'background:rgba(250,204,21,.15)':'';
+6419: 												return '<div style="'+cls+'"><span style="color:var(--t4);width:30px;display:inline-block;text-align:right;padding-right:8px">'+ln+'</span>'+esc(line)+'</div>';
+6420: 											}).join('');
+6421: 											document.getElementById('ocFvTitle').textContent=f+':'+l;
+6422: 										}
+6423: 									}
+6424: 								});
+6425: 							});
+6426: 						});
+6427: 					}
+6428: 				});
+6429: 			}
+6430: 		});
+6431: 	}
+6432: 	return el;
+6433: };
+6434: 
+6435: // ===== FEATURE: Timeline slash command =====
+6436: // /timeline is already in slashCmds array
+6437: var _origSendRef2=send;
+6438: // Handle /timeline command
+6439: var _origProcessCmd=null;
+6440: 
+6441: // ===== FEATURE: Plugin/Extension System =====
+6442: var _plugins={};
+6443: function registerPlugin(name,handlers){
+6444: 	_plugins[name]=handlers;
+6445: 	if(handlers.onMount){
+6446: 		try{handlers.onMount()}catch(e){console.error('Plugin '+name+' mount error:',e)}
+6447: 	}
+6448: 	toast('Plugin loaded: '+name,'ok');

@@ -1,0 +1,49 @@
+# route: clear  line: 1760  method: POST
+# params(arg): {}
+# response field reads seen in callback: (none/indirect)
+# NOTE: best-effort regex scan; verify against this dump.
+----------------------------------------------------------------------
+1758: 		var cmd=text.replace(/\s+/g,' ').split(' ');
+1759: 		var c=cmd[0].toLowerCase();
+1760: 		if(c==='/clear'){api('clear',{},function(){rMsgs([]);st('Cleared',true)});return}
+1761: 		if(c==='/export'){showExportDialog();return}
+1762: 		if(c==='/copy'){
+1763: 			var msgs=document.querySelectorAll('#ocCI .ocMsg');
+1764: 			var mdText='';
+1765: 			msgs.forEach(function(el){
+1766: 				var isUser=el.classList.contains('u');
+1767: 				mdText+=(isUser?'**User:** ':'**Assistant:** ');
+1768: 				var textEl=el.querySelector('.ocMd');
+1769: 				if(textEl){
+1770: 					mdText+=textEl.innerText||'';
+1771: 				}else if(isUser){
+1772: 					var userEl=el.querySelector('.ocMbb');
+1773: 					if(userEl)mdText+=userEl.innerText||'';
+1774: 				}
+1775: 				mdText+='\n\n';
+1776: 			});
+1777: 			navigator.clipboard.writeText(mdText).then(function(){toast('Copied to clipboard','ok')},function(){toast('Copy failed','err')});
+1778: 			return;
+1779: 		}
+1780: 		if(c==='/plan'){api('set_mode',{mode:'plan'},function(){document.getElementById('ocMode').value='plan';st('Plan mode',true)});return}
+1781: 		if(c==='/build'){api('set_mode',{mode:'build'},function(){document.getElementById('ocMode').value='build';st('Build mode',true)});return}
+1782: 		if(c==='/compact'){
+1783: 			st('Compacting...',true);
+1784: 			api('compact',{keep_last_n:3},function(e2,r2){
+1785: 				if(!e2&&r2&&r2.success){
+1786: 					rMsgs(r2.messages||[]);
+1787: 					if(r2.summary){toast('Nothing to compact','warn')}else{toast('Conversation compacted','ok')}
+1788: 					st('Ready',true);
+1789: 				}else{
+1790: 					toast('Failed to compact: '+(e2||(r2&&r2.error)||'Unknown error'),'err');
+1791: 					st('Ready',true);
+1792: 				}
+1793: 			});
+1794: 			return;
+1795: 		}
+1796: 		if(c==='/undo'){
+1797: 			if(!rMsgs._lastMsgs||!rMsgs._lastMsgs.length){toast('Nothing to undo','warn');return}
+1798: 			var lastUser=null;
+1799: 			for(var i=rMsgs._lastMsgs.length-1;i>=0;i--){
+1800: 				if(rMsgs._lastMsgs[i].role==='user'){lastUser=rMsgs._lastMsgs[i];break}
+1801: 			}

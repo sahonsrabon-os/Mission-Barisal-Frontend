@@ -1,0 +1,18 @@
+# secrets — never commit
+.env
+
+# runtime output (recreated on demand)
+logs/
+workspace/
+server/data/
+
+# dependencies / tooling (this project uses Node built-ins only)
+node_modules/
+
+# python caches (extract tooling in unnecessary/)
+__pycache__/
+*.pyc
+
+# OS junk
+.DS_Store
+Thumbs.db

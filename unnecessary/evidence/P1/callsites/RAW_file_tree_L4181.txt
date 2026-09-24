@@ -1,0 +1,48 @@
+# raw XHR route: file_tree  line: 4181
+----------------------------------------------------------------------
+4177: 	}
+4178: }
+4179: 
+4180: function loadFTSub(path,container,toggle){
+4181: 	var u=A+'&ai_php_api=file_tree&csrf_token='+C+'&path='+encodeURIComponent(path)+'&depth=1';
+4182: 	var x=new XMLHttpRequest();
+4183: 	x.open('GET',u,true);
+4184: 	x.setRequestHeader('Accept','application/json');
+4185: 	x.onload=function(){
+4186: 		if(x.status===200){
+4187: 			try{
+4188: 				var data=JSON.parse(x.responseText);
+4189: 				container.innerHTML='';
+4190: 				if(data.directories){
+4191: 					data.directories.sort(function(a,b){return a.name.localeCompare(b.name)});
+4192: 					data.directories.forEach(function(d){
+4193: 						var item=document.createElement('div');
+4194: 						item.className='ocFtI';
+4195: 						item.dataset.path=d.path;
+4196: 						item.dataset.type='dir';
+4197: 						item.dataset.loaded='0';
+4198: 						item.style.paddingLeft='16px';
+4199: 			item.innerHTML='<span class="ocFtIc"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></span><span class="ocFtIn">'+esc(d.name)+'</span>';
+4200: 						item.addEventListener('click',function(ev){
+4201: 							ev.stopPropagation();
+4202: 							var loaded=this.dataset.loaded==='1';
+4203: 							var open=this.dataset.open==='1';
+4204: 							if(!loaded){
+4205: 								this.dataset.loaded='1';
+4206: 								var sub=document.createElement('div');
+4207: 								sub.className='ocFtSub';
+4208: 								sub.style.display='block';
+4209: 								this.after(sub);
+4210: 								loadFTSub(d.path,sub,this);
+4211: 							}else{
+4212: 								var sub=this.nextElementSibling;
+4213: 								if(sub&&sub.className==='ocFtSub'){
+4214: 									sub.style.display=open?'none':'block';
+4215: 								}
+4216: 							}
+4217: 							this.dataset.open=open?'0':'1';
+4218: this.querySelector('.ocFtIc').innerHTML=open?'<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>':'<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>';
+4219: 						});
+4220: 						container.appendChild(item);
+4221: 					});
+4222: 				}

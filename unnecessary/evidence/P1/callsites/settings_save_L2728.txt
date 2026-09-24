@@ -1,0 +1,49 @@
+# route: settings_save  line: 2728  method: GET
+# params(arg): d
+# response field reads seen in callback: error, models, success
+# NOTE: best-effort regex scan; verify against this dump.
+----------------------------------------------------------------------
+2726: 		d.models=JSON.stringify(models);
+2727: 	}
+2728: 	api('settings_save',d,function(e,r){
+2729: 		if(!e&&r&&r.success){
+2730: 			document.getElementById('ocConMod').classList.remove('open');
+2731: 			cP=null;
+2732: 			_providersCache=null;
+2733: 			loadP();
+2734: 		}else alert(e||(r&&r.error)||'Failed');
+2735: 	});
+2736: });
+2737: document.getElementById('ocTst').addEventListener('click',function(){
+2738: 	var selVal=document.getElementById('ocProvSel').value;
+2739: 	var pid=cP||selVal;
+2740: 	if(!pid)return;
+2741: 	var td={provider_id:pid,api_key:document.getElementById('ocAK').value.trim()};
+2742: 	if(isCustomType(pid)){
+2743: 		var bu=document.getElementById('ocBU').value.trim();
+2744: 		if(bu)td.base_url=bu;
+2745: 		var testPid=pid;
+2746: 		if(selVal==='custom'){
+2747: 			var custName=document.getElementById('ocCustName').value.trim();
+2748: 			if(custName)testPid='custom:'+custName.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'');
+2749: 			else testPid='custom:test';
+2750: 		}
+2751: 		td.provider_id=testPid;
+2752: 		var md=document.getElementById('ocCustModels').value.trim();
+2753: 		if(md){
+2754: 			var models={};
+2755: 			md.split(',').forEach(function(m){
+2756: 				var parts=m.trim().split('=');
+2757: 				if(parts.length===2){
+2758: 					models[parts[0].trim()]=parts[1].trim();
+2759: 				}else if(parts.length===1&&parts[0].trim()){
+2760: 					models[parts[0].trim()]=parts[0].trim();
+2761: 				}
+2762: 			});
+2763: 			td.models=JSON.stringify(models);
+2764: 			var firstModel=Object.keys(models)[0];
+2765: 			if(firstModel)td.model=firstModel;
+2766: 		}
+2767: 	}
+2768: 	st('Testing...',true);
+2769: 	api('test_connection',td,function(e,r){

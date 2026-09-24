@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>তুলনা রিপোর্ট — ui/index.php বনাম Code with AI/index.html</title>
+<style>
+ :root{--bg:#0b1220;--card:#121826;--card2:#1b2333;--bd:#2b3445;--t1:#E5E7EB;--t2:#94A3B8;--t3:#64748B;--p:#3b82f6;--s:#8b5cf6;--ok:#22c55e;--err:#ef4444;--wr:#f59e0b}
+ *{box-sizing:border-box;margin:0;padding:0}
+ body{font-family:'Segoe UI',ui-sans-serif,system-ui,sans-serif;background:var(--bg);color:var(--t1);line-height:1.7;padding:24px;max-width:1000px;margin:0 auto;font-size:15px}
+ h1{font-size:24px;background:linear-gradient(135deg,var(--p),var(--s));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:6px}
+ h2{font-size:19px;margin:34px 0 12px;color:#60a5fa;border-left:4px solid var(--p);padding-left:10px}
+ h3{font-size:16px;margin:18px 0 8px;color:#a78bfa}
+ .sub{color:var(--t3);font-size:13px;margin-bottom:20px}
+ .card{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:16px 18px;margin:12px 0}
+ .ok{border-left:4px solid var(--ok)} .warn{border-left:4px solid var(--wr)} .bad{border-left:4px solid var(--err)}
+ table{width:100%;border-collapse:collapse;margin:10px 0;font-size:13.5px}
+ th,td{border:1px solid var(--bd);padding:8px 10px;text-align:left;vertical-align:top}
+ th{background:var(--card2);color:#93c5fd;font-weight:600}
+ code{background:#0f1623;border:1px solid var(--bd);border-radius:5px;padding:1px 6px;font-size:12.5px;color:#fbbf24;font-family:ui-monospace,Menlo,monospace;word-break:break-all}
+ .pill{display:inline-block;background:var(--card2);border:1px solid var(--bd);border-radius:99px;padding:2px 10px;font-size:12px;margin:2px 3px 2px 0;color:var(--t2)}
+ .pill b{color:#93c5fd}
+ ul,ol{padding-left:22px;margin:8px 0}
+ li{margin:5px 0}
+ .num{color:#fbbf24;font-weight:700}
+ .verdict{background:linear-gradient(135deg,rgba(59,130,246,.12),rgba(139,92,246,.12));border:1px solid #3b82f6;border-radius:14px;padding:18px 20px;margin:16px 0}
+ .foot{color:var(--t3);font-size:12.5px;margin-top:36px;border-top:1px solid var(--bd);padding-top:12px}
+</style>
+</head>
+<body>
+
+<h1>📊 দুটো "Code with AI" ইনডেক্সের তুলনামূলক রিপোর্ট</h1>
+<div class="sub">তৈরি: ২৪ সেপ্টেম্বর ২০২৬ · পদ্ধতি: প্রতিটি লাইন পড়ে, কমান্ড-প্রমাণসহ (৪১টা গ্রিপ/কমান্ড পাস) · কিছুই বদলানো/মুছা হয়নি</div>
+
+<div class="card">
+<h3 style="margin-top:0">মূল সত্য এক লাইনে</h3>
+দুটো ফাইলই <b>শুধু ফ্রন্ট-এন্ড</b> (HTML+JavaScript) — নামে <code>.php</code> হলেও ভেতরে <b>০টি PHP কোড</b>। দুটোই একই ব্যাকএন্ড <code>index.live.php?act=ai</code>-কে কল করে — <b>সেই ব্যাকএন্ড কোড দুটো ফোল্ডারেই নেই</b>। তাই এখন একা চালানো যায় না; সার্ভার বানাতে হলে ব্যাকএন্ড লিখতে হবে।
+</div>
+
+<h2>১ · দুটো ফাইলের পরিচয়</h2>
+<table>
+<tr><th>বিষয়</th><th>A — <code>/home/sahon/Videos/ui/index.php</code></th><th>B — <code>Code with AI/index.html</code></th></tr>
+<tr><td>আকার / লাইন</td><td><b>৩১০,২৩৩ বাইট / ৬,৪৯০ লাইন</b></td><td>২৫৭,০৮৩ বাইট / ৫,৪২৭ লাইন</td></tr>
+<tr><td>PHP কোড</td><td>০ ব্লক (নামে .php, ভেতরে বিশুদ্ধ HTML+JS)</td><td>০ ব্লক (এমনকি <code>index.live.php</code>-ও একই ফাইলের কপি)</td></tr>
+<tr><td>শিরোনাম</td><td><code>public_html - Code with AI</code></td><td><code>gqcjrtrd - Code with AI</code></td></tr>
+<tr><td>বেস ঠিকানা (লাইন ১০৬৬/৮৭২)</td><td><code>index.live.php?act=ai&amp;path=public_html&amp;project_id=alistiyab_a6093d3b779b</code><br>SP=<code>/home/alistiyab/</code></td><td><code>index.live.php?act=ai&amp;project_id=gqcjrtrd_6c5ab4ea6450</code><br>SP=HD=<code>/home/gqcjrtrd</code></td></tr>
+<tr><td>JS ফাংশন</td><td><b>১৩৩টি</b></td><td>১১৩টি</td></tr>
+<tr><td>রাউট</td><td><b>৩৯টি</b></td><td>৩৮টি (গুলো <code>projects_close</code> নেই)</td></tr>
+<tr><td>শেষ পরিবর্তন</td><td>২৪ সেপ্ট ২০২৬, ০২:১৭ (আজ)</td><td>১৭ আগস্ট ২০২৬</td></tr>
+<tr><td>CSRF টোকেন</td><td><code>C=''</code> — খালি (আসল সার্ভার PHP দিয়ে এটা ভরত)</td><td>একইভাবে খালি</td></tr>
+<tr><td>স্থানীয় প্রজেক্টের সাথে মেলে?</td><td>❌ না — ঠিকানা অন্য অ্যাকাউন্টের (alistiyab/public_html)</td><td>✅ হ্যাঁ — <code>ai/projects/gqcjrtrd…</code> ও <code>g.zombiecoder.my.id</code> সেটিংসের সাথে মিলে</td></tr>
+</table>
+
+<h2>২ · রাউট — মোট ৩৯টি (দুটো মিলিয়ে, ইউনিক)</h2>
+<p>সব রাউটের প্রথমে যায়: <code>&lt;বেস&gt;&amp;ai_php_api=&lt;রাউট&gt;&amp;csrf_token=C</code> — ডেটা থাকলে POST (form-urlencoded), না থাকলে GET।</p>
+
+<h3>ক · চ্যাট ও সেশন — ১২টি</h3>
+<table>
+<tr><th>রাউট</th><th>প্যারামিটার (যাচাইকৃত)</th><th>কাজ</th></tr>
+<tr><td><code>start</code></td><td><code>provider, model, mode</code></td><td>নতুন AI সেশন চালু</td></tr>
+<tr><td><code>conversations</code> / <code>conversation</code></td><td><code>conversation_id</code></td><td>তালিকা / নির্দিষ্ট কথোপকথন আনা</td></tr>
+<tr><td><code>switch_conversation</code> / <code>delete_conversation</code> / <code>rename_conversation</code></td><td><code>conversation_id</code></td><td>দেখা/মুছা/নাম বদল</td></tr>
+<tr><td><code>new_session</code>, <code>regenerate</code>, <code>fork</code>, <code>compact</code></td><td>—</td><td>নতুন সেশন, আবার জেনারেট, কপি শাখা, কনটেক্স্ট সংকুচন</td></tr>
+<tr><td><code>abort</code>, <code>status</code></td><td>—</td><td>স্ট্রিম থামানো, অবস্থা যাচাই</td></tr>
+<tr><td><b><code>ai_chat_stream</code></b> (POST)</td><td><code>content, conversation_id?, attachments?</code> (JSON)</td><td><b>মূল চ্যাট স্ট্রিম</b> — উত্তর <code>data: {json}</code> লাইনে SSE-মতো আসে</td></tr>
+</table>
+
+<h3>খ · ফাইল ও প্রজেক্ট — ১২টি</h3>
+<table>
+<tr><th>রাউট</th><th>প্যারামিটার (যাচাইকৃত)</th><th>কাজ</th></tr>
+<tr><td><code>file_tree</code></td><td><code>path, depth=1</code></td><td>ফোল্ডার গাছ আনা</td></tr>
+<tr><td><code>read_file</code></td><td><code>path</code></td><td>ফাইল পড়া</td></tr>
+<tr><td><code>resolve_file</code></td><td><code>path</code> (#line সহ)</td><td>লাইন-রেফারেন্স খোলা</td></tr>
+<tr><td><code>diff</code>, <code>changes</code>, <code>restore</code></td><td>—</td><td>পার্থক্য দেখা, পরিবর্তন তালিকা, ফিরিয়ে আনা</td></tr>
+<tr><td><code>project_info</code>, <code>projects_list/create/delete</code></td><td><code>project_id</code></td><td>প্রজেক্ট ব্যবস্থাপনা</td></tr>
+<tr><td><code>projects_close</code> <span class="pill">শুধু A-তে</span></td><td>—</td><td>প্রজেক্ট বন্ধ</td></tr>
+<tr><td><code>projects_wordpress</code></td><td>—</td><td>ওয়ার্ডপ্রেস প্রজেক্ট (WP-হোস্টিং লিঙ্ক)</td></tr>
+</table>
+
+<h3>গ · সেটিংস ও প্রোভাইডার — ৭টি</h3>
+<table>
+<tr><th>রাউট</th><th>প্যারামিটার (যাচাইকৃত)</th></tr>
+<tr><td><code>providers</code>, <code>settings_load/delete</code></td><td>—</td></tr>
+<tr><td><code>settings_save</code></td><td><code>name, provider_id, api_key, base_url?, models (JSON)</code></td></tr>
+<tr><td><code>test_connection</code></td><td><code>provider_id, base_url, models</code></td></tr>
+<tr><td><code>favorite_model</code>, <code>unfavorite_model</code></td><td>—</td></tr>
+</table>
+
+<h3>ঘ · সিস্টেম — ২টি</h3>
+<p><span class="pill"><b><code>shell</code></b> — <code>command</code> → ফেরত <code>output, error, returncode</code></span> <span class="pill"><code>undo</code> · <code>redo</code> · <code>clear</code> · <code>force_unlock</code> · <code>set_mode</code> · <code>toggle_permission</code></span></p>
+<p style="color:var(--t3);font-size:13px">মোট: ১২ + ১২ + ৭ + ২ + ৬ (ইতিহাস/মোড) + ১ স্ট্রিম = <b class="num">৩৯ রাউট</b> (B-তে ৩৮ — <code>projects_close</code> নেই)।</p>
+
+<h2>৩ · টুল — ১০টি নাম ধরা পড়েছে (দুটো ফাইলে সমান)</h2>
+<table>
+<tr><th>টুল</th><th>কাজ</th><th>প্রমাণ (কোড লক্ষণ)</th></tr>
+<tr><td><code>read_file</code></td><td>ফাইল পড়া</td><td>৩ জায়গায়</td></tr>
+<tr><td><code>write_file</code></td><td>নতুন ফাইল/পুরো লেখা</td><td>৪ জায়গায়</td></tr>
+<tr><td><code>edit_file</code></td><td>সম্পাদনা</td><td>২ জায়গায়</td></tr>
+<tr><td><code>replace_in_file</code></td><td>অংশ খুঁজে বদলানো</td><td>২ জায়গায়</td></tr>
+<tr><td><code>apply_patch</code></td><td>ডিফ-প্যাচ প্রয়োগ</td><td>name=== কোডে</td></tr>
+<tr><td><code>bash</code></td><td><b>শেল কমান্ড চালানো</b> (স্ল্যাশ <code>!</code> দিয়েও)</td><td>৬ জায়গায়</td></tr>
+<tr><td><code>search</code> / <code>search_files</code></td><td>ফাইল খোঁজা</td><td>name=== কোডে</td></tr>
+<tr><td><code>grep</code></td><td>কনটেন্ট খোঁজা — ফলে <b>ক্লিকযোগ্য ফাইল:লাইন</b> বানায়</td><td>২৩ জায়গায় UI-তে</td></tr>
+<tr><td><code>glob</code></td><td>প্যাটার্নে ফাইল তালিকা</td><td>name=== কোডে</td></tr>
+</table>
+<p>সাথে: <span class="pill">মোড: <b>build</b> / <b>plan</b></span> <span class="pill">পারমিশন মডাল: "Permission Required — tool_call"</span> <span class="pill">স্ল্যাশ কমান্ড: <code>/shell</code>(!) <code>/todo</code></span> <span class="pill">ইনলাইন টুল-কল চিপ + ডিফ ভিউয়ার</span></p>
+
+<h2>৪ · সার্ভার বানানোর পরিকল্পনা (আমার প্রস্তাব)</h2>
+<div class="card">
+<ol>
+<li><b>ভিত্তি নেওয়া:</b> A (<code>ui/index.php</code>) কপি → কাজের ফোল্ডার; ভেতরের <code>var A=…</code> লাইন বদলে নিজের ঠিকানা বসানো (<code>project_id</code>, <code>path</code>, SP পাথ)।</li>
+<li><b>ব্যাকএন্ড লেখা</b> (এটাই মূল কাজ — দুটো ফোল্ডারেই এখন নেই): <code>index.live.php</code> নামে ~৩৯ রাউটের হ্যান্ডলার। মেশিনে <b>PHP 8.2.33</b> ও <b>Node v24.19.0</b> — দুটোই আছে, যেটায় চাই চলবে।
+ <ul>
+ <li>চ্যাট স্ট্রিম: প্রোভাইডারের OpenAI-compatible <code>/v1/chat/completions</code>-এ পাঠিয়ে <code>data: {json}</code> লাইন হুবহু UI-র প্রত্যাশা অনুযায়ী ফেরত।</li>
+ <li>টুল: read/write/edit/grep/glob সার্ভারেই; <code>bash</code>-এ <b>অনুমোদন বাধ্যতামূলক</b> (UI-তে আগে থেকেই পারমিশন মডাল আছে)।</li>
+ <li>সেশন/কথোপকথন: <code>ai/</code> ফোল্ডারে JSON — আপনার নিজের <code>ai/projects/…</code> প্যাটার্নই ধরে রাখা হবে।</li>
+ <li>CSRF: রেন্ডার সময়ে <code>C</code> ভরে দেওয়া।</li>
+ </ul></li>
+<li><b>মডেল সোর্স (খরচ ৳০):</b> <code>settings_save</code>-এ <code>base_url</code> = omniroute ফ্রি রুট / Ollama (লোকাল বা ওই ngrok URL) / OpenCode ফ্রি মডেল — API key খালি রাখা যায়।</li>
+<li><b>চালু:</b> <code>php -S 127.0.0.1:8080</code> বা Node সার্ভার → ব্রাউজারে খোলা। দরকার হলে ইনস্টল করা <code>cloudflared</code> দিয়ে পাবলি URL — <b>তবে <code>shell</code> রাউট = যেকোনো কমান্ড চলে, তাই পাবলি করলে অবশ্যই লগইন/টোকেন বসাতে হবে</b>।</li>
+<li><b>পরীক্ষা:</b> রাউট-ম্যাট্রিক্স (৩৯টি) ধাপে-ধাপে চালিয়ে যাচাই।</li>
+</ol>
+</div>
+
+<h2>৫ · আমার রায় — কোনটি যৌক্তিক?</h2>
+<div class="verdict">
+<p>✅ <b>ভিত্তি হিসেবে A — <code>/home/sahon/Videos/ui/index.php</code> যৌক্তিক।</b></p>
+<ul>
+<li><b>কারণ ১ — নতুন ও সম্পূর্ণ:</b> আজকের (২৪ সেপ্ট) ফাইল, B থেকে ১,০৬৩ লাইন বেশি, ২০টি অতিরিক্ত ফাংশন।</li>
+<li><b>কারণ ২ — ফিচার সুপারসেট:</b> A-তে যা আছে B-তে নেই — মাল্টি-সেশন ট্যাব (<code>switchToSessionIdx</code>, <code>pollSessionStates</code>), প্রজেক্ট-কনটেক্স্ট মডাল (<code>loadPctx/renderPctxTabs</code>), ডেস্কটপ নোটিফিকেশন+আনরিড (<code>_desktopNotify/markUnread</code>), সাউন্ড, <code>projects_close</code> রাউট। কোনো ফিচার A-তে নেই এমনটা ধরা পড়েনি।</li>
+<li><b>কারণ ৩ — সব রাউট/টুল B-এর সুপারসেট:</b> B-এর ৩৮টির সবগুলোই A-তে আছে।</li>
+</ul>
+<p><b>⚠️ শর্ত:</b> A-এর বেস ঠিকানা এখন <b>অন্য কারো অ্যাকাউন্টের</b> (<code>alistiyab_a6093d3b779b</code>, <code>path=public_html</code>) — কাজে নেওয়ার আগে সেটা বদলে নিজের <code>project_id</code>-তে তুলতে হবে। আর B কোড ফাইলটা <b>রেফারেন্স/ফলব্যাক</b> হিসেবে রাখুন — কারণ B-এর কনফিগ আপনার বর্তমান স্থানীয় প্রজেক্টের (<code>gqcjrtrd</code>) সাথে মেলে।</p>
+</div>
+
+<h2>৬ · এখন কেমন আছে — সৎ অবস্থা</h2>
+<div class="card warn">
+<ul>
+<li>❌ <b>ব্যাকএন্ড নেই:</b> দুটো ফোল্ডারেই <code>index.live.php</code>-এর আসল সার্ভার-সাইড কোড নেই (B-এর <code>index.live.php</code> হলো একই ফ্রন্টএন্ডের কপি)। মূল ব্যাকএন্ড সম্ভবত সেই cPanel সার্ভারে (<code>jupiter.itnut.net</code>) আছে।</li>
+<li>⚠️ <b><code>ai_php_api.php</code> আসল API নয়:</b> এটা একটা "verifying…" স্পিনার পেজ — ভেতরে <b>অস্পষ্ট (obfuscated) JS</b> ব্রাউজারের webdriver/headless/plugin পরীক্ষা করে এবং ওই ঠিকানা+ফিঙ্গারপ্রিন্ট <code>/z0f76a1d…</code> পাথে পাঠায়। হোস্টিং প্যানেল থেকে আসা বট-চেক পেজ বলে মনে হয় — <b>এটা দিয়ে সার্ভার বানাবেন না</b>, নিজের লেখা হ্যান্ডলারই বসান।</li>
+<li>⚠️ <b>CSRF খালি</b> (<code>C=''</code>) — কপি করা হলেও টোকেন সেট করা হয়নি।</li>
+<li>⚠️ <b>A-এর ঠিকানা অন্য অ্যাকাউন্টের</code> (উপরে দেওয়া আছে)।</li>
+<li>✅ আপনার নিজের আগের অডিট রিপোর্টের চেতাবনী এখনো প্রযোজ্য: <b>API key ব্রাউজারের JS-দিয়ে যায়</b> (High) — ব্যাকএন্ডেই কী রাখাই ভালো।</li>
+<li>✅ মেশিনে প্রয়োজনীয় সব আছে: PHP 8.2.33, Node 24, python3, cloudflared — কিছু নতুন ইনস্টল লাগবে না।</li>
+</ul>
+</div>
+
+<h2>৭ · বিনিময়ে কী পাবেন</h2>
+<div class="card ok">
+<ul>
+<li><b>🎯 একটা পূর্ণাঙ্গ সেলফ-হোস্টেড ওযেব কোড-এজেন্ট</b> — Cline/VS Code-এর মতো UI (চ্যাট, ফাইল-ট্রি, শেল, ডিফ-ভিউয়ার, টু-ডু, বিল্ড/প্ল্যান মোড) — যেকোনো ব্রাউজার থেকে, নিজের সার্ভারে।</li>
+<li><b>💰 খরচ ৳০:</b> মডেল ফ্রি রুটে (omniroute / Ollama / OpenCode ফ্রি) — কোনো API বিল নেই।</li>
+<li><b>🌍 যেকোনো জায়গা থেকে:</b> cPanel-এ চড়লে নিজের হোস্টিং-এই চলবে (মূল ডিজাইন সেটাই); লোকালে থাকলে cloudflared দিয়ে অস্থায়ী URL।</li>
+<li><b>📖 শেখা:</b> SSE স্ট্রিম প্রক্সি, টুল-এজেন্ট লুপ, পারমিশন গেট — একসাথে দুটো বিষয়ের হাতে-কড়ায় অভিজ্ঞতা।</li>
+<li><b>🔐 নিরাপত্তা নিয়ন্ত্রণ আপনার হাতে:</b> key, লগ, মডেল — সব নিজের মেশিনে, কারো কাছে যায় না (একটা পয়েন্ট: পাবলি করলে <code>shell</code> রাউটে লগইন বাধ্যতামূলক)।</li>
+</ul>
+<p><b>বিনিময়ে যা দিতে হবে:</b> ব্যাকএন্ড লেখার সময় (আনুমানিক ~৬০০–১,০০০ লাইন, আমি লিখব), আর যাচাইয়ের সময়। ডিস্কে প্রায় শূন্য খরচ (এখনকার ফাইলগুলো মাত্র ~৩১০KB)।</p>
+</div>
+
+<h2>৮ · পরবর্তী ধাপ</h2>
+<div class="card">
+<p>১. <b>আপনার অনুমোদনের অপেক্ষায়:</b> A ভিত্তি করে ব্যাকএন্ড লেখা শুরু করব কিনা?<br>
+২. ব্যাকএন্ডের ভাষা: <b>PHP</b> (হুবহু <code>index.live.php</code> নাম ধরে রাখা যায়, cPanel-এ সরাসরি যাবে) না <b>Node</b> (লোকালে সহজ)?<br>
+৩. মডেল সোর্স কোনটা দিয়ে শুরু — omniroute ফ্রি, Ollama, না OpenCode ফ্রি?</p>
+<p style="color:var(--t3)">উত্তর দিলে একই রিপোর্টে "কার্যকর হয়েছে" কলাম ভরে যাবে। 🙏</p>
+</div>
+
+<div class="foot">
+প্রমাণ: সব সংখ্যা এই কমান্ডগুলো থেকে — <code>wc -l</code> · <code>grep -oE "api\('[a-z_]+'" | sort -u</code> · <code>grep -oE "name==='[a-z_]+'"</code> · <code>diff</code> (১,৯৩৭টা পার্থক্য লাইন) · <code>sed -n</code> দিয়ে লাইন-পড়া · <code>md5sum</code> · <code>php -v</code> / <code>node -v</code>। ফাইলে কোনো পরিবর্তন করা হয়নি।
+</div>
+
+</body>
+</html>

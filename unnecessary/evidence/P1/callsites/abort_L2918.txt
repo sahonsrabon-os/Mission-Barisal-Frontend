@@ -1,0 +1,49 @@
+# route: abort  line: 2918  method: POST
+# params(arg): {}
+# response field reads seen in callback: (none/indirect)
+# NOTE: best-effort regex scan; verify against this dump.
+----------------------------------------------------------------------
+2916: 	if(_streamSid===aC){_streamSid=null}
+2917: 	_activeThinkBubble=null;
+2918: 	api('abort',{},function(){});
+2919: });
+2920: 
+2921: var slashCmds=[
+2922: 	{cmd:'/plan',desc:'Switch to Plan mode (read-only)'},
+2923: 	{cmd:'/build',desc:'Switch to Build mode (read+write)'},
+2924: 	{cmd:'/clear',desc:'Clear current conversation'},
+2925: 	{cmd:'/export',desc:'Download conversation as Markdown'},
+2926: 	{cmd:'/copy',desc:'Copy transcript to clipboard'},
+2927: 	{cmd:'/compact',desc:'Summarize conversation to reduce context'},
+2928: 	{cmd:'/undo',desc:'Undo last message pair'},
+2929: 	{cmd:'/redo',desc:'Redo last undone message'},
+2930: 	{cmd:'/fork',desc:'Fork conversation from last message'},
+2931: 	{cmd:'/rename',desc:'Rename this session'},
+2932: 	{cmd:'/todo',desc:'Add a task item (e.g. /todo Fix login bug)'},
+2933: 	{cmd:'/sound',desc:'Toggle sound notifications on/off'},
+2934: 	{cmd:'/notify',desc:'Toggle desktop notifications'},
+2935: 	{cmd:'/keybindings',desc:'Customize keyboard shortcuts'},
+2936: 	{cmd:'/timeline',desc:'Toggle message timeline navigation'},
+2937: 	{cmd:'/help',desc:'Show keyboard shortcuts and commands'}
+2938: ];
+2939: 
+2940: document.getElementById('ocIn').addEventListener('input',function(){
+2941: 	autoResize(this);
+2942: 	var v=this.value;
+2943: 	var hint=document.getElementById('ocSlash');
+2944: 	if(v.charAt(0)==='/'&&v.indexOf(' ')===-1){
+2945: 		var q=v.toLowerCase();
+2946: 		var matches=slashCmds.filter(function(c){return c.cmd.indexOf(q)===0});
+2947: 		if(matches.length){
+2948: 			hint.innerHTML=matches.map(function(c){return '<div class="ocSHItem" data-cmd="'+c.cmd+'"><span class="ocSHCmd">'+c.cmd+'</span><span class="ocSHDesc">'+c.desc+'</span></div>'}).join('');
+2949: 			hint.classList.add('open');
+2950: 			slashHintIdx=-1;
+2951: 			hint.querySelectorAll('.ocSHItem').forEach(function(el){
+2952: 				el.addEventListener('click',function(){
+2953: 					var inp=document.getElementById('ocIn');
+2954: 					var cmd=this.dataset.cmd;
+2955: 					hint.classList.remove('open');
+2956: 					slashHintIdx=-1;
+2957: 					if(cmd==='/todo'){
+2958: 						inp.value=cmd+' ';
+2959: 						inp.focus();

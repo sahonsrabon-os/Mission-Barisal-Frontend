@@ -1,0 +1,9 @@
+E4.1 — UI source integrity AFTER all tests (0 edits)
+
+md5 before tests : 895eb75226cc2801834baaced2873bb1
+md5 after  tests : 895eb75226cc2801834baaced2873bb1  (re-verified after contract_test + user_test)
+expected         : 895eb75226cc2801834baaced2873bb1
+size             : 310233 bytes
+lines            : 6490
+
+RESULT: ✅ byte-identical — 0 edits proven

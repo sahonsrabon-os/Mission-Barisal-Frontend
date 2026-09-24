@@ -1,0 +1,8 @@
+E1.4 — Stream events = 12 (Engineer)
+command: grep -oE "ev==='[a-z-]+'" index.php | sort -u
+--------------------------------------------------
+count  : 12   ✅ = 12
+events : done, error, iteration-start, permission-request, question, reasoning-delta, text-delta, title, todos, tool-call, tool-result, usage
+--------------------------------------------------
+UI parse rule : line must start with 'data: ' then JSON.parse(line.substring(6))
+                -> server MUST emit:  data: {"_event":"<name>", ...}\n

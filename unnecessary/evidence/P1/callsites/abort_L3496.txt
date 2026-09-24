@@ -1,0 +1,49 @@
+# route: abort  line: 3496  method: POST
+# params(arg): {}
+# response field reads seen in callback: (none/indirect)
+# NOTE: best-effort regex scan; verify against this dump.
+----------------------------------------------------------------------
+3494: document.addEventListener('keydown',function(e){
+3495: 	if(matchKey(e,getKeybinding('stop'))){
+3496: 		if((_ss[aC]&&_ss[aC].streaming)||(_ss[aC]&&_ss[aC].xhr)){if(_ss[aC]&&_ss[aC].xhr){_ss[aC].xhr.abort();_ss[aC].xhr=null}_ss[aC].streaming=false;_ss[aC].lockActive=false;syncStreamUI();st('Stopped',false);clearGenTab(aC);if(_streamSid===aC){_streamSid=null}_activeThinkBubble=null;api('abort',{},function(){})}
+3497: 		var openModals=document.querySelectorAll('.ocMo.open,.ocFv.open,.ocCmdP.open,.ocPerm.open');
+3498: 		openModals.forEach(function(m){m.classList.remove('open')});
+3499: 		var slashH=document.getElementById('ocSlash');if(slashH)slashH.classList.remove('open');slashHintIdx=-1;
+3500: 		return;
+3501: 	}
+3502: 	if(matchKey(e,getKeybinding('command_palette'))){e.preventDefault();e.stopPropagation();toggleCmdPalette();return}
+3503: 	if(((_ss[aC]&&_ss[aC].streaming)||cS||lockActive)&&((e.key==='F5')||(e.ctrlKey&&e.key==='r')||(e.metaKey&&e.key==='r'))){
+3504: 		e.preventDefault();
+3505: 		e.stopPropagation();
+3506: 		if(confirm('A generation is still running in the background. If you refresh the page, the process will be terminated and any in-progress work may be lost.\n\nDo you want to refresh anyway?')){
+3507: 			api('abort',{},function(){});
+3508: 			_intentionalUnload=true;
+3509: 			location.reload();
+3510: 		}
+3511: 		return;
+3512: 	}
+3513: 	var inp=document.getElementById('ocIn');
+3514: 	// Panel toggles work even while typing
+3515: 	if(matchKey(e,getKeybinding('toggle_modified'))){e.preventDefault();var _fp=document.getElementById('ocFilesP');_fp.classList.toggle('open');if(_fp.classList.contains('open'))loadModifiedFiles();return}
+3516: 	if(matchKey(e,getKeybinding('toggle_todos'))){e.preventDefault();document.getElementById('ocTodoP').classList.toggle('open');return}
+3517: 	if(matchKey(e,getKeybinding('toggle_files'))){e.preventDefault();document.getElementById('ocFtBtn').click();return}
+3518: 	if(matchKey(e,getKeybinding('toggle_sidebar'))){e.preventDefault();document.getElementById('ocSb').classList.toggle('hid');return}
+3519: 	// Alt+1..9 session switching (separate from keybindings system)
+3520: 	// Supports Alt+10..99: press Alt+1 then Alt+0 within 500ms for session 10.
+3521: 	if(e.altKey&&!e.shiftKey&&!e.ctrlKey&&!e.metaKey&&e.key>='0'&&e.key<='9'){
+3522: 		e.preventDefault();
+3523: 		_altNumBuf+=e.key;
+3524: 		var idx=parseInt(_altNumBuf,10)-1;
+3525: 		if(_altNumTimer)clearTimeout(_altNumTimer);
+3526: 		if(_altNumBuf.length>=2){
+3527: 			// Two-digit complete — switch to the 2-digit session and reset
+3528: 			if(_sessions&&_sessions[idx]){switchToSessionIdx(idx)}
+3529: 			_altNumBuf='';_altNumTimer=null;
+3530: 		}else{
+3531: 			// Single digit — switch immediately but allow override if a second digit comes within 500ms
+3532: 			if(_sessions&&_sessions[idx]){switchToSessionIdx(idx)}
+3533: 			_altNumTimer=setTimeout(function(){_altNumBuf='';_altNumTimer=null;},500);
+3534: 		}
+3535: 		return;
+3536: 	}
+3537: 	if(document.activeElement===inp)return;

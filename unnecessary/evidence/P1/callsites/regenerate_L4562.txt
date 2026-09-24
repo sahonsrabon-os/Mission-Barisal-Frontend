@@ -1,0 +1,49 @@
+# route: regenerate  line: 4562  method: POST
+# params(arg): {}
+# response field reads seen in callback: success
+# NOTE: best-effort regex scan; verify against this dump.
+----------------------------------------------------------------------
+4560: 		regenBtn.addEventListener('click',function(ev){
+4561: 			ev.stopPropagation();
+4562: 			api('regenerate',{},function(e,r){
+4563: 				if(!e&&r&&r.success){
+4564: 					msg.parentNode.removeChild(msg);
+4565: 					toast('Regenerating...','info');
+4566: 					var lastUserMsg='';
+4567: 					document.querySelectorAll('#ocCI .ocMsg.u').forEach(function(m){
+4568: 						lastUserMsg=m.querySelector('.ocMbb').textContent||'';
+4569: 					});
+4570: 					if(lastUserMsg){
+4571: 						var inp=document.getElementById('ocIn');
+4572: 						inp.value=lastUserMsg;
+4573: 						origSend();
+4574: 						inp.value='';
+4575: 					}
+4576: 				}
+4577: 			});
+4578: 		});
+4579: 		act.appendChild(regenBtn);
+4580: 	}
+4581: 	if(!isU){
+4582: 		var forkBtn2=document.createElement('button');
+4583: 		forkBtn2.className='ocMsgActB';
+4584: 		forkBtn2.innerHTML='<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3v12"/><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M18 9a9 9 0 0 1-9 9"/></svg>';
+4585: 		forkBtn2.title='Fork from here';
+4586: 		forkBtn2.addEventListener('click',function(ev){
+4587: 			ev.stopPropagation();
+4588: 			var prevMsg=msg.previousElementSibling;
+4589: 			var forkId='';
+4590: 			while(prevMsg){
+4591: 				if(prevMsg.classList.contains('u')){
+4592: 					forkId=prevMsg.dataset.msgId||'';
+4593: 					// Verify forkId exists in messages, if not try content match
+4594: 					var allMsgs2=rMsgs._lastMsgs||[];
+4595: 					var found2=false;
+4596: 					for(var j=0;j<allMsgs2.length;j++){
+4597: 						if(allMsgs2[j].id===forkId){found2=true;break}
+4598: 					}
+4599: 					if(!found2){
+4600: 						var bb2=prevMsg.querySelector('.ocMbb');
+4601: 						var domText2=bb2?(bb2.textContent||'').trim().substring(0,50):'';
+4602: 						for(var j=0;j<allMsgs2.length;j++){
+4603: 							if(allMsgs2[j].role==='user'){

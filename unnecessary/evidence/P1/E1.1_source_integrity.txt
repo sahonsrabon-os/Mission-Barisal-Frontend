@@ -1,0 +1,10 @@
+E1.1 — UI source integrity (Engineer)
+command: md5sum / stat -c%s / wc -l  (read-only)
+--------------------------------------------------
+md5sum       : 895eb75226cc2801834baaced2873bb1
+expected     : 895eb75226cc2801834baaced2873bb1
+MATCH        : YES  ✅ source byte-identical (0 edits)
+size(bytes)  : 310233
+lines        : 6490
+--------------------------------------------------
+NOTE: every phase re-runs this check (see E4.1).

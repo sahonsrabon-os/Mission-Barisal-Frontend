@@ -1,0 +1,333 @@
+{
+  "expected_routes": 39,
+  "distinct_routes_seen": 39,
+  "rows": [
+    {
+      "route": "status",
+      "method": "GET",
+      "status": 200,
+      "content_type": "application/json; charset=utf-8",
+      "json_ok": true,
+      "body_sample": "{\"session\":{\"provider\":\"custom:fakea\",\"model\":\"fast\",\"mode\":\"build\",\"active_conversation\":\"conv_5b3ea98ea0c1\"},\"providers\":[{\"id\":\"anthropic\",\"name\":\"Anthropic\",\"connected\":false,\"models\":{\"claude-sonnet-4-20250514\":{\"name\":\"Claude Sonnet 4\",\"context_window\":200000},\"claude-opus-4-20250514\":{\"name\":\"Claude Opus 4\",\"context_window\":200000},\"claude-3-7-sonnet-20250219\":{\"name\":\"Claude 3.7 Sonnet\",\"context_window\":200000},\"claude-3-5-haiku-20241022\":{\"name\":\"Claude 3.5 Haiku\",\"context_window\":200000}},\"is_custom_type\":false,\"default_model\":\"claude-sonnet-4-20250514\",\"base_url\":\"https://api.anthropic.com/v1\"},{\"id\":\"openai\",\"name\":\"OpenAI\",\"connected\":false,\"models\":{\"gpt-4o\":{\"name\":\"GPT-4o\",\"context_window\":128000},\"gpt-4o-mini\":{\"name\":\"GPT-4o mini\",\"context_window\":128000},\"gpt-4.1\":{\"name\":\"GPT-4.1\",\"context_window\":1047576},\"gpt-4.1-mini\":{\"name\":\"GPT-4.1 mini\",\"context_window\":1047576},\"o3-mini\":{\"name\":\"o3-mini\",\"context_window\":200000}},\"is_custom_type\":false,\"default_model\":\"gpt-4o\",\"base_url\":\"https://api.openai.com/v1\"},{\"id\":\"google\",\"name\":\"Google\",\"connected\":false,\"models\":{\"gemini-2.5-pro\":{\"name\":\"Gemini 2.5 Pro\",\"context_window\":1048576},\"gemini-2.5-flash\":{\"name\":\"G"
+    },
+    {
+      "route": "start",
+      "method": "POST",
+      "status": 200,
+      "content_type": "application/json; charset=utf-8",
+      "json_ok": true,
+      "body_sample": "{\"success\":true,\"session\":{\"provider\":\"custom:fakea\",\"model\":\"fast\",\"mode\":\"build\"}}"
+    },
+    {
+      "route": "conversations",
+      "method": "GET",
+      "status": 200,
+      "content_type": "application/json; charset=utf-8",
+      "json_ok": true,
+      "body_sample": "[{\"id\":\"conv_5b3ea98ea0c1\",\"title\":\"Say hello to the contract\",\"updated_at\":1790242848,\"message_count\":4,\"running\":false,\"last_status\":\"completed\"},{\"id\":\"conv_ef94fd81b950\",\"title\":\"Untitled\",\"updated_at\":1790242848,\"message_count\":0,\"running\":false,\"last_status\":\"idle\"},{\"id\":\"conv_fb48e5723e64\",\"title\":\"USE_TOOL read the readme\",\"updated_at\":1790242848,\"message_count\":4,\"running\":false,\"last_status\":\"completed\"},{\"id\":\"conv_058336fc6855\",\"title\":\"USE_WRITE create greeting\",\"updated_at\":1790242848,\"message_count\":4,\"running\":false,\"last_status\":\"completed\"},{\"id\":\"conv_0ab64458d2c5\",\"title\":\"TODO update the plan\",\"updated_at\":1790242848,\"message_count\":4,\"running\":false,\"last_status\":\"completed\"},{\"id\":\"conv_af36076c1714\",\"title\":\"Untitled\",\"updated_at\":1790242848,\"message_count\":1,\"running\":false,\"last_status\":\"completed\"},{\"id\":\"conv_04bc3ec45a79\",\"title\":\"Untitled\",\"updated_at\":1790242848,\"message_count\":1,\"running\":false,\"last_status\":\"error\"}]"
+    },
+    {
+      "route": "new_session",
+      "method": "POST",
+      "status": 200,
+      "content_type": "application/json; charset=utf-8",
+      "json_ok": true,
+      "body_sample": "{\"id\":\"conv_d1702d31e2f4\",\"title\":\"Untitled\",\"output\":\"\"}"
+    },
+    {
+      "route": "conversation",
+      "method": "GET",
+      "status": 200,
+      "content_type": "application/json; charset=utf-8",
+      "json_ok": true,
+      "body_sample": "{\"messages\":[{\"id\":\"m_349efdd23c\",\"role\":\"user\",\"content\":\"Say hello to the contract\",\"time\":1790242847},{\"id\":\"m_92af430d77\",\"role\":\"assistant\",\"content\":\"Hello from FAKE_A. This is a streamed reply.\",\"parts\":[{\"type\":\"reasoning\",\"text\":\"Thinking... the user said: \\\"Say hello to the contract\\\". A concise reply is best.\"},{\"type\":\"text\",\"text\":\"Hello from FAKE_A. This is a streamed reply.\"}],\"time\":1790242848,\"model\":\"fast\",\"provider\":\"custom:fakea\",\"usage\":{\"input_tokens\":42,\"output_tokens\":17,\"cached_tokens\":7}},{\"id\":\"m_8fecb85dd7\",\"role\":\"user\",\"content\":\"A second warmup message\",\"time\":1790242848},{\"id\":\"m_d0cf96c738\",\"role\":\"assistant\",\"content\":\"Hello from FAKE_A. This is a streamed reply.\",\"parts\":[{\"type\":\"reasoning\",\"text\":\"Thinking... the user said: \\\"A second warmup message\\\". A concise reply is best.\"},{\"type\":\"text\",\"text\":\"Hello from FAKE_A. This is a streamed reply.\"}],\"time\":1790242848,\"model\":\"fast\",\"provider\":\"custom:fakea\",\"usage\":{\"input_tokens\":42,\"output_tokens\":17,\"cached_tokens\":7}}],\"todos\":[]}"
+    },
+    {
+      "route": "switch_conversation",
+      "method": "POST",
+      "status": 200,
+      "content_type": "application/json; charset=utf-8",
+      "json_ok": true,
+      "body_sample": "{\"success\":true,\"conversation_id\":\"conv_5b3ea98ea0c1\"}"
+    },
+    {
+      "route": "rename_conversation",
+      "method": "POST",
+      "status": 200,
+      "content_type": "application/json; charset=utf-8",
+      "json_ok": true,
+      "body_sample": "{\"success\":true,\"title\":\"Renamed session\"}"
+    },
+    {
+      "route": "delete_conversation",
+      "method": "POST",
+      "status": 200,
+      "content_type": "application/json; charset=utf-8",
+      "json_ok": true,
+      "body_sample": "{\"success\":true}"
+    },
+    {
+      "route": "regenerate",
+      "method": "POST",
+      "status": 200,
+      "content_type": "application/json; charset=utf-8",
+      "json_ok": true,
+      "body_sample": "{\"success\":true}"
+    },
+    {
+      "route": "fork",
+      "method": "POST",
+      "status": 200,
+      "content_type": "application/json; charset=utf-8",
+      "json_ok": true,
+      "body_sample": "{\"success\":true,\"conversation_id\":\"conv_3b6b510dca8d\",\"title\":\"Renamed session (fork)\",\"forked_content\":\"\"}"
+    },
+    {
+      "route": "compact",
+      "method": "POST",
+      "status": 200,
+      "content_type": "application/json; charset=utf-8",
+      "json_ok": true,
+      "body_sample": "{\"success\":true,\"messages\":[{\"id\":\"m_349efdd23c\",\"role\":\"user\",\"content\":\"Say hello to the contract\",\"time\":1790242847},{\"id\":\"m_92af430d77\",\"role\":\"assistant\",\"content\":\"Hello from FAKE_A. This is a streamed reply.\",\"parts\":[{\"type\":\"reasoning\",\"text\":\"Thinking... the user said: \\\"Say hello to the contract\\\". A concise reply is best.\"},{\"type\":\"text\",\"text\":\"Hello from FAKE_A. This is a streamed reply.\"}],\"time\":1790242848,\"model\":\"fast\",\"provider\":\"custom:fakea\",\"usage\":{\"input_tokens\":42,\"output_tokens\":17,\"cached_tokens\":7}}],\"summary\":\"nothing to compact\"}"
+    },
+    {
+      "route": "compact",
+      "method": "POST",
+      "status": 200,
+      "content_type": "application/json; charset=utf-8",
+      "json_ok": true,
+      "body_sample": "{\"success\":true,\"messages\":[{\"id\":\"m_b77eb21f35\",\"role\":\"assistant\",\"content\":\"\",\"parts\":[{\"type\":\"text\",\"text\":\"(Conversation compacted: 1 earlier messages summarized out. Continue from the recent context below.)\"}],\"time\":1790242848},{\"id\":\"m_92af430d77\",\"role\":\"assistant\",\"content\":\"Hello from FAKE_A. This is a streamed reply.\",\"parts\":[{\"type\":\"reasoning\",\"text\":\"Thinking... the user said: \\\"Say hello to the contract\\\". A concise reply is best.\"},{\"type\":\"text\",\"text\":\"Hello from FAKE_A. This is a streamed reply.\"}],\"time\":1790242848,\"model\":\"fast\",\"provider\":\"custom:fakea\",\"usage\":{\"input_tokens\":42,\"output_tokens\":17,\"cached_tokens\":7}}]}"
+    },
+    {
+      "route": "undo",
+      "method": "POST",
+      "status": 200,
+      "content_type": "application/json; charset=utf-8",
+      "json_ok": true,
+      "body_sample": "{\"success\":true,\"messages\":[]}"
+    },
+    {
+      "route": "redo",
+      "method": "POST",
+      "status": 200,
+      "content_type": "application/json; charset=utf-8",
+      "json_ok": true,
+      "body_sample": "{\"success\":true,\"messages\":[{\"id\":\"m_b77eb21f35\",\"role\":\"assistant\",\"content\":\"\",\"parts\":[{\"type\":\"text\",\"text\":\"(Conversation compacted: 1 earlier messages summarized out. Continue from the recent context below.)\"}],\"time\":1790242848},{\"id\":\"m_92af430d77\",\"role\":\"assistant\",\"content\":\"Hello from FAKE_A. This is a streamed reply.\",\"parts\":[{\"type\":\"reasoning\",\"text\":\"Thinking... the user said: \\\"Say hello to the contract\\\". A concise reply is best.\"},{\"type\":\"text\",\"text\":\"Hello from FAKE_A. This is a streamed reply.\"}],\"time\":1790242848,\"model\":\"fast\",\"provider\":\"custom:fakea\",\"usage\":{\"input_tokens\":42,\"output_tokens\":17,\"cached_tokens\":7}}]}"
+    },
+    {
+      "route": "abort",
+      "method": "POST",
+      "status": 200,
+      "content_type": "application/json; charset=utf-8",
+      "json_ok": true,
+      "body_sample": "{\"success\":true}"
+    },
+    {
+      "route": "file_tree",
+      "method": "GET",
+      "status": 200,
+      "content_type": "application/json; charset=utf-8",
+      "json_ok": true,
+      "body_sample": "{\"directories\":[],\"files\":[{\"name\":\"README.md\",\"path\":\"/tmp/oc_contract/home/default/README.md\",\"size\":162},{\"name\":\"greeting.txt\",\"path\":\"/tmp/oc_contract/home/default/greeting.txt\",\"size\":39}]}"
+    },
+    {
+      "route": "read_file",
+      "method": "POST",
+      "status": 200,
+      "content_type": "application/json; charset=utf-8",
+      "json_ok": true,
+      "body_sample": "{\"content\":\"# default\\n\\nWorking directory managed by the Code with AI server.\\nProject path: `/tmp/oc_contract/home/default`\\n\\nAsk the AI to explore, edit or run commands here.\\n\"}"
+    },
+    {
+      "route": "resolve_file",
+      "method": "GET",
+      "status": 200,
+      "content_type": "application/json; charset=utf-8",
+      "json_ok": true,
+      "body_sample": "{\"content\":\"# default\\n\\nWorking directory managed by the Code with AI server.\\nProject path: `/tmp/oc_contract/home/default`\\n\\nAsk the AI to explore, edit or run commands here.\\n\"}"
+    },
+    {
+      "route": "changes",
+      "method": "GET",
+      "status": 200,
+      "content_type": "application/json; charset=utf-8",
+      "json_ok": true,
+      "body_sample": "{\"snapshots\":[{\"id\":\"snap_c8bf9afd65ee\",\"message\":\"write_file: greeting.txt\",\"time\":1790242848}]}"
+    },
+    {
+      "route": "diff",
+      "method": "POST",
+      "status": 200,
+      "content_type": "application/json; charset=utf-8",
+      "json_ok": true,
+      "body_sample": "{\"diff\":\"--- a/greeting.txt\\n+++ b/greeting.txt\\n@@ -1,0 +1,1 @@\\n+Hello from the fake AI (marker FAKE_A)\"}"
+    },
+    {
+      "route": "restore",
+      "method": "POST",
+      "status": 200,
+      "content_type": "application/json; charset=utf-8",
+      "json_ok": true,
+      "body_sample": "{\"restored\":true,\"diff\":\"--- a/greeting.txt\\n+++ b/greeting.txt\\n@@ -1,1 +1,0 @@\\n-Hello from the fake AI (marker FAKE_A)\"}"
+    },
+    {
+      "route": "project_info",
+      "method": "GET",
+      "status": 200,
+      "content_type": "application/json; charset=utf-8",
+      "json_ok": true,
+      "body_sample": "{\"overview\":\"Project type: custom\\nProject path: /tmp/oc_contract/home/default\\n\\n# default\\n\\nWorking directory managed by the Code with AI server.\\nProject path: `/tmp/oc_contract/home/default`\\n\\nAsk the AI to explore, edit or run commands here.\\n\",\"type\":\"custom\",\"project_id\":\"default\",\"name\":\"default\"}"
+    },
+    {
+      "route": "projects_list",
+      "method": "GET",
+      "status": 200,
+      "content_type": "application/json; charset=utf-8",
+      "json_ok": true,
+      "body_sample": "[{\"project_id\":\"default\",\"name\":\"default\",\"path\":\"/tmp/oc_contract/home/default\",\"type\":\"custom\",\"insid\":null,\"created\":1790242847},{\"project_id\":\"proj_6f998484101c\",\"name\":\"ProjB\",\"path\":\"/tmp/oc_contract/home/projb\",\"type\":\"custom\",\"insid\":null,\"created\":1790242848},{\"project_id\":\"proj_4915afe35314\",\"name\":\"ProjClose\",\"path\":\"/tmp/oc_contract/home/projclose\",\"type\":\"custom\",\"insid\":null,\"created\":1790242848},{\"project_id\":\"proj_7e6d71ee8dea\",\"name\":\"ProjDel\",\"path\":\"/tmp/oc_contract/home/projdel\",\"type\":\"custom\",\"insid\":null,\"created\":1790242848}]"
+    },
+    {
+      "route": "projects_create",
+      "method": "POST",
+      "status": 200,
+      "content_type": "application/json; charset=utf-8",
+      "json_ok": true,
+      "body_sample": "{\"project_id\":\"proj_6128b2798c68\",\"name\":\"MatrixTmp\",\"path\":\"/tmp/oc_contract/home/matrixtmp\"}"
+    },
+    {
+      "route": "projects_close",
+      "method": "POST",
+      "status": 200,
+      "content_type": "application/json; charset=utf-8",
+      "json_ok": true,
+      "body_sample": "{\"success\":true}"
+    },
+    {
+      "route": "projects_delete",
+      "method": "POST",
+      "status": 200,
+      "content_type": "application/json; charset=utf-8",
+      "json_ok": true,
+      "body_sample": "{\"success\":true}"
+    },
+    {
+      "route": "projects_wordpress",
+      "method": "GET",
+      "status": 200,
+      "content_type": "application/json; charset=utf-8",
+      "json_ok": true,
+      "body_sample": "[]"
+    },
+    {
+      "route": "providers",
+      "method": "GET",
+      "status": 200,
+      "content_type": "application/json; charset=utf-8",
+      "json_ok": true,
+      "body_sample": "[{\"id\":\"anthropic\",\"name\":\"Anthropic\",\"connected\":false,\"models\":{\"claude-sonnet-4-20250514\":{\"name\":\"Claude Sonnet 4\",\"context_window\":200000},\"claude-opus-4-20250514\":{\"name\":\"Claude Opus 4\",\"context_window\":200000},\"claude-3-7-sonnet-20250219\":{\"name\":\"Claude 3.7 Sonnet\",\"context_window\":200000},\"claude-3-5-haiku-20241022\":{\"name\":\"Claude 3.5 Haiku\",\"context_window\":200000}},\"is_custom_type\":false,\"default_model\":\"claude-sonnet-4-20250514\",\"base_url\":\"https://api.anthropic.com/v1\"},{\"id\":\"openai\",\"name\":\"OpenAI\",\"connected\":false,\"models\":{\"gpt-4o\":{\"name\":\"GPT-4o\",\"context_window\":128000},\"gpt-4o-mini\":{\"name\":\"GPT-4o mini\",\"context_window\":128000},\"gpt-4.1\":{\"name\":\"GPT-4.1\",\"context_window\":1047576},\"gpt-4.1-mini\":{\"name\":\"GPT-4.1 mini\",\"context_window\":1047576},\"o3-mini\":{\"name\":\"o3-mini\",\"context_window\":200000}},\"is_custom_type\":false,\"default_model\":\"gpt-4o\",\"base_url\":\"https://api.openai.com/v1\"},{\"id\":\"google\",\"name\":\"Google\",\"connected\":false,\"models\":{\"gemini-2.5-pro\":{\"name\":\"Gemini 2.5 Pro\",\"context_window\":1048576},\"gemini-2.5-flash\":{\"name\":\"Gemini 2.5 Flash\",\"context_window\":1048576},\"gemini-2.0-flash\":{\"name\":\"Gemini 2.0 Flash\",\"context_window\":1048576}},\"is_cus"
+    },
+    {
+      "route": "settings_load",
+      "method": "GET",
+      "status": 200,
+      "content_type": "application/json; charset=utf-8",
+      "json_ok": true,
+      "body_sample": "{\"favorite_models\":[],\"permissions\":{}}"
+    },
+    {
+      "route": "settings_save",
+      "method": "POST",
+      "status": 200,
+      "content_type": "application/json; charset=utf-8",
+      "json_ok": true,
+      "body_sample": "{\"success\":true,\"provider_id\":\"custom:tempprobe\"}"
+    },
+    {
+      "route": "settings_delete",
+      "method": "POST",
+      "status": 200,
+      "content_type": "application/json; charset=utf-8",
+      "json_ok": true,
+      "body_sample": "{\"success\":true}"
+    },
+    {
+      "route": "test_connection",
+      "method": "POST",
+      "status": 200,
+      "content_type": "application/json; charset=utf-8",
+      "json_ok": true,
+      "body_sample": "{\"success\":true,\"endpoint\":\"http://127.0.0.1:18871/v1/models\"}"
+    },
+    {
+      "route": "favorite_model",
+      "method": "POST",
+      "status": 200,
+      "content_type": "application/json; charset=utf-8",
+      "json_ok": true,
+      "body_sample": "{\"success\":true}"
+    },
+    {
+      "route": "unfavorite_model",
+      "method": "POST",
+      "status": 200,
+      "content_type": "application/json; charset=utf-8",
+      "json_ok": true,
+      "body_sample": "{\"success\":true}"
+    },
+    {
+      "route": "toggle_permission",
+      "method": "POST",
+      "status": 200,
+      "content_type": "application/json; charset=utf-8",
+      "json_ok": true,
+      "body_sample": "{\"success\":true}"
+    },
+    {
+      "route": "shell",
+      "method": "POST",
+      "status": 200,
+      "content_type": "application/json; charset=utf-8",
+      "json_ok": true,
+      "body_sample": "{\"output\":\"contract-shell-ok\\n\",\"returncode\":0}"
+    },
+    {
+      "route": "set_mode",
+      "method": "POST",
+      "status": 200,
+      "content_type": "application/json; charset=utf-8",
+      "json_ok": true,
+      "body_sample": "{\"success\":true,\"mode\":\"plan\"}"
+    },
+    {
+      "route": "clear",
+      "method": "POST",
+      "status": 200,
+      "content_type": "application/json; charset=utf-8",
+      "json_ok": true,
+      "body_sample": "{\"success\":true,\"messages\":[]}"
+    },
+    {
+      "route": "force_unlock",
+      "method": "POST",
+      "status": 200,
+      "content_type": "application/json; charset=utf-8",
+      "json_ok": true,
+      "body_sample": "{\"success\":true,\"message\":\"Lock cleared\"}"
+    },
+    {
+      "route": "ai_chat_stream",
+      "method": "POST",
+      "status": 200,
+      "content_type": "text/plain; charset=utf-8",
+      "json_ok": false,
+      "sse_protocol_ok": true,
+      "body_sample": "data: {\"_event\":\"iteration-start\",\"conversation_id\":\"conv_5b3ea98ea0c1\",\"iteration\":1}\ndata: {\"_event\":\"reasoning-delta\",\"text\":\"Thinking... the user said: \\\"matrix route check\\\". A concise reply is best.\",\"conversation_id\":\"conv_5b3ea98ea0c1\"}\ndata: {\"_event\":\"text-delta\",\"text\":\"Hello \",\"conversation_id\":\"conv_5b3ea98ea0c1\"}\ndata: {\"_event\":\"text-delta\",\"text\":\"from \",\"conversation_id\":\"conv_5b3ea98ea0c1\"}\ndata: {\"_event\":\"text-delta\",\"text\":\"FAKE_A. \",\"conversation_id\":\"conv_5b3ea98ea0c1\"}\ndata: {\"_event\":\"text-delta\",\"text\":\"This \",\"conversation_id\":\"conv_5b3ea98ea0c1\"}\ndata: {\"_event\":\"text-delta\",\"text\":\"is \",\"conversation_id\":\"conv_5b3ea98ea0c1\"}\ndata: {\"_event\":\"text-delta\",\"text\":\"a \",\"conversation_id\":\"conv_5b3ea98ea0c1\"}\ndata: {\"_event\":\"text-delta\",\"text\":\"streamed \",\"conversat"
+    }
+  ],
+  "all_200": true,
+  "all_json": true,
+  "failures": {
+    "not_200": [],
+    "not_json": []
+  }
+}

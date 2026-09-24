@@ -1,0 +1,48 @@
+# raw XHR route: file_tree  line: 4112
+----------------------------------------------------------------------
+4108: document.getElementById('ocFvC').addEventListener('click',function(){document.getElementById('ocFv').classList.remove('open')});
+4109: 
+4110: function loadFT(path){
+4111: 	ftPath=path;
+4112: 	var u=A+'&ai_php_api=file_tree&csrf_token='+C+'&path='+encodeURIComponent(path)+'&depth=1';
+4113: 	var x=new XMLHttpRequest();
+4114: 	x.open('GET',u,true);
+4115: 	x.setRequestHeader('Accept','application/json');
+4116: 	x.onload=function(){
+4117: 		if(x.status===200){
+4118: 			try{renderFT(JSON.parse(x.responseText),path)}
+4119: 			catch(e){}
+4120: 		}
+4121: 	};
+4122: 	x.send();
+4123: }
+4124: 
+4125: function renderFT(data,basePath){
+4126: 	var el=document.getElementById('ocFtL');
+4127: 	el.innerHTML='';
+4128: 	if(data.directories){
+4129: 		data.directories.sort(function(a,b){return a.name.localeCompare(b.name)});
+4130: 		data.directories.forEach(function(d){
+4131: 			if(d.name==='.git')return;
+4132: 			var item=document.createElement('div');
+4133: 			item.className='ocFtI';
+4134: 			item.dataset.path=d.path;
+4135: 			item.dataset.type='dir';
+4136: 			item.dataset.loaded='0';
+4137: 			item.innerHTML='<span class="ocFtIc"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></span><span class="ocFtIn">'+esc(d.name)+'</span>';
+4138: 			item.addEventListener('click',function(ev){
+4139: 				ev.stopPropagation();
+4140: 				var loaded=this.dataset.loaded==='1';
+4141: 				var open=this.dataset.open==='1';
+4142: 				if(!loaded){
+4143: 					this.dataset.loaded='1';
+4144: 					var sub=document.createElement('div');
+4145: 					sub.className='ocFtSub';
+4146: 					sub.style.display='block';
+4147: 					this.after(sub);
+4148: 					loadFTSub(d.path,sub,this);
+4149: 				}else{
+4150: 					var sub=this.nextElementSibling;
+4151: 					if(sub&&sub.className==='ocFtSub'){
+4152: 						sub.style.display=open?'none':'block';
+4153: 					}

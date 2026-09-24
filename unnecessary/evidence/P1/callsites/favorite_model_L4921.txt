@@ -1,0 +1,49 @@
+# route: favorite_model  line: 4921  method: POST
+# params(arg): {model_id:modelId}
+# response field reads seen in callback: (none/indirect)
+# NOTE: best-effort regex scan; verify against this dump.
+----------------------------------------------------------------------
+4919: 	if(idx===-1){
+4920: 		favModels.push(modelId);
+4921: 		api('favorite_model',{model_id:modelId},function(){});
+4922: 		toast('Added to favorites','ok');
+4923: 	}else{
+4924: 		favModels.splice(idx,1);
+4925: 		api('unfavorite_model',{model_id:modelId},function(){});
+4926: 		toast('Removed from favorites','info');
+4927: 	}
+4928: }
+4929: 
+4930: // Permission System
+4931: var permConfig={};
+4932: var permResolve=null;
+4933: function askPermission(permType,detail){
+4934: 	var permKey=permType;
+4935: 	if(permConfig[permKey]==='allow_always')return Promise.resolve(true);
+4936: 	if(permConfig[permKey]==='deny')return Promise.resolve(false);
+4937: 	return new Promise(function(resolve){
+4938: 		var mod=document.getElementById('ocPermMod');
+4939: 		document.getElementById('ocPermTitle').textContent='Allow '+permType+'?';
+4940: 		document.getElementById('ocPermSub').textContent=permType;
+4941: 		var detailText='';
+4942: 		if(typeof detail==='string')detailText=detail;
+4943: 		else if(typeof detail==='object')detailText=JSON.stringify(detail,null,2);
+4944: 		document.getElementById('ocPermDetail').textContent=detailText;
+4945: 		var iconMap={write_file:'\uD83D\uDCDD',edit_file:'\u270F\uFE0F',bash:'\uD83D\uDCBB',php_eval:'\uD83D\uDCBB',php_lint:'\uD83D\uDCBB',file_download:'\u2B07\uFE0F'};
+4946: 		document.getElementById('ocPermIcon').textContent=iconMap[permType]||'\uD83D\uDD12';
+4947: 		mod.classList.add('open');
+4948: 		var onOnce=function(){mod.classList.remove('open');cleanup();resolve(true)};
+4949: 		var onAlways=function(){permConfig[permKey]='allow_always';mod.classList.remove('open');cleanup();resolve(true);api('toggle_permission',{permission:permKey,value:'allow_always'},function(){});}
+4950: 		var onDeny=function(){mod.classList.remove('open');cleanup();resolve(false)};
+4951: 		var cleanup=function(){
+4952: 			document.getElementById('ocPermAllowOnce').removeEventListener('click',onOnce);
+4953: 			document.getElementById('ocPermAllowAlways').removeEventListener('click',onAlways);
+4954: 			document.getElementById('ocPermDeny').removeEventListener('click',onDeny);
+4955: 		};
+4956: 		document.getElementById('ocPermAllowOnce').addEventListener('click',onOnce);
+4957: 		document.getElementById('ocPermAllowAlways').addEventListener('click',onAlways);
+4958: 		document.getElementById('ocPermDeny').addEventListener('click',onDeny);
+4959: 	});
+4960: }
+4961: 
+4962: // Session Rename (double-click sidebar item)

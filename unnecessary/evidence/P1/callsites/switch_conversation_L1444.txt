@@ -1,0 +1,49 @@
+# route: switch_conversation  line: 1444  method: POST
+# params(arg): {conversation_id:s.id}
+# response field reads seen in callback: forEach, id, length, updated_at
+# NOTE: best-effort regex scan; verify against this dump.
+----------------------------------------------------------------------
+1442: 	api('start',_sp,function(){
+1443: 		aC=s.id;
+1444: 		api('switch_conversation',{conversation_id:s.id},function(){loadC(s.id)});
+1445: 	});
+1446: }
+1447: 
+1448: function loadSL(){
+1449: 	api('conversations',null,function(e,d){
+1450: 		if(e||!d)return;
+1451: 		var ls=document.getElementById('ocSL');
+1452: 		ls.innerHTML='';
+1453: 		if(!d.length){
+1454: 			ls.innerHTML='<div style="padding:20px;color:var(--t3);font-size:12px;text-align:center">No sessions yet</div>';
+1455: 			return;
+1456: 		}
+1457: 		_sessions=d;
+1458: 		var lastDayKey='';
+1459: 		d.forEach(function(s,i){
+1460: 			// Day separator
+1461: 			if(s.updated_at){
+1462: 				var dt=new Date(s.updated_at*1000);
+1463: 				var today=new Date();
+1464: 				var dayKey=dt.toDateString();
+1465: 				if(dayKey!==lastDayKey){
+1466: 					lastDayKey=dayKey;
+1467: 					var dayLabel;
+1468: 					if(dt.toDateString()===today.toDateString()){
+1469: 						dayLabel='Today';
+1470: 					}else{
+1471: 						var yesterday=new Date(today);
+1472: 						yesterday.setDate(yesterday.getDate()-1);
+1473: 						if(dt.toDateString()===yesterday.toDateString()){
+1474: 							dayLabel='Yesterday';
+1475: 						}else{
+1476: 							dayLabel=dt.toLocaleDateString([],{weekday:'long',month:'short',day:'numeric'});
+1477: 						}
+1478: 					}
+1479: 					var sep=document.createElement('div');
+1480: 					sep.className='ocSbSep';
+1481: 					sep.textContent=dayLabel;
+1482: 					ls.appendChild(sep);
+1483: 				}
+1484: 			}
+1485: 			var it=document.createElement('div');

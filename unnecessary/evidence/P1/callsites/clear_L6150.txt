@@ -1,0 +1,49 @@
+# route: clear  line: 6150  method: POST
+# params(arg): {}
+# response field reads seen in callback: classList, messages, success, summary
+# NOTE: best-effort regex scan; verify against this dump.
+----------------------------------------------------------------------
+6148: 		}
+6149: 	}},
+6150: 	{kb:'clear',cmd:'Clear Conversation',desc:'Delete all messages in this session',action:function(){api('clear',{},function(){rMsgs([]);st('Cleared',true)})}},
+6151: 	{kb:'compact',cmd:'Compact Conversation',desc:'Summarize history to free context space',action:function(){st('Compacting...',true);api('compact',{keep_last_n:3},function(e,r){if(!e&&r&&r.success){rMsgs(r.messages||[]);if(r.summary){toast('Nothing to compact','warn')}else{toast('Compacted','ok')}st('Ready',true)}else{toast('Failed','err');st('Ready',true)}})}},
+6152: 	{kb:'export',cmd:'Export as Markdown',desc:'Download conversation with export options',action:function(){showExportDialog()}},
+6153: 	{kb:'copy',cmd:'Copy Transcript',desc:'Copy conversation to clipboard',action:function(){copyTranscript()}},
+6154: 	{kb:'help',cmd:'Help',desc:'Show keyboard shortcuts and FAQ',action:function(){document.getElementById('ocHlBtn').click()}}
+6155: ];
+6156: 
+6157: // Patch the command palette to include new commands
+6158: function toggleCmdPalette(){
+6159: 	var p=document.getElementById('ocCmdP');
+6160: 	if(p.classList.contains('open')){p.classList.remove('open');return}
+6161: 	var inp=document.getElementById('ocCmdIn');
+6162: 	inp.value='';
+6163: 	renderCmdList('');
+6164: 	p.classList.add('open');
+6165: 	setTimeout(function(){inp.focus()},50);
+6166: }
+6167: function renderCmdList(q){
+6168: 	var list=document.getElementById('ocCmdL');
+6169: 	list.innerHTML='';
+6170: 	var lq=(q||'').toLowerCase();
+6171: 	_origCmdCommands.filter(function(c){return !lq||c.cmd.toLowerCase().indexOf(lq)!==-1||(c.desc&&c.desc.toLowerCase().indexOf(lq)!==-1)}).forEach(function(c,i){
+6172: 		var dynKey=c.kb?getKeybinding(c.kb):'';
+6173: 		var div=document.createElement('div');
+6174: 		div.className='ocCmdIt';
+6175: 		div.innerHTML=(dynKey?'<span class="ocCmdItK">'+esc(dynKey)+'</span>':'<span class="ocCmdItK empty"></span>')+'<div style="flex:1;min-width:0"><div class="ocCmdItN">'+esc(c.cmd)+'</div>'+(c.desc?'<div class="ocCmdItD">'+esc(c.desc)+'</div>':'')+'</div>';
+6176: 		div.addEventListener('click',function(){
+6177: 			document.getElementById('ocCmdP').classList.remove('open');
+6178: 			c.action();
+6179: 		});
+6180: 		div.addEventListener('mouseenter',function(){
+6181: 			list.querySelectorAll('.ocCmdIt').forEach(function(el){el.classList.remove('act')});
+6182: 			div.classList.add('act');
+6183: 		});
+6184: 		list.appendChild(div);
+6185: 	});
+6186: }
+6187: document.getElementById('ocCmdIn').addEventListener('input',function(){
+6188: 	renderCmdList(this.value);
+6189: });
+6190: document.getElementById('ocCmdIn').addEventListener('keydown',function(e){
+6191: 	if(e.key==='Escape'){document.getElementById('ocCmdP').classList.remove('open');return}

@@ -1,0 +1,49 @@
+# route: fork  line: 3379  method: POST
+# params(arg): {message_id:msgId}
+# response field reads seen in callback: conversation_id, error, forked_content, success, title
+# NOTE: best-effort regex scan; verify against this dump.
+----------------------------------------------------------------------
+3377: 	function doFork(msgId){
+3378: 		st('Forking...',true);
+3379: 		api('fork',{message_id:msgId},function(e,r){
+3380: 			if(!e&&r&&r.success){
+3381: 				aC=r.conversation_id;
+3382: 				updateURL(aC);
+3383: 				toast('Forked to new session: '+(r.title||'Untitled'),'ok');
+3384: 				st('Ready',true);
+3385: 				loadSL();
+3386: 				loadC(aC);
+3387: 				if(r.forked_content){
+3388: 					var inp=document.getElementById('ocIn');
+3389: 					inp.value=r.forked_content;
+3390: 					inp.focus();
+3391: 				}
+3392: 			}else{
+3393: 				toast('Failed to fork: '+(e||(r&&r.error)||'Unknown error'),'err');
+3394: 				st('Ready',true);
+3395: 			}
+3396: 		});
+3397: 	}
+3398: 
+3399: 	renderForkList('');
+3400: 	search.value='';
+3401: 	mod.classList.add('open');
+3402: 	setTimeout(function(){search.focus()},50);
+3403: 
+3404: 	// Wire up search
+3405: 	search.oninput=function(){renderForkList(this.value)};
+3406: 
+3407: 	// Close handlers
+3408: 	document.getElementById('ocForkC').onclick=function(){mod.classList.remove('open')};
+3409: 	mod.onclick=function(e){if(e.target===mod)mod.classList.remove('open')};
+3410: }
+3411: 
+3412: function showExportDialog(){
+3413: 	var m=document.getElementById('ocDiffMod')||null;
+3414: 	// Create export options modal
+3415: 	var mod=document.createElement('div');
+3416: 	mod.className='ocMo open';
+3417: 	mod.id='ocExportMod';
+3418: 	mod.innerHTML='<div class="ocMoB" style="width:440px"><div class="ocMoH"><h3>Export Options</h3><button class="ocMoC" id="ocExpC">✕</button></div><div class="ocMoBd">'
+3419: 		+'<div style="margin-bottom:12px"><label style="display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer"><input type="checkbox" id="ocExpThinking" checked> Include reasoning/thinking blocks</label></div>'
+3420: 		+'<div style="margin-bottom:12px"><label style="display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer"><input type="checkbox" id="ocExpTools" checked> Include tool call details</label></div>'

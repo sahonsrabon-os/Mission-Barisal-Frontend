@@ -1,0 +1,49 @@
+# route: projects_delete  line: 5078  method: POST
+# params(arg): {project_id:p.project_id}
+# response field reads seen in callback: error, name, path, project_id, success
+# NOTE: best-effort regex scan; verify against this dump.
+----------------------------------------------------------------------
+5076: 			ev.stopPropagation();
+5077: 			if(confirm('Delete project "'+(p.name||p.path)+'"?\n\nThis will permanently delete all conversations, sessions and context data for this project.')){
+5078: 				api('projects_delete',{project_id:p.project_id},function(e,r){
+5079: 					if(!e&&r&&r.success){
+5080: 						if(p.project_id===PID){
+5081: 							var u=new URL(window.location);
+5082: 							u.searchParams.delete('project_id');
+5083: 							u.searchParams.delete('insid');
+5084: 							u.searchParams.delete('path');
+5085: 							u.searchParams.delete('session');
+5086: 							window.location.href=u.toString();
+5087: 						}else{
+5088: 							loadProjects(true);
+5089: 							toast('Project deleted','ok');
+5090: 						}
+5091: 					}else{
+5092: 						toast(r&&r.error?r.error:'Failed to delete project','err');
+5093: 					}
+5094: 				});
+5095: 			}
+5096: 		});
+5097: 		list.appendChild(item);
+5098: 	});
+5099: }
+5100: 
+5101: function switchToProject(projectId){
+5102: 	var u=new URL(window.location);
+5103: 	u.searchParams.set('project_id',projectId);
+5104: 	u.searchParams.delete('insid');
+5105: 	u.searchParams.delete('path');
+5106: 	u.searchParams.delete('session');
+5107: 	window.location.href=u.toString();
+5108: }
+5109: 
+5110: function openProjectModal(){
+5111: 	document.getElementById('ocProjMod').classList.add('open');
+5112: 	document.getElementById('ocProjSearch').value='';
+5113: 	document.getElementById('ocProjNewForm').style.display='none';
+5114: 	loadProjects();
+5115: }
+5116: 
+5117: function closeProjectModal(){
+5118: 	document.getElementById('ocProjMod').classList.remove('open');
+5119: }

@@ -1,0 +1,49 @@
+# route: start  line: 1711  method: GET
+# params(arg): _sp
+# response field reads seen in callback: error, output, returncode
+# NOTE: best-effort regex scan; verify against this dump.
+----------------------------------------------------------------------
+1709: 			var pp=mv.split('/');
+1710: 		var _sp={provider:pp[0],model:pp.slice(1).join('/'),mode:document.getElementById('ocMode').value};
+1711: 		api('start',_sp,function(){});
+1712: 		}
+1713: 	});
+1714: }
+1715: 
+1716: function send(){
+1717: 	var inp=document.getElementById('ocIn');
+1718: 	var text=inp.value.trim();
+1719: 	if(!text)return;
+1720: 	// Only block if the CURRENT session is streaming, not other sessions
+1721: 	if(_ss[aC]&&_ss[aC].streaming)return;
+1722: 
+1723: 	if(text.charAt(0)==='!'&&text.length>1){
+1724: 		var shellCmd=text.substring(1);
+1725: 		inp.value='';autoResize(inp);
+1726: 		if(text&&!(_ss[aC]&&_ss[aC].streaming)){promptHistory.push(text);if(promptHistory.length>50)promptHistory.shift();promptHistoryIdx=-1;savePromptHistory()}
+1727: 		rMsg({role:'user',content:text});
+1728: 		var shellEl=rMsg({role:'asst',content:'',parts:[]});
+1729: 		shellEl.innerHTML='<div class="ocShellPrompt">'+esc(shellCmd)+'</div><div class="ocTerm">Running...</div>';
+1730: 		// Per-session: mark this session as streaming too
+1731: 		if(!_ss[aC]) _ss[aC]={};
+1732: 		_ss[aC].streaming=true;
+1733: 		_ss[aC].lockActive=true;
+1734: 		syncStreamUI();
+1735: 		st('Running shell...',true);
+1736: 		api('shell',{command:shellCmd},function(e,r){
+1737: 			if(aC&&_ss[aC]){_ss[aC].streaming=false;_ss[aC].lockActive=false}
+1738: 			syncStreamUI();
+1739: 			if(!e&&r){
+1740: 				var output=r.output||'';
+1741: 				if(r.error)output+='\nError: '+r.error;
+1742: 				shellEl.innerHTML='<div class="ocShellPrompt">'+esc(shellCmd)+'</div><div class="ocTerm">'+esc(output)+'</div>';
+1743: 				if(r.returncode!==0)shellEl.querySelector('.ocTerm').style.borderColor='var(--wr)';
+1744: 			}else{
+1745: 				shellEl.innerHTML='<div class="ocShellPrompt">'+esc(shellCmd)+'</div><div class="ocTerm" style="color:var(--err)">Error: '+(e||'Unknown error')+'</div>';
+1746: 			}
+1747: 			st('Ready',true);
+1748: 			_playSound('complete');
+1749: 			_notifyOnComplete('Shell Complete','Command finished');
+1750: 			loadSL();
+1751: 		});
+1752: 		return;

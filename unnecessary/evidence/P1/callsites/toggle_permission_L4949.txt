@@ -1,0 +1,49 @@
+# route: toggle_permission  line: 4949  method: POST
+# params(arg): {permission:permKey,value:'allow_always'}
+# response field reads seen in callback: success
+# NOTE: best-effort regex scan; verify against this dump.
+----------------------------------------------------------------------
+4947: 		mod.classList.add('open');
+4948: 		var onOnce=function(){mod.classList.remove('open');cleanup();resolve(true)};
+4949: 		var onAlways=function(){permConfig[permKey]='allow_always';mod.classList.remove('open');cleanup();resolve(true);api('toggle_permission',{permission:permKey,value:'allow_always'},function(){});}
+4950: 		var onDeny=function(){mod.classList.remove('open');cleanup();resolve(false)};
+4951: 		var cleanup=function(){
+4952: 			document.getElementById('ocPermAllowOnce').removeEventListener('click',onOnce);
+4953: 			document.getElementById('ocPermAllowAlways').removeEventListener('click',onAlways);
+4954: 			document.getElementById('ocPermDeny').removeEventListener('click',onDeny);
+4955: 		};
+4956: 		document.getElementById('ocPermAllowOnce').addEventListener('click',onOnce);
+4957: 		document.getElementById('ocPermAllowAlways').addEventListener('click',onAlways);
+4958: 		document.getElementById('ocPermDeny').addEventListener('click',onDeny);
+4959: 	});
+4960: }
+4961: 
+4962: // Session Rename (double-click sidebar item)
+4963: document.getElementById('ocSL').addEventListener('dblclick',function(e){
+4964: 	var item=e.target.closest('.ocSi');
+4965: 	if(!item||!item.dataset.id)return;
+4966: 	var currentTitle=item.querySelector('.ocSiT');
+4967: 	if(!currentTitle)return;
+4968: 	var newTitle=prompt('Rename session:',currentTitle.textContent);
+4969: 	if(newTitle!==null&&newTitle.trim()){
+4970: 		api('rename_conversation',{conversation_id:item.dataset.id,title:newTitle.trim()},function(e,r){
+4971: 			if(!e&&r&&r.success){
+4972: 				currentTitle.textContent=newTitle.trim();
+4973: 				toast('Renamed','ok');
+4974: 			}else{
+4975: 				toast('Failed to rename','err');
+4976: 			}
+4977: 		});
+4978: 	}
+4979: });
+4980: 
+4981: // Load favorites on init
+4982: loadFavModels();
+4983: 
+4984: // Project Management
+4985: function loadProjects(force){
+4986: 	if(_projectsCache&&!force){
+4987: 		projects=_projectsCache.projects||[];
+4988: 		wordpressInstalls=_projectsCache.wordpress||[];
+4989: 		renderProjectList('');
+4990: 		if(typeof loadSidebarProjects==='function') loadSidebarProjects();

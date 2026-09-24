@@ -1,0 +1,49 @@
+# route: delete_conversation  line: 1513  method: POST
+# params(arg): {conversation_id:s.id}
+# response field reads seen in callback: id
+# NOTE: best-effort regex scan; verify against this dump.
+----------------------------------------------------------------------
+1511: 						if(!_deletedIds)_deletedIds={};
+1512: 						_deletedIds[s.id]=true;
+1513: 						api('delete_conversation',{conversation_id:s.id},function(){
+1514: 							loadSL();
+1515: 							if(aC===s.id){aC=null;rMsgs([])}
+1516: 							delete _deletedIds[s.id];
+1517: 						});
+1518: 					}
+1519: 					return;
+1520: 				}
+1521: 				var mv=document.getElementById('ocModel').value;
+1522: 				var pp=mv.split('/');
+1523: 			var _sp={provider:pp[0],model:pp.slice(1).join('/'),mode:document.getElementById('ocMode').value};
+1524: 			api('start',_sp,function(){
+1525: 				aC=s.id;
+1526: 				api('switch_conversation',{conversation_id:s.id},function(){
+1527: 					loadC(s.id);
+1528: 				});
+1529: 				});
+1530: 			});
+1531: 			ls.appendChild(it);
+1532: 		});
+1533: 		syncSessionStates(d);
+1534: 	});
+1535: }
+1536: 
+1537: function hlS(id){
+1538: 	document.querySelectorAll('.ocSi').forEach(function(el){
+1539: 		el.classList.toggle('act',el.dataset.id===id);
+1540: 	});
+1541: }
+1542: 
+1543: function setGenTab(id){
+1544: 	if(!id)return;
+1545: 	var el=document.querySelector('#ocSL .ocSi[data-id="'+(window.CSS&&CSS.escape?CSS.escape(id):id.replace(/["\\]/g,'\\$&'))+'"]');
+1546: 	if(!el)return;
+1547: 	// 'gen' (red, "thinking") applies to the generating session including when
+1548: 	// it is the currently-viewed (active) session. CSS ordering (.gen after .act)
+1549: 	// makes the red dot override the active green dot while generating.
+1550: 	el.classList.remove('unread');
+1551: 	el.classList.add('gen');
+1552: }
+1553: 
+1554: 

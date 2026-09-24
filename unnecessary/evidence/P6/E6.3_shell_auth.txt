@@ -1,0 +1,10 @@
+E6.3 — shell route behind OC_ACCESS_TOKEN login gate
+
+✅ GET / without token serves login page (not the UI) — HTTP 200, has login form=true, has UI=false
+✅ shell without login -> HTTP 403 — HTTP 403 {"error":"invalid csrf token (login required)"}
+✅ POST /login wrong token -> re-serves login with error — HTTP 200
+✅ POST /login correct token -> 302 + session cookie — HTTP 302 cookie=oc_sid=428b67002f1b02c80…
+✅ GET / with session cookie serves the real UI + CSRF — HTTP 200, csrf=yes
+✅ shell WITH login works (output present) — HTTP 200 {"output":"guarded-ok\n","returncode":0}
+
+RESULT: ✅ shell is unreachable without the access token

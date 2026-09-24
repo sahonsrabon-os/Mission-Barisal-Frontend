@@ -1,0 +1,13 @@
+E6.1 — customer switches between two custom providers (own base_url + api_key)
+
+FakeA url=http://127.0.0.1:18871/v1 marker=FAKE_A  test_connection={"success":true,"endpoint":"http://127.0.0.1:18871/v1/models"}
+FakeB url=http://127.0.0.1:18872/v1 marker=FAKE_B  test_connection={"success":true,"endpoint":"http://127.0.0.1:18872/v1/models"}
+Dead  url=http://127.0.0.1:18899/v1 test_connection={"error":"Cannot reach http://127.0.0.1:18899/v1: fetch failed"}
+
+settings_save A -> {"success":true,"provider_id":"custom:fakea"}
+settings_save B -> {"success":true,"provider_id":"custom:fakeb"}
+
+stream while provider=custom:fakeb: status=200 contains FAKE_B=true contains FAKE_A=false
+stream while provider=custom:fakea: status=200 contains FAKE_A=true contains FAKE_B=false
+
+RESULT: ✅ both providers connect + streams route to the selected base_url

@@ -1,0 +1,49 @@
+# route: force_unlock  line: 4347  method: POST
+# params(arg): {}
+# response field reads seen in callback: message, success
+# NOTE: best-effort regex scan; verify against this dump.
+----------------------------------------------------------------------
+4345: 	var inp=document.getElementById('ocIn');
+4346: 	var lastMsg=inp.value.trim();
+4347: 	api('force_unlock',{},function(e,r){
+4348: 		if(!e&&r&&r.success){
+4349: 			toast('Lock cleared successfully','ok');
+4350: 			st('Ready',true);
+4351: 			if(aC&&_ss[aC]){_ss[aC].streaming=false;_ss[aC].lockActive=false;_ss[aC].xhr=null}
+4352: 			syncStreamUI();
+4353: 			cS=null;
+4354: 			clearGenTab(aC);
+4355: 			if(lastMsg){
+4356: 				inp.value=lastMsg;
+4357: 				setTimeout(function(){send()},300);
+4358: 			}
+4359: 		}else{
+4360: 			toast('Failed to clear lock: '+(e||(r&&r.message)||'Unknown error'),'err');
+4361: 		}
+4362: 	});
+4363: }
+4364: window.forceUnlockAndRetry=forceUnlockAndRetry;
+4365: 
+4366: // @-Mention file resolution + mode switching in send()
+4367: var origSend=send;
+4368: send=function(){
+4369: 	var inp=document.getElementById('ocIn');
+4370: 	var text=inp.value.trim();
+4371: 	if(!text)return;
+4372: 	// Only block if the CURRENT session is streaming, not other sessions
+4373: 	if(_ss[aC]&&_ss[aC].streaming)return;
+4374: 
+4375: 	// Handle @build/@plan mode mentions
+4376: 	var modeMentions=text.match(/@(build|plan)\b/gi);
+4377: 	if(modeMentions){
+4378: 		modeMentions.forEach(function(m){
+4379: 			var mode=m.substring(1).toLowerCase();
+4380: 			if(mode==='build'||mode==='plan'){
+4381: 				document.getElementById('ocMode').value=mode;
+4382: 				api('set_mode',{mode:mode},function(){});
+4383: 				text=text.replace(m,'').trim();
+4384: 			}
+4385: 		});
+4386: 		inp.value=text;
+4387: 		if(!text)return;
+4388: 	}

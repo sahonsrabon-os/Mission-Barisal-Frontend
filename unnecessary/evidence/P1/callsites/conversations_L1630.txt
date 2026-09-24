@@ -1,0 +1,49 @@
+# route: conversations  line: 1630  method: GET
+# params(arg): null
+# response field reads seen in callback: context_tokens, cost, iterations, tool_calls, usage
+# NOTE: best-effort regex scan; verify against this dump.
+----------------------------------------------------------------------
+1628: function pollSessionStates(){
+1629: 	if(document.hidden)return;
+1630: 	api('conversations',null,function(e,d){
+1631: 		if(e||!d)return;
+1632: 		syncSessionStates(d);
+1633: 	});
+1634: }
+1635: 
+1636: setInterval(function(){pollSessionStates()},5000);
+1637: 
+1638: document.getElementById('ocSbSearchIn').addEventListener('input',function(){
+1639: 	var q=this.value.toLowerCase().trim();
+1640: 	var items=document.querySelectorAll('.ocSi');
+1641: 	items.forEach(function(it){
+1642: 		var title=it.querySelector('.ocSiT');
+1643: 		if(!title)return;
+1644: 		var match=!q||title.textContent.toLowerCase().indexOf(q)!==-1;
+1645: 		it.style.display=match?'':'none';
+1646: 	});
+1647: });
+1648: 
+1649: function updateStats(d){
+1650: 	if(!d)return;
+1651: 	lastStats=d;
+1652: 	var u=d.usage||{};
+1653: 	document.getElementById('ocStat').style.display='inline-flex';
+1654: 	document.getElementById('ocStatCtxV').textContent=fmtTok(d.context_tokens||0);
+1655: 	document.getElementById('ocStatInV').textContent=fmtTok(u.input_tokens||0);
+1656: 	var cached=u.cached_tokens||0;
+1657: 	document.getElementById('ocStatCacheV').textContent=cached>0?fmtTok(cached):'0';
+1658: 	document.getElementById('ocStatOutV').textContent=fmtTok(u.output_tokens||0);
+1659: 	document.getElementById('ocStatToolsV').textContent=d.tool_calls||0;
+1660: 	document.getElementById('ocStatIterV').textContent=d.iterations||0;
+1661: 	var cost=d.cost||0;
+1662: 	var mv=document.getElementById('ocModel').value;
+1663: 	var isFreeModel=mv&&mv.indexOf('opencode_zen/')===0;
+1664: 	var costEl=document.getElementById('ocStatCost');
+1665: 	if(isFreeModel||cost<=0){
+1666: 		costEl.style.display='none';
+1667: 	}else{
+1668: 		costEl.style.display='inline-flex';
+1669: 		document.getElementById('ocStatCostV').textContent=cost<0.01&&cost>0?cost.toFixed(6):cost.toFixed(4);
+1670: 	}
+1671: 	var ctxEl=document.getElementById('ocStatCtx');

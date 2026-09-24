@@ -1,0 +1,48 @@
+# raw XHR route: resolve_file  line: 4407
+----------------------------------------------------------------------
+4403: 				var hashIdx=raw.indexOf('#');
+4404: 				var fp=hashIdx!==-1?raw.substring(0,hashIdx):raw;
+4405: 				var lineRange=hashIdx!==-1?raw.substring(hashIdx+1):null;
+4406: 				if(lineRange)lineRanges[fp]=lineRange;
+4407: 				var u=A+'&ai_php_api=resolve_file&csrf_token='+C+'&path='+encodeURIComponent(fp);
+4408: 				var x=new XMLHttpRequest();
+4409: 				x.open('GET',u,true);
+4410: 				x.setRequestHeader('Accept','application/json');
+4411: 				x.onload=function(){
+4412: 					if(x.status===200){
+4413: 						try{
+4414: 							var d=JSON.parse(x.responseText);
+4415: 							if(d.content){
+4416: 								files[fp]=d.content;
+4417: 								resolved++;
+4418: 							}
+4419: 						}catch(e){}
+4420: 					}
+4421: 					remaining--;
+4422: 					if(remaining===0){
+4423: 						if(resolved>0){
+4424: 							var fileCtx='';
+4425: 							for(var f in files){
+4426: 								var content=files[f];
+4427: 								var range=lineRanges[f];
+4428: 								if(range){
+4429: 									var parts=range.split('-');
+4430: 									var start=parseInt(parts[0])||1;
+4431: 									var end=parts.length>1?parseInt(parts[1])||start:start;
+4432: 									var lines=content.split('\n');
+4433: 									var selected=lines.slice(Math.max(0,start-1),Math.min(end,lines.length));
+4434: 									content=selected.map(function(l,i){return (start+i)+': '+l}).join('\n');
+4435: 									fileCtx+='\n\n--- @'+f+'#'+range+' ---\n'+content+'\n';
+4436: 								}else{
+4437: 									fileCtx+='\n\n--- @'+f+' ---\n'+content+'\n';
+4438: 								}
+4439: 							}
+4440: 							text+='\n[Attached files:]'+fileCtx;
+4441: 						}
+4442: 						inp.value=text;
+4443: 						origSend();
+4444: 					}
+4445: 				};
+4446: 				x.onerror=function(){
+4447: 					remaining--;
+4448: 					if(remaining===0){

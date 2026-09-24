@@ -1,0 +1,49 @@
+# route: toggle_permission  line: 5690  method: POST
+# params(arg): {permission:document.getElementById('ocPermSub').textContent,value:'allow_always'}
+# response field reads seen in callback: custom, customPlaceholder, header, multiple, options, question
+# NOTE: best-effort regex scan; verify against this dump.
+----------------------------------------------------------------------
+5688: document.getElementById('ocPermAllowAlways').addEventListener('click',function(){
+5689: 	document.getElementById('ocPermMod').classList.remove('open');
+5690: 	api('toggle_permission',{permission:document.getElementById('ocPermSub').textContent,value:'allow_always'},function(){});
+5691: 	if(_permCb)_permCb('allow_always');_permCb=null;
+5692: });
+5693: document.getElementById('ocPermMod').addEventListener('click',function(e){
+5694: 	if(e.target===this){this.classList.remove('open');if(_permCb)_permCb('deny');_permCb=null}
+5695: });
+5696: 
+5697: // ===== FEATURE: Multi-step Question/Prompt Flow =====
+5698: function showQuestion(qData){
+5699: 	return new Promise(function(resolve){
+5700: 		var chat=document.getElementById('ocCI');
+5701: 		var el=document.createElement('div');
+5702: 		el.className='ocMsg a';
+5703: 		var optionsHtml='';
+5704: 		if(qData.options&&qData.options.length){
+5705: 			optionsHtml='<div class="ocQOptions">';
+5706: 			qData.options.forEach(function(opt,i){
+5707: 				var multi=qData.multiple?'data-multi="1"':'';
+5708: 				optionsHtml+='<div class="ocQOpt" data-idx="'+i+'" '+multi+'>'+esc(opt.label||opt)+'</div>';
+5709: 			});
+5710: 			optionsHtml+='</div>';
+5711: 		}
+5712: 		var customHtml='';
+5713: 		if(qData.custom!==false){
+5714: 			customHtml='<div class="ocQCustom"><input type="text" id="ocQCustomIn" placeholder="'+(qData.customPlaceholder||'Type your answer...')+'"><button class="ocB ocBP ocBs" id="ocQCustomBtn">Submit</button></div>';
+5715: 		}
+5716: 		el.innerHTML='<div class="ocAv" style="background:var(--p);color:#fff"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>'
+5717: 			+'<div class="ocMb"><div class="ocQuestion"><div class="ocQHeader"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>Question</div><div class="ocQBody"><div class="ocQText">'+(qData.question||qData.header||'')+'</div>'+optionsHtml+customHtml+'</div></div></div>';
+5718: 		chat.appendChild(el);
+5719: 		document.getElementById('ocChat').scrollTop=1e9;
+5720: 		_playSound('question');
+5721: 		_desktopNotify('AI Question','The AI is asking you a question');
+5722: 		var selected=[];
+5723: 		el.querySelectorAll('.ocQOpt').forEach(function(opt){
+5724: 			opt.addEventListener('click',function(){
+5725: 				if(qData.multiple){
+5726: 					this.classList.toggle('sel');
+5727: 					selected=Array.from(el.querySelectorAll('.ocQOpt.sel')).map(function(o){return qData.options[parseInt(o.dataset.idx)]});
+5728: 				}else{
+5729: 					el.querySelectorAll('.ocQOpt').forEach(function(o){o.classList.remove('sel')});
+5730: 					this.classList.add('sel');
+5731: 					selected=[qData.options[parseInt(this.dataset.idx)]];

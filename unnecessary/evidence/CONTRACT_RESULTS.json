@@ -1,0 +1,96 @@
+{
+  "started": "2026-09-24T09:40:47.501Z",
+  "duration_ms": 2015,
+  "results": [
+    {
+      "id": "E3.1",
+      "view": "Engineer",
+      "title": "১২/১২ ইভেন্টের নাম ও `data: ` প্রিফিক্স সঠিক",
+      "ok": true,
+      "evidence": "unnecessary/evidence/P3/E3.1_events.json",
+      "note": "observed union=done,error,iteration-start,permission-request,question,reasoning-delta,text-delta,title,todos,tool-call,tool-result,usage; missing=none"
+    },
+    {
+      "id": "E3.2",
+      "view": "Engineer",
+      "title": "প্রতিটি ইভেন্টে `conversation_id` (সেশন আইসোলেশন)",
+      "ok": true,
+      "evidence": "unnecessary/evidence/P3/E3.2_conv_ids.txt",
+      "note": ""
+    },
+    {
+      "id": "E2.1",
+      "view": "Engineer",
+      "title": "৩৯/৩৯ রাউট উত্তর দেয়, HTTP 200 + JSON",
+      "ok": true,
+      "evidence": "unnecessary/evidence/P2/E2.1_routes.json",
+      "note": "distinct=39, rows=40, not200=none"
+    },
+    {
+      "id": "E2.2",
+      "view": "Engineer",
+      "title": "প্রতিটি রাউটের বাধ্যতামূলক ফিল্ড উপস্থিত (স্কিমা যাচাই)",
+      "ok": true,
+      "evidence": "unnecessary/evidence/P2/E2.2_schema_report.md",
+      "note": ""
+    },
+    {
+      "id": "E2.3",
+      "view": "Engineer",
+      "title": "GET/POST নিয়ম মেলে (ডেটা থাকলে POST)",
+      "ok": true,
+      "evidence": "unnecessary/evidence/P2/E2.3_method_rules.txt",
+      "note": ""
+    },
+    {
+      "id": "E5.1",
+      "view": "Engineer",
+      "title": "path/project_id বদলালে file_tree ওই ডিরেক্টরি দেখায়",
+      "ok": true,
+      "evidence": "unnecessary/evidence/P5/E5.1_workdir.txt",
+      "note": ""
+    },
+    {
+      "id": "E5.2",
+      "view": "Engineer",
+      "title": "রুটের বাইরে (../) যাওয়া যায় না — path-traversal জেইল",
+      "ok": true,
+      "evidence": "unnecessary/evidence/P5/E5.2_traversal.txt",
+      "note": ""
+    },
+    {
+      "id": "E6.1",
+      "view": "Engineer",
+      "title": "দুই আলাদা base_url-এ test_connection + স্ট্রিম চলে",
+      "ok": true,
+      "evidence": "unnecessary/evidence/P6/E6.1_provider_switch.txt",
+      "note": ""
+    },
+    {
+      "id": "E6.2",
+      "view": "Engineer",
+      "title": "API key/পুরনো পাথ কখনো UI/JS response-এ ফেরত আসে না",
+      "ok": true,
+      "evidence": "unnecessary/evidence/P6/E6.2_key_leak.txt",
+      "note": "leaks=none"
+    },
+    {
+      "id": "E6.3",
+      "view": "Engineer",
+      "title": "shell রাউট লগইন/টোকেন ছাড়া ব্লকড",
+      "ok": true,
+      "evidence": "unnecessary/evidence/P6/E6.3_shell_auth.txt",
+      "note": ""
+    },
+    {
+      "id": "E4.1",
+      "view": "Engineer",
+      "title": "UI ফাইল টেস্ট-পরেও md5 একই (০ এডিট প্রমাণ)",
+      "ok": true,
+      "evidence": "unnecessary/evidence/P4/E4.1_md5_recheck.txt",
+      "note": "md5=895eb75226cc2801834baaced2873bb1"
+    }
+  ],
+  "pass": 11,
+  "fail": 0
+}

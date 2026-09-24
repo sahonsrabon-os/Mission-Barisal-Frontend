@@ -1,0 +1,26 @@
+✅ PASS U2.1 — UI থেকে রাউট ট্রিগার + ফল দেখা যায় (কভারেজ 39/39) — uncovered=none, non200=0
+✅ PASS U3.1 — চ্যাটে ধারাবাহিক উত্তর + Thinking ব্লক — msgs=2
+✅ PASS U4.1 — টুল-কল → ডিফ ভিউয়ার — screenshot
+✅ PASS U4.2 — পারমিশন মোডাল ৩ বাটনসহ — screenshot + toggle_permission route
+✅ PASS U4.3 — শেল টার্মিনাল (!cmd) আউটপুট
+✅ PASS U4.4 — ফাইল-ট্রি এক্সপ্যান্ড + ফাইল ভিউয়ার
+✅ PASS U4.5 — প্রজেক্ট সুইচার/ক্রিয়েট/ডিলিট
+✅ PASS U4.6 — undo/redo/fork/regenerate/Stop + Force Unlock — routes=undo,redo,regenerate,fork,abort,force_unlock
+✅ PASS U5.1 — দুই প্রজেক্ট সুইচ → আলাদা file_tree
+✅ PASS U6.1 — Settings-ে নিজের provider সংযোগ সফল
+✅ PASS E4.1 — UI ফাইল সব টেস্ট-পরেও md5 একই (০ এডিট) — md5=895eb75226cc2801834baaced2873bb1
+
+================ USER TEST SUMMARY ================
+✅ U2.1   UI থেকে রাউট ট্রিগার + ফল দেখা যায় (কভারেজ 39/39) — uncovered=none, non200=0
+✅ U3.1   চ্যাটে ধারাবাহিক উত্তর + Thinking ব্লক — msgs=2
+✅ U4.1   টুল-কল → ডিফ ভিউয়ার — screenshot
+✅ U4.2   পারমিশন মোডাল ৩ বাটনসহ — screenshot + toggle_permission route
+✅ U4.3   শেল টার্মিনাল (!cmd) আউটপুট
+✅ U4.4   ফাইল-ট্রি এক্সপ্যান্ড + ফাইল ভিউয়ার
+✅ U4.5   প্রজেক্ট সুইচার/ক্রিয়েট/ডিলিট
+✅ U4.6   undo/redo/fork/regenerate/Stop + Force Unlock — routes=undo,redo,regenerate,fork,abort,force_unlock
+✅ U5.1   দুই প্রজেক্ট সুইচ → আলাদা file_tree
+✅ U6.1   Settings-ে নিজের provider সংযোগ সফল
+✅ E4.1   UI ফাইল সব টেস্ট-পরেও md5 একই (০ এডিট) — md5=895eb75226cc2801834baaced2873bb1
+route coverage: 39/39, non200=0, exceptions=0
+TOTAL: 11/11 PASS (17437 ms)

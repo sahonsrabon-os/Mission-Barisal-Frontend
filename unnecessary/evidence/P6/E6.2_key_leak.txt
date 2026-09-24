@@ -1,0 +1,14 @@
+E6.2 — secrets never returned to the browser (sweep of every client-visible surface)
+
+swept surfaces: status, providers, settings_load, conversations, projects_list, conversation, settings_save, test_connection, page_render
+leak hits: NONE
+note: rendered page is scanned for key VALUES (TESTKEY/sk-...) and old paths;
+      the `api_key` FIELD NAME may appear in UI source (it is how the UI submits keys).
+
+rendered page: alistiyab occurrences=0, old path /home/alistiyab occurrences=0, injected HD=/tmp/oc_contract/home present=true
+rendered page var A: var A='index.live.php?act=ai&path=default&project_id=default'
+
+positive control — state.json stores the key server-side: true, mode=600 (want 600)
+providers response for custom:fakea: {"id":"custom:fakea","name":"FakeA","connected":true,"models":{"fast":{"name":"Fast","context_window":65536},"tooly":{"name":"Tooly","context_window":32768}},"is_custom_type":true,"default_model":"fast","base_url":"http://127.0.0.1:18871/v1"}
+
+RESULT: ✅ no key/path leaks; key stored 0600 server-side

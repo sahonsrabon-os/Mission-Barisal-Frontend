@@ -1,0 +1,49 @@
+# route: status  line: 3986  method: GET
+# params(arg): null
+# response field reads seen in callback: connected, favorite_models, providers, session
+# NOTE: best-effort regex scan; verify against this dump.
+----------------------------------------------------------------------
+3984: });
+3985: 
+3986: api('status',null,function(e,d){
+3987: 	if(!e&&d){
+3988: 		_statusLoaded=true;
+3989: 		if(d.session){
+3990: 			if(d.session.provider&&d.session.model){
+3991: 				selModel=d.session.provider+'/'+d.session.model;
+3992: 				selMode=d.session.mode||'build';
+3993: 				// Re-apply model selection if dropdown already populated
+3994: 				var ms=document.getElementById('ocModel');
+3995: 				if(ms&&ms.options.length>1){
+3996: 					ms.value=selModel;
+3997: 					if(ms.value!==selModel){
+3998: 						var opts=ms.querySelectorAll('option');
+3999: 						for(var i=0;i<opts.length;i++){
+4000: 							if(opts[i].value===selModel){ms.selectedIndex=i;break}
+4001: 						}
+4002: 					}
+4003: 					syncModelBtn();
+4004: 					syncModelDropdownSelection();
+4005: 					updateVariantBadge();
+4006: 				}
+4007: 			}
+4008: 			if(d.session.mode)document.getElementById('ocMode').value=d.session.mode;
+4009: 			var urlSession=new URL(window.location).searchParams.get('session');
+4010: 			if(urlSession){
+4011: 				aC=urlSession;
+4012: 				loadC(aC);
+4013: 			}else if(d.session.active_conversation){
+4014: 				aC=d.session.active_conversation;
+4015: 				loadC(aC);
+4016: 			}
+4017: 		}
+4018: 		var hc=(d.providers||[]).some(function(p){return p.connected});
+4019: 		st(hc?'Ready':'No provider connected',hc);
+4020: 
+4021: 		// Apply favorite models from status (covers the case where settings_load hasn't returned yet)
+4022: 		if(d.favorite_models && d.favorite_models.length && !favModels.length){
+4023: 			favModels=d.favorite_models;
+4024: 			if(_providersCache){
+4025: 				renderModelSelect(_providersCache);
+4026: 				renderModelDropdown(_providersCache);
+4027: 				syncModelBtn();

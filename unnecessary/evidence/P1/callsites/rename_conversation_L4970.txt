@@ -1,0 +1,49 @@
+# route: rename_conversation  line: 4970  method: POST
+# params(arg): {conversation_id:item.dataset.id,title:newTitle.trim()}
+# response field reads seen in callback: success
+# NOTE: best-effort regex scan; verify against this dump.
+----------------------------------------------------------------------
+4968: 	var newTitle=prompt('Rename session:',currentTitle.textContent);
+4969: 	if(newTitle!==null&&newTitle.trim()){
+4970: 		api('rename_conversation',{conversation_id:item.dataset.id,title:newTitle.trim()},function(e,r){
+4971: 			if(!e&&r&&r.success){
+4972: 				currentTitle.textContent=newTitle.trim();
+4973: 				toast('Renamed','ok');
+4974: 			}else{
+4975: 				toast('Failed to rename','err');
+4976: 			}
+4977: 		});
+4978: 	}
+4979: });
+4980: 
+4981: // Load favorites on init
+4982: loadFavModels();
+4983: 
+4984: // Project Management
+4985: function loadProjects(force){
+4986: 	if(_projectsCache&&!force){
+4987: 		projects=_projectsCache.projects||[];
+4988: 		wordpressInstalls=_projectsCache.wordpress||[];
+4989: 		renderProjectList('');
+4990: 		if(typeof loadSidebarProjects==='function') loadSidebarProjects();
+4991: 		renderWpInstalls(_projectsCache.wordpress||[]);
+4992: 		return;
+4993: 	}
+4994: 	api('projects_list',null,function(e,d){
+4995: 		if(e||!d)return;
+4996: 		projects=d;
+4997: 		_projectsCache=_projectsCache||{};
+4998: 		_projectsCache.projects=d;
+4999: 		renderProjectList('');
+5000: 		if(typeof loadSidebarProjects==='function') loadSidebarProjects();
+5001: 	});
+5002: 	api('projects_wordpress',null,function(e,d){
+5003: 		if(e||!d)return;
+5004: 		wordpressInstalls=d;
+5005: 		_projectsCache=_projectsCache||{};
+5006: 		_projectsCache.wordpress=d;
+5007: 		renderWpInstalls(d);
+5008: 	});
+5009: }
+5010: function renderWpInstalls(d){
+5011: 		var sel=document.getElementById('ocProjWpSel');

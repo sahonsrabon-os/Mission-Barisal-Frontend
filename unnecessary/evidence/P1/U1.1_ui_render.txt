@@ -1,0 +1,21 @@
+U1.1 — UI renders in browser WITHOUT a server (User perspective)
+method: local HTTP server (python3 -m http.server) serving index.php
+        via .html symlink (MIME=text/html) + Chrome headless --screenshot
+        (NOTE: file:// + .php gives MIME application/octet-stream -> download,
+         so a temp .html symlink was used; SOURCE FILE NOT MODIFIED)
+--------------------------------------------------
+screenshot : evidence/P1/U1.1_ui_render.png   (57,361 bytes, chrome exit=0)
+observed   : full 3-column layout rendered:
+  [header]  hamburger, project selector ("Loading projects..."), Build mode,
+            Select model, icon toolbar, back arrow, theme/sound/bell
+  [sidebar] "+ New Session" button, "Search sessions..." box, footer icons
+  [center]  empty chat area + input "Ask anything or type / for commands..."
+            slash chips: /todo /notify /sound /export /help /clear /plan
+                         /build /compact /undo
+  [right]   MODIFIED FILES (0) "No files modified" + View All
+            CONTEXT WINDOW "0% of 128K tokens used"
+  [status]  "Ready"          [path] /home/alistiyab/public_html
+--------------------------------------------------
+VERDICT: PASS ✅ — UI shell renders fully with zero backend.
+         Project selector shows "Loading projects..." = expected (no server).
+         Bottom-right path = hardcoded OTHER account path (to strip in E6.x).

@@ -1,0 +1,106 @@
+{
+  "duration_ms": 19684,
+  "route_log_entries": 147,
+  "coverage": "39/39",
+  "uncovered": [],
+  "non200": [],
+  "dialogs": [
+    {
+      "type": "confirm",
+      "message": "Restore this snapshot?"
+    },
+    {
+      "type": "confirm",
+      "message": "Delete this session?"
+    },
+    {
+      "type": "confirm",
+      "message": "Delete project \"UITest\"?\n\nThis will permanently delete all conversations, sessions and context data for this project."
+    },
+    {
+      "type": "confirm",
+      "message": "Close project \"ProjB\"?\n\nThis will remove the project from your project list. No conversations, sessions or context data will be deleted."
+    },
+    {
+      "type": "alert",
+      "message": "OK"
+    },
+    {
+      "type": "confirm",
+      "message": "Disconnect?"
+    },
+    {
+      "type": "confirm",
+      "message": "Disconnect this custom provider?"
+    }
+  ],
+  "js_exceptions": [],
+  "results": [
+    {
+      "id": "U2.1",
+      "title": "UI থেকে রাউট ট্রিগার + ফল দেখা যায় (কভারেজ 39/39)",
+      "ok": true,
+      "note": "uncovered=none, non200=0"
+    },
+    {
+      "id": "U3.1",
+      "title": "চ্যাটে ধারাবাহিক উত্তর + Thinking ব্লক",
+      "ok": true,
+      "note": "msgs=2"
+    },
+    {
+      "id": "U4.1",
+      "title": "টুল-কল → ডিফ ভিউয়ার",
+      "ok": true,
+      "note": "screenshot"
+    },
+    {
+      "id": "U4.2",
+      "title": "পারমিশন মোডাল ৩ বাটনসহ",
+      "ok": true,
+      "note": "screenshot + toggle_permission route"
+    },
+    {
+      "id": "U4.3",
+      "title": "শেল টার্মিনাল (!cmd) আউটপুট",
+      "ok": true,
+      "note": ""
+    },
+    {
+      "id": "U4.4",
+      "title": "ফাইল-ট্রি এক্সপ্যান্ড + ফাইল ভিউয়ার",
+      "ok": true,
+      "note": ""
+    },
+    {
+      "id": "U4.5",
+      "title": "প্রজেক্ট সুইচার/ক্রিয়েট/ডিলিট",
+      "ok": true,
+      "note": ""
+    },
+    {
+      "id": "U4.6",
+      "title": "undo/redo/fork/regenerate/Stop + Force Unlock",
+      "ok": true,
+      "note": "routes=undo,redo,regenerate,fork,abort,force_unlock"
+    },
+    {
+      "id": "U5.1",
+      "title": "দুই প্রজেক্ট সুইচ → আলাদা file_tree",
+      "ok": true,
+      "note": ""
+    },
+    {
+      "id": "U6.1",
+      "title": "Settings-ে নিজের provider সংযোগ সফল",
+      "ok": true,
+      "note": ""
+    },
+    {
+      "id": "E4.1",
+      "title": "UI ফাইল সব টেস্ট-পরেও md5 একই (০ এডিট)",
+      "ok": true,
+      "note": "md5=895eb75226cc2801834baaced2873bb1"
+    }
+  ]
+}

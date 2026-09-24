@@ -1,0 +1,5 @@
+data: {"_event":"iteration-start","conversation_id":"conv_af36076c1714","iteration":1}
+data: {"_event":"usage","conversation_id":"conv_af36076c1714","usage":{"input_tokens":42,"output_tokens":17,"cached_tokens":7},"context_tokens":5,"tool_calls":0,"iterations":1,"cost":0}
+data: {"_event":"tool-call","id":"call_q1","name":"ask_user_question","input":{"question":"Which route should I take?","header":"Route","options":[{"label":"Option Alpha","value":"alpha"},{"label":"Option Beta","value":"beta"}],"multiple":false,"custom":true,"customPlaceholder":"Type your own answer..."},"conversation_id":"conv_af36076c1714"}
+data: {"_event":"question","conversation_id":"conv_af36076c1714","question":"Which route should I take?","header":"Route","options":[{"label":"Option Alpha","value":"alpha"},{"label":"Option Beta","value":"beta"}],"multiple":false,"custom":true,"customPlaceholder":"Type your own answer..."}
+data: {"_event":"done","conversation_id":"conv_af36076c1714","usage":{"input_tokens":42,"output_tokens":17,"cached_tokens":7},"context_tokens":5,"tool_calls":0,"iterations":1,"cost":0,"pending_question":true}

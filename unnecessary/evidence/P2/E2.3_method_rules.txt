@@ -1,0 +1,53 @@
+E2.3 — GET/POST method rules (mirrors UI api(): data ? POST form : GET)
+
+route | UI method | server status | content-type | note
+status | GET | 200 | application/json; charset=utf-8
+start | POST | 200 | application/json; charset=utf-8
+conversations | GET | 200 | application/json; charset=utf-8
+new_session | POST | 200 | application/json; charset=utf-8
+conversation | GET | 200 | application/json; charset=utf-8
+switch_conversation | POST | 200 | application/json; charset=utf-8
+rename_conversation | POST | 200 | application/json; charset=utf-8
+delete_conversation | POST | 200 | application/json; charset=utf-8
+regenerate | POST | 200 | application/json; charset=utf-8
+fork | POST | 200 | application/json; charset=utf-8
+compact | POST | 200 | application/json; charset=utf-8
+compact | POST | 200 | application/json; charset=utf-8
+undo | POST | 200 | application/json; charset=utf-8
+redo | POST | 200 | application/json; charset=utf-8
+abort | POST | 200 | application/json; charset=utf-8
+file_tree | GET | 200 | application/json; charset=utf-8
+read_file | POST | 200 | application/json; charset=utf-8
+resolve_file | GET | 200 | application/json; charset=utf-8
+changes | GET | 200 | application/json; charset=utf-8
+diff | POST | 200 | application/json; charset=utf-8
+restore | POST | 200 | application/json; charset=utf-8
+project_info | GET | 200 | application/json; charset=utf-8
+projects_list | GET | 200 | application/json; charset=utf-8
+projects_create | POST | 200 | application/json; charset=utf-8
+projects_close | POST | 200 | application/json; charset=utf-8
+projects_delete | POST | 200 | application/json; charset=utf-8
+projects_wordpress | GET | 200 | application/json; charset=utf-8
+providers | GET | 200 | application/json; charset=utf-8
+settings_load | GET | 200 | application/json; charset=utf-8
+settings_save | POST | 200 | application/json; charset=utf-8
+settings_delete | POST | 200 | application/json; charset=utf-8
+test_connection | POST | 200 | application/json; charset=utf-8
+favorite_model | POST | 200 | application/json; charset=utf-8
+unfavorite_model | POST | 200 | application/json; charset=utf-8
+toggle_permission | POST | 200 | application/json; charset=utf-8
+shell | POST | 200 | application/json; charset=utf-8
+set_mode | POST | 200 | application/json; charset=utf-8
+clear | POST | 200 | application/json; charset=utf-8
+force_unlock | POST | 200 | application/json; charset=utf-8
+ai_chat_stream | POST | 200 | text/plain; charset=utf-8
+
+## Protocol probes
+✅ GET works for data-less route (status) — HTTP 200
+✅ POST form-urlencoded for data route (rename_conversation) — HTTP 200
+✅ JSON body accepted (defensive) — HTTP 200
+✅ invalid csrf_token -> HTTP 403 — HTTP 403
+✅ no csrf -> HTTP 403 (shell) — HTTP 403
+✅ GET-with-data also served (lenient, UI uses POST) — HTTP 200
+
+## Result: ✅ ALL PASS

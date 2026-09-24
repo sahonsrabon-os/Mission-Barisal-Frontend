@@ -1,0 +1,28 @@
+# R1.4 root-cause probe — why Provider A chat got HTTP 503 "Value looks like object,
+# but can't find closing '}' symbol" (runs 2 & 3) while run 1 passed.
+# Trigger isolated: assistant.tool_calls[].function.arguments sent as spec JSON STRING.
+# Method: curl replay of iteration-2-shaped bodies (system+user+assistant(tool_calls)+tool,
+# stream+stream_options+tools) against both endpoints. 2026-09-24.
+
+[ngrok qwen]   full shape, content:null           -> 503 local+cloud HTTP 400 (bug)
+[ngrok qwen]   content:"" instead of null         -> 503 (same)  <- null not the cause
+[ngrok qwen]   no tools field                     -> 503 (same)  <- tools param not the cause
+[ngrok qwen]   assistant tool_calls only (no tool msg) -> 503 (same)
+[ngrok qwen]   tool msg only (no tool_calls)      -> 200         <- tool role message alone is fine
+[ngrok qwen]   arguments as OBJECT                -> 200         <- DISCRIMINATOR
+[ngrok gpt-oss:20b] full shape, string args       -> 503 cloud HTTP 400 (model-independent)
+[mission]      model=jaahas/... (wrong name)      -> 502 "All providers and models failed"
+                                                     (Mission is a multi-provider gateway
+                                                      that ROUTES model names upstream)
+[mission]      model=mission, tool history, STRING args -> 200 (spec-compliant gateway)
+[mission]      model=mission, tool history, OBJECT args -> 200
+
+Engine log evidence (real run 3, ui/logs/server.log):
+  08:12:59 qwen request -> 12.8s -> done tool_calls=1        (iteration 1: 200)
+  08:13:11 iteration-2 request (tool history in messages) -> 777ms -> HTTP 503 x retries
+
+CONCLUSION: upstream Ollama-proxy parser bug (spec-string tool arguments rejected).
+FIX (our side, industry practice): engine retry ladder in providers.js/openaiChat —
+  1) transient 429/502/503 same body once, 2) on persistent 400/422/500/502/503 with
+  tool history, resend ONCE with arguments as objects (spec form always tried first,
+  so compliant providers never see the variant). Mission accepts both forms.

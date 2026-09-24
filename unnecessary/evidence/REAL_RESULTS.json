@@ -1,0 +1,115 @@
+{
+  "results": [
+    {
+      "id": "R1.1",
+      "title": "Test Connection (ngrok Ollama) alert says OK",
+      "ok": true,
+      "note": "alert: OK"
+    },
+    {
+      "id": "R1.2",
+      "title": "Provider A saved & listed Connected in settings",
+      "ok": true,
+      "note": "row text snippet: Anthropic4 modelsNot setConnectDeepSeek2 modelsNot setConnectGoogle3 modelsNot setConnectOllama3 modelsNot setConnectOpenAI5 modelsNot setConnectOpenCode Zen7 modelsNot setConnectOllama Remote2 modelsConnectedDisconnect+"
+    },
+    {
+      "id": "R1.3",
+      "title": "Model jaahas/qwen3.5-uncensored:2b selected from dropdown",
+      "ok": true,
+      "note": "button label: Qwen3.5 Uncensored 2B"
+    },
+    {
+      "id": "R1.4",
+      "title": "Real streaming chat reply from Provider A (contains OLLAMA CONNECTED OK)",
+      "ok": true,
+      "note": "reply(23 chars): AI\n\nOLLAMA CONNECTED OK"
+    },
+    {
+      "id": "R2.1",
+      "title": "Test Connection (Mission localhost:3000) alert says OK",
+      "ok": true,
+      "note": "alert: OK"
+    },
+    {
+      "id": "R2.2",
+      "title": "Provider B saved & listed Connected in settings",
+      "ok": true,
+      "note": "row text snippet: Anthropic4 modelsNot setConnectDeepSeek2 modelsNot setConnectGoogle3 modelsNot setConnectOllama3 modelsNot setConnectOpenAI5 modelsNot setConnectOpenCode Zen7 modelsNot setConnectOllama Remote2 modelsConnectedDisconnectM"
+    },
+    {
+      "id": "R2.3",
+      "title": "Model mission selected from dropdown",
+      "ok": true,
+      "note": "button label: Mission Pilot"
+    },
+    {
+      "id": "R2.4",
+      "title": "Real streaming chat reply from Provider B (Bengali, non-error)",
+      "ok": true,
+      "note": "reply(175 chars): AI\n\n[phase] সরাসরি উত্তর তৈরি করছি...[phase] উত্তর প্রস্তুত!আমার নাম বারিশালি, আমি শেখা ও সমাজের সঠিক প্রবণতা বুঝতে এবং দুষ্টুমির বিরুদ্ধে সংগ্রাম করতে সক্ষম হওয়ার জন্য তৈরি।"
+    },
+    {
+      "id": "R3.1",
+      "title": "providers JSON: both base_urls present, api keys masked",
+      "ok": true,
+      "note": "{\"status\":200,\"hasA\":true,\"hasB\":true,\"keyA\":false,\"keyB\":null,\"len\":3185}"
+    },
+    {
+      "id": "R3.2",
+      "title": "all expected routes fired, every response HTTP 200",
+      "ok": true,
+      "note": "counts={\"projects_list\":1,\"status\":1,\"project_info\":1,\"providers\":3,\"conversations\":37,\"settings_load\":1,\"test_connection\":2,\"settings_save\":2,\"start\":5,\"ai_chat_stream\":2} missing=[] non200=[]"
+    },
+    {
+      "id": "R3.3",
+      "title": "two Test-Connection OK dialogs observed",
+      "ok": true,
+      "note": "dialogs=[\"alert:OK\",\"alert:OK\"]"
+    },
+    {
+      "id": "R3.4",
+      "title": "zero JavaScript exceptions in the page",
+      "ok": true,
+      "note": "none"
+    },
+    {
+      "id": "R3.5",
+      "title": "index.php untouched (md5 still 895eb75226cc2801834baaced2873bb1)",
+      "ok": true,
+      "note": "md5=895eb75226cc2801834baaced2873bb1"
+    }
+  ],
+  "counts": {
+    "projects_list": 1,
+    "status": 1,
+    "project_info": 1,
+    "providers": 3,
+    "conversations": 37,
+    "settings_load": 1,
+    "test_connection": 2,
+    "settings_save": 2,
+    "start": 5,
+    "ai_chat_stream": 2
+  },
+  "non200": [],
+  "dialogLog": [
+    {
+      "type": "alert",
+      "message": "OK",
+      "t": 1790239135479
+    },
+    {
+      "type": "alert",
+      "message": "OK",
+      "t": 1790239228005
+    }
+  ],
+  "exceptions": [],
+  "notes": [],
+  "chatAttempts": 1,
+  "replies": {
+    "A": "AI\n\nOLLAMA CONNECTED OK",
+    "B": "AI\n\n[phase] সরাসরি উত্তর তৈরি করছি...[phase] উত্তর প্রস্তুত!আমার নাম বারিশালি, আমি শেখা ও সমাজের সঠিক প্রবণতা বুঝতে এবং দুষ্টুমির বিরুদ্ধে সংগ্রাম করতে সক্ষম হওয়ার জন্য তৈরি।"
+  },
+  "elapsed_s": 154.7
+}

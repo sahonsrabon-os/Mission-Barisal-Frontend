@@ -1,0 +1,49 @@
+# route: projects_wordpress  line: 5002  method: GET
+# params(arg): null
+# response field reads seen in callback: forEach, name, path, project_id
+# NOTE: best-effort regex scan; verify against this dump.
+----------------------------------------------------------------------
+5000: 		if(typeof loadSidebarProjects==='function') loadSidebarProjects();
+5001: 	});
+5002: 	api('projects_wordpress',null,function(e,d){
+5003: 		if(e||!d)return;
+5004: 		wordpressInstalls=d;
+5005: 		_projectsCache=_projectsCache||{};
+5006: 		_projectsCache.wordpress=d;
+5007: 		renderWpInstalls(d);
+5008: 	});
+5009: }
+5010: function renderWpInstalls(d){
+5011: 		var sel=document.getElementById('ocProjWpSel');
+5012: 		if(sel){
+5013: 			sel.innerHTML='<option value="">Select installation...</option>';
+5014: 			d.forEach(function(w){
+5015: 				var o=document.createElement('option');
+5016: 				o.value=w.insid;
+5017: 				o.textContent=w.name+' - '+w.path;
+5018: 				sel.appendChild(o);
+5019: 			});
+5020: 		}
+5021: }
+5022: 
+5023: function renderProjectList(query){
+5024: 	var list=document.getElementById('ocProjList');
+5025: 	if(!list)return;
+5026: 	list.innerHTML='';
+5027: 	if(!projects.length){
+5028: 		list.innerHTML='<div style="padding:20px;text-align:center;color:var(--t3);font-size:13px">No projects yet. Create one to get started!</div>';
+5029: 		return;
+5030: 	}
+5031: 	var q=(query||'').toLowerCase();
+5032: 	var filtered=projects.filter(function(p){
+5033: 		return !q||(p.name||'').toLowerCase().indexOf(q)!==-1||(p.path||'').toLowerCase().indexOf(q)!==-1;
+5034: 	});
+5035: 	if(!filtered.length){
+5036: 		list.innerHTML='<div style="padding:20px;text-align:center;color:var(--t3);font-size:13px">No projects match your search.</div>';
+5037: 		return;
+5038: 	}
+5039: 	filtered.forEach(function(p){
+5040: 		var item=document.createElement('div');
+5041: 		item.className='ocPi';
+5042: 		item.dataset.id=p.project_id;
+5043: 		item.style.cursor='pointer';

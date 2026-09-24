@@ -1,0 +1,117 @@
+{
+  "results": [
+    {
+      "id": "Q4.1",
+      "title": "UI boots cleanly with zero providers (no LLM configured)",
+      "ok": true,
+      "note": "status=No provider connected connected_customs=0 note=dropdown groups=0"
+    },
+    {
+      "id": "Q4.2",
+      "title": "Model dropdown correctly empty (no connected provider) — user simply cannot chat yet, no crash",
+      "ok": true,
+      "note": "groups=0"
+    },
+    {
+      "id": "Q2.1",
+      "title": "start script + .env: config file loaded, providers seeded — zero source edits",
+      "ok": true,
+      "note": "keys=12 applied=11\" | created=2"
+    },
+    {
+      "id": "Q2.2",
+      "title": "both .env providers visible to UI as Connected, keys never sent to browser",
+      "ok": true,
+      "note": "[\"custom:ollama-remote:true:jaahas/qwen3.5-uncensored:2b\",\"custom:mission-local:true:mission\"] keyLeak=false"
+    },
+    {
+      "id": "Q2.3",
+      "title": "UI auto-selects the admin-chosen default model from .env (no click needed)",
+      "ok": true,
+      "note": "label=Qwen3.5 Uncensored 2B"
+    },
+    {
+      "id": "Q2.4",
+      "title": "Settings lists both env providers Connected without touching the UI",
+      "ok": true,
+      "note": "rows snippet: Anthropic4 modelsNot setConnectDeepSeek2 modelsNot setConnectGoogle3 modelsNot setConnectOllama3 modelsNot setConnectOpenAI5 modelsNot setConnectOpenCode Zen7 modelsNot setConnectOllama Remote2 modelsConnectedDisconnectMission Local2 models"
+    },
+    {
+      "id": "Q7.1",
+      "title": "daily-use Bengali chat answered by a REAL external LLM through the UI",
+      "ok": true,
+      "note": "model=Qwen3.5 Uncensored 2B reply(175c): AI আপনি যাচ্ছিছে একটি প্রশ্নের উত্তর দেওয়ার জন্য। আমি চিঠিপত্র থেকে এই বক্তব্যটি পাওয়া যাচ্ছে: \"প্রশ্নে রাজধানীর নাম কী, বাংলায় এক লাইনে উত্তর দিন।\" তাহলে উত্তর হলো: ঢাকা"
+    },
+    {
+      "id": "Q7.2",
+      "title": "file tree opens and lists files (per-project workdir jail)",
+      "ok": true,
+      "note": "route=true tree rows=1"
+    },
+    {
+      "id": "Q7.3",
+      "title": "New Session button starts a fresh conversation",
+      "ok": true,
+      "note": "new_session fired=true"
+    },
+    {
+      "id": "Q7.4",
+      "title": "phase-B route log: every response HTTP 200",
+      "ok": true,
+      "note": "routes=37 non200=[]"
+    },
+    {
+      "id": "Q6.1",
+      "title": "real environment variable beats .env value (precedence documented behaviour)",
+      "ok": true,
+      "note": "T08:36:28.741Z INFO  boot \"READY pid=11355 host=0.0.0.0 port=18921 access_token=off roots=/tmp/oc_qna/home_b log=/tmp/oc_qna/server_lan.log\""
+    },
+    {
+      "id": "Q6.2",
+      "title": "UI fully works from a DIFFERENT origin (http://192.168.1.145:18921/) — same-origin API path, tunnel-ready",
+      "ok": true,
+      "note": "providers status=200 customs=2"
+    },
+    {
+      "id": "Q6.3",
+      "title": "route log over LAN origin: HTTP 200 everywhere (proxies/tunnels behave like this origin)",
+      "ok": true,
+      "note": "routes=7 non200=[]"
+    },
+    {
+      "id": "Q1.1",
+      "title": "backend+UI are independent of localhost:3000 — contract & user suites PASS with fakes only",
+      "ok": true,
+      "note": "contract=11/11 user=11/11"
+    },
+    {
+      "id": "Q1.2",
+      "title": "localhost:3000 never referenced by product code (only optional live test/docs/config)",
+      "ok": true,
+      "note": "total hits=15 product-code hits=0 (see evidence/P8/Q1_grep_localhost3000.txt)"
+    },
+    {
+      "id": "Q3.1",
+      "title": "index.php untouched through every phase (0 edits)",
+      "ok": true,
+      "note": "md5=895eb75226cc2801834baaced2873bb1"
+    },
+    {
+      "id": "Q5.1",
+      "title": "both admin (.env seed — proved in Q2) and frontend (Settings UI — U6.1) can add LLMs",
+      "ok": true,
+      "note": "env_seeded=2 ui_add(U6.1)=true"
+    },
+    {
+      "id": "Q5.2",
+      "title": "zero JavaScript exceptions across all phases",
+      "ok": true,
+      "note": "none"
+    }
+  ],
+  "notes": [],
+  "exceptions": [],
+  "dialogLog": [],
+  "lan": "192.168.1.145",
+  "elapsed_s": 112
+}

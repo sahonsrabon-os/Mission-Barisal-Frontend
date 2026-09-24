@@ -1,0 +1,12 @@
+PHASE 1 — ENGINEER EVIDENCE SUMMARY
+====================================
+E1.1 md5 match        : PASS  (895eb75226cc2801834baaced2873bb1)
+E1.2 php blocks == 0  : PASS  (0)
+E1.3 routes == 39     : PASS  (39)
+E1.4 events == 12     : PASS  (12)
+E1.5 contract.json    : WRITTEN  (73 api calls captured)
+E1.6 protocol captured: PASS  (line 1116)
+E1.7 xhr points       : INFO  (8 .open( sites)
+E1.8 callsite dumps   : WRITTEN  (80 files)
+
+artifacts: /home/sahon/Videos/ui/evidence/P1

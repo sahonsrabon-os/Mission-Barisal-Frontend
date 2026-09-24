@@ -1,0 +1,49 @@
+# route: set_mode  line: 4382  method: POST
+# params(arg): {mode:mode}
+# response field reads seen in callback: content
+# NOTE: best-effort regex scan; verify against this dump.
+----------------------------------------------------------------------
+4380: 			if(mode==='build'||mode==='plan'){
+4381: 				document.getElementById('ocMode').value=mode;
+4382: 				api('set_mode',{mode:mode},function(){});
+4383: 				text=text.replace(m,'').trim();
+4384: 			}
+4385: 		});
+4386: 		inp.value=text;
+4387: 		if(!text)return;
+4388: 	}
+4389: 
+4390: 	var mentions=text.match(/@([\w\/.\-]+(?:#\d+(?:-\d+)?)?)/g);
+4391: 	if(mentions){
+4392: 		mentions=mentions.filter(function(m){
+4393: 			var fp=m.substring(1).split('#')[0].toLowerCase();
+4394: 			return fp!=='build'&&fp!=='plan';
+4395: 		});
+4396: 		if(mentions.length>0){
+4397: 			var files={};
+4398: 			var lineRanges={};
+4399: 			var resolved=0;
+4400: 			var remaining=mentions.length;
+4401: 			mentions.forEach(function(m){
+4402: 				var raw=m.substring(1);
+4403: 				var hashIdx=raw.indexOf('#');
+4404: 				var fp=hashIdx!==-1?raw.substring(0,hashIdx):raw;
+4405: 				var lineRange=hashIdx!==-1?raw.substring(hashIdx+1):null;
+4406: 				if(lineRange)lineRanges[fp]=lineRange;
+4407: 				var u=A+'&ai_php_api=resolve_file&csrf_token='+C+'&path='+encodeURIComponent(fp);
+4408: 				var x=new XMLHttpRequest();
+4409: 				x.open('GET',u,true);
+4410: 				x.setRequestHeader('Accept','application/json');
+4411: 				x.onload=function(){
+4412: 					if(x.status===200){
+4413: 						try{
+4414: 							var d=JSON.parse(x.responseText);
+4415: 							if(d.content){
+4416: 								files[fp]=d.content;
+4417: 								resolved++;
+4418: 							}
+4419: 						}catch(e){}
+4420: 					}
+4421: 					remaining--;
+4422: 					if(remaining===0){
+4423: 						if(resolved>0){

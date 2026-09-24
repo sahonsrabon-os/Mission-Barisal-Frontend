@@ -1,0 +1,48 @@
+# raw XHR route: conversation  line: 4706
+----------------------------------------------------------------------
+4702:   	loadTodos();
+4703:   	loadPromptHistoryForSession();
+4704:   	var ch=document.getElementById('ocCI');
+4705:   	ch.innerHTML='<div class="ocLoad"><span class="ocLoadD"></span><span class="ocLoadD"></span><span class="ocLoadD"></span><span>Loading...</span></div>';
+4706:   	var u=A+'&ai_php_api=conversation&csrf_token='+C+'&conversation_id='+encodeURIComponent(id);
+4707:   	var x=new XMLHttpRequest();
+4708:   	x.open('GET',u,true);
+4709:   	x.setRequestHeader('Accept','application/json');
+4710:   	x.onload=function(){
+4711:   		if(x.status===200){
+4712:   			try{
+4713:   				var d=JSON.parse(x.responseText);
+4714:   				rMsgs(d.messages||[]);
+4715:   				if(d.todos)applyServerTodos(d.todos);
+4716:   				hlS(id);
+4717:   				if(!d.messages||!d.messages.length){aC=null;updateURL('')}
+4718:   				else{
+4719:   					var userMsgs=[];
+4720:   					var userEls=document.querySelectorAll('.ocMsg.u .ocMbb');
+4721:   					for(var i=0;i<userEls.length;i++){var t=userEls[i].textContent;if(t)userMsgs.push(t)}
+4722:   					if(userMsgs.length){promptHistory=userMsgs.slice(-50);promptHistoryIdx=-1;savePromptHistory()}
+4723:   				}
+4724:   				// If this session is currently generating, re-add the thinking bubble
+4725:   				// that was removed when the chat area was re-rendered by rMsgs().
+4726:   				if(_ss[id] && _ss[id].streaming){
+4727:   					_activeThinkBubble=rMsg({role:'asst',content:'__thinking__',parts:[]});
+4728:   					st('Thinking...',true);
+4729:   					document.getElementById('ocChat').scrollTop=1e9;
+4730:   				}
+4731:   			}catch(e){
+4732:   				var ch=document.getElementById('ocCI');
+4733:   				if(ch)ch.innerHTML='<div style="padding:20px;color:var(--err)">Error loading conversation: '+esc(e.message||'unknown')+'</div>';
+4734:   			}
+4735:   		}
+4736: 	};
+4737: 	x.send();
+4738: };
+4739: 
+4740: // Auto-title after first AI response
+4741: var _origXhrOnload;
+4742: var origDoSendPatched=false;
+4743: 
+4744: // File tree search
+4745: var ftSearchEl=document.getElementById('ocFtSearch');
+4746: if(ftSearchEl){
+4747: 	ftSearchEl.addEventListener('input',function(){

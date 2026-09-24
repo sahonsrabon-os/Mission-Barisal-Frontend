@@ -1,0 +1,49 @@
+# route: fork  line: 4615  method: POST
+# params(arg): {message_id:forkId}
+# response field reads seen in callback: conversation_id, error, forked_content, success, title
+# NOTE: best-effort regex scan; verify against this dump.
+----------------------------------------------------------------------
+4613: 			if(!forkId){toast('Cannot fork: no user message found before this','warn');return}
+4614: 			st('Forking...',true);
+4615: 			api('fork',{message_id:forkId},function(e,r){
+4616: 				if(!e&&r&&r.success){
+4617: 					aC=r.conversation_id;
+4618: 					updateURL(aC);
+4619: 					toast('Forked to new session: '+(r.title||'Untitled'),'ok');
+4620: 					st('Ready',true);
+4621: 					loadSL();
+4622: 					loadC(aC);
+4623: 					if(r.forked_content){
+4624: 						var inp=document.getElementById('ocIn');
+4625: 						inp.value=r.forked_content;
+4626: 						inp.focus();
+4627: 					}
+4628: 				}else{
+4629: 					toast('Failed to fork: '+(e||(r&&r.error)||'Unknown error'),'err');
+4630: 					st('Ready',true);
+4631: 				}
+4632: 			});
+4633: 		});
+4634: 		act.appendChild(forkBtn2);
+4635: 	}
+4636: 	var copyBtn=document.createElement('button');
+4637: 	copyBtn.className='ocMsgActB';
+4638: 	copyBtn.innerHTML='<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>';
+4639: 	copyBtn.title='Copy';
+4640: 	copyBtn.addEventListener('click',function(ev){
+4641: 		ev.stopPropagation();
+4642: 		var bb=msg.querySelector('.ocMbb');
+4643: 		if(!bb)return;
+4644: 		var txt=bb.innerText||bb.textContent;
+4645: 		var ta=document.createElement('textarea');ta.value=txt;ta.style.cssText='position:fixed;left:-9999px';document.body.appendChild(ta);ta.select();
+4646: 		try{document.execCommand('copy')}catch(e){}
+4647: 		document.body.removeChild(ta);
+4648: 		toast('Copied','ok');
+4649: 	});
+4650: 	act.appendChild(copyBtn);
+4651: 	msg.appendChild(act);
+4652: });
+4653: 
+4654: // Message timestamps on hover
+4655: var _origRMsg=rMsg;
+4656: rMsg=function(m){

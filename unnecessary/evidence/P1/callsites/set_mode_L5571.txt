@@ -1,0 +1,49 @@
+# route: set_mode  line: 5571  method: POST
+# params(arg): {mode:mode}
+# response field reads seen in callback: (none/indirect)
+# NOTE: best-effort regex scan; verify against this dump.
+----------------------------------------------------------------------
+5569: 	hideAt();
+5570: 	document.getElementById('ocMode').value=mode;
+5571: 	api('set_mode',{mode:mode},function(){
+5572: 		toast('Switched to '+mode.charAt(0).toUpperCase()+mode.slice(1)+' mode','ok');
+5573: 	});
+5574: 	inp.focus();
+5575: }
+5576: 
+5577: document.getElementById('ocIn').addEventListener('input',function(){
+5578: 	var v=this.value;
+5579: 	var pos=this.selectionStart;
+5580: 	var before=v.substring(0,pos);
+5581: 	var atI=before.lastIndexOf('@');
+5582: 	if(atI>=0&&(atI===0||/\s/.test(before[atI-1]))){
+5583: 		var q=before.substring(atI+1);
+5584: 		if(q.indexOf(' ')===-1){
+5585: 			atStart=atI;
+5586: 			showAt(q);
+5587: 			return;
+5588: 		}
+5589: 	}
+5590: 	hideAt();
+5591: });
+5592: 
+5593: document.getElementById('ocIn').addEventListener('keydown',function(e){
+5594: 	if(!atActive)return;
+5595: 	if(e.key==='ArrowDown'){
+5596: 		e.preventDefault();
+5597: 		var items=atEl.querySelectorAll('.ocAtItem');
+5598: 		atIdx=Math.min(atIdx+1,items.length-1);
+5599: 		items.forEach(function(el,i){el.classList.toggle('active',i===atIdx)});
+5600: 	}else if(e.key==='ArrowUp'){
+5601: 		e.preventDefault();
+5602: 		var items=atEl.querySelectorAll('.ocAtItem');
+5603: 		atIdx=Math.max(atIdx-1,0);
+5604: 		items.forEach(function(el,i){el.classList.toggle('active',i===atIdx)});
+5605: 	}else if(e.key==='Enter'||e.key==='Tab'){
+5606: 		if(atIdx>=0){
+5607: 			e.preventDefault();
+5608: 			var items=atEl.querySelectorAll('.ocAtItem');
+5609: 			if(items[atIdx])pickAt(items[atIdx].dataset.id);
+5610: 		}else if(atActive){
+5611: 			e.preventDefault();
+5612: 			var first=atEl.querySelector('.ocAtItem');

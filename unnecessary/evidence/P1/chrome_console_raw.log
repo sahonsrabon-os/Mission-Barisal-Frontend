@@ -1,0 +1,4 @@
+[0924/041515.846457:ERROR:third_party/crashpad/crashpad/util/file/file_io_posix.cc:153] open /home/sahon/.config/google-chrome/Crash Reports/pending/3f850c72-87e5-45f1-a6f1-3015961eeddb.lock: File exists (17)
+[0924/041515.846522:ERROR:third_party/crashpad/crashpad/util/file/file_io_posix.cc:153] open /home/sahon/.config/google-chrome/Crash Reports/pending/87872199-63ef-4ec9-9305-aa91d6d28757.lock: File exists (17)
+libva error: /usr/lib/x86_64-linux-gnu/dri/iHD_drv_video.so init failed
+57361 bytes written to file /home/sahon/Videos/ui/evidence/P1/U1.1_ui_render.png

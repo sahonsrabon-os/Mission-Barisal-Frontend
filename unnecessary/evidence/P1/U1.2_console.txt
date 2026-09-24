@@ -1,0 +1,18 @@
+U1.2 — No DOM/JS crash when server absent (User perspective)
+method: Chrome headless --dump-dom --enable-logging=stderr
+--------------------------------------------------
+DOM size after load : 314,672 bytes (page fully built)
+key element ids present (grep count):
+  ocSb=1  ocModel=1  ocMode=1  ocIn=1  ocChat=1  ocFtL=1  ocSL=1
+  (ocH / ocSendBtn are classes/other ids, not matched by this id-grep)
+--------------------------------------------------
+CONSOLE MESSAGES (filtered, full log: U1.2_console_full.log):
+  [INFO:CONSOLE] "[DOM] Password field is not contained in a form ..."
+     -> benign HTML warning about the API-key <input type=password>
+        inside the settings modal (no <form> wrapper). Harmless.
+  no "Uncaught ..." / no "is not a function" / no ReferenceError /
+  no TypeError / no crash.
+--------------------------------------------------
+XHR/network failures (expected, no server): project/provider/status calls
+fail gracefully -> UI stays "Ready", does not blank out.
+VERDICT: PASS ✅ — UI tolerates missing backend without JS crash.

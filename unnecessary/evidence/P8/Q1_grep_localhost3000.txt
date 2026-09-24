@@ -1,0 +1,22 @@
+# every occurrence of localhost:3000 in the project (code + docs + test configs)
+# PRODUCT CODE = index.php, server/server.js, server/lib/*, contract/user/fake suites
+# (the optional real-provider test, this self-checking script, docs and .env may
+#  legitimately mention it as configuration/reference).
+# PRODUCT-CODE hits: 0
+  none
+# non-product hits (optional live test / qna self-reference / docs / config):
+docs/QUESTIONS_AND_ANSWERS.md:11: ## Q1. `/home/sahon/Videos/ui/` কি সত্যিই স্বাধীন — `localhost:3000`-এর উপর শতভাগ নির্ভর নয়?
+docs/QUESTIONS_AND_ANSWERS.md:13: **প্রশ্নের ভিত্তি:** Mission (`localhost:3000`) ভুল রেসপন্স দিতে পারে; তার উপর ভিত্তি করে
+docs/QUESTIONS_AND_ANSWERS.md:18: 1. পুরো প্রজেক্টে `localhost:3000` খোঁজা হলো (কোড+ডক):
+docs/QUESTIONS_AND_ANSWERS.md:28: **উত্তর:** হ্যাঁ — সম্পূর্ণ স্বাধীন। `localhost:3000` শুধু একটি **ঐচ্ছিক** প্রোভাইডার-উদাহরণ।
+server/test/qna_test.js:9: *   Q1  Is the UI+backend fully independent of localhost:3000?
+server/test/qna_test.js:529: and localhost:3000 appears ONLY in the optional real-provider test */
+server/test/qna_test.js:538: if (txt.includes('localhost:3000')) {
+server/test/qna_test.js:540: if (l.includes('localhost:3000')) grepHits.push(path.relative(ROOT, p) + ':' + (i + 1) + ': ' + l.trim().slice(0, 140));
+server/test/qna_test.js:552: '# every occurrence of localhost:3000 in the project (code + docs + test configs)\n' +
+server/test/qna_test.js:564: rec('Q1.1', 'backend+UI are independent of localhost:3000 — contract & user suites PASS with fakes only',
+server/test/qna_test.js:567: rec('Q1.2', 'localhost:3000 never referenced by product code (only optional live test/docs/config)',
+server/test/qna_test.js:605: '- External LLM replies are live (ngrok Ollama / Mission localhost:3000); upstream',
+server/test/real_provider_test.js:10: *   Provider B: Mission Barisal     http://localhost:3000/v1
+server/test/real_provider_test.js:56: base: 'http://localhost:3000/v1',
+server/test/real_provider_test.js:448: rec('R2.1', 'Test Connection (Mission localhost:3000) alert says OK', /^OK/.test(alertB), 'alert: ' + alertB);

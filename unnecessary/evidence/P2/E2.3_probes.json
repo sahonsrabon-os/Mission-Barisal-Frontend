@@ -1,0 +1,32 @@
+[
+  {
+    "label": "GET works for data-less route (status)",
+    "ok": true,
+    "detail": "HTTP 200"
+  },
+  {
+    "label": "POST form-urlencoded for data route (rename_conversation)",
+    "ok": true,
+    "detail": "HTTP 200"
+  },
+  {
+    "label": "JSON body accepted (defensive)",
+    "ok": true,
+    "detail": "HTTP 200"
+  },
+  {
+    "label": "invalid csrf_token -> HTTP 403",
+    "ok": true,
+    "detail": "HTTP 403"
+  },
+  {
+    "label": "no csrf -> HTTP 403 (shell)",
+    "ok": true,
+    "detail": "HTTP 403"
+  },
+  {
+    "label": "GET-with-data also served (lenient, UI uses POST)",
+    "ok": true,
+    "detail": "HTTP 200"
+  }
+]

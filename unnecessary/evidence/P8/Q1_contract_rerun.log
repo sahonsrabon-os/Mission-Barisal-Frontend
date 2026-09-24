@@ -1,0 +1,26 @@
+✅ PASS E3.1 — ১২/১২ ইভেন্টের নাম ও `data: ` প্রিফিক্স সঠিক — observed union=done,error,iteration-start,permission-request,question,reasoning-delta,text-delta,title,todos,tool-call,tool-result,usage; missing=none
+✅ PASS E3.2 — প্রতিটি ইভেন্টে `conversation_id` (সেশন আইসোলেশন)
+✅ PASS E2.1 — ৩৯/৩৯ রাউট উত্তর দেয়, HTTP 200 + JSON — distinct=39, rows=40, not200=none
+✅ PASS E2.2 — প্রতিটি রাউটের বাধ্যতামূলক ফিল্ড উপস্থিত (স্কিমা যাচাই)
+✅ PASS E2.3 — GET/POST নিয়ম মেলে (ডেটা থাকলে POST)
+✅ PASS E5.1 — path/project_id বদলালে file_tree ওই ডিরেক্টরি দেখায়
+✅ PASS E5.2 — রুটের বাইরে (../) যাওয়া যায় না — path-traversal জেইল
+✅ PASS E6.1 — দুই আলাদা base_url-এ test_connection + স্ট্রিম চলে
+✅ PASS E6.2 — API key/পুরনো পাথ কখনো UI/JS response-এ ফেরত আসে না — leaks=none
+✅ PASS E6.3 — shell রাউট লগইন/টোকেন ছাড়া ব্লকড
+✅ PASS E4.1 — UI ফাইল টেস্ট-পরেও md5 একই (০ এডিট প্রমাণ) — md5=895eb75226cc2801834baaced2873bb1
+
+================ CONTRACT TEST SUMMARY ================
+✅ E3.1   ১২/১২ ইভেন্টের নাম ও `data: ` প্রিফিক্স সঠিক — observed union=done,error,iteration-start,permission-request,question,reasoning-delta,text-delta,title,todos,tool-call,tool-result,usage; missing=none
+✅ E3.2   প্রতিটি ইভেন্টে `conversation_id` (সেশন আইসোলেশন)
+✅ E2.1   ৩৯/৩৯ রাউট উত্তর দেয়, HTTP 200 + JSON — distinct=39, rows=40, not200=none
+✅ E2.2   প্রতিটি রাউটের বাধ্যতামূলক ফিল্ড উপস্থিত (স্কিমা যাচাই)
+✅ E2.3   GET/POST নিয়ম মেলে (ডেটা থাকলে POST)
+✅ E5.1   path/project_id বদলালে file_tree ওই ডিরেক্টরি দেখায়
+✅ E5.2   রুটের বাইরে (../) যাওয়া যায় না — path-traversal জেইল
+✅ E6.1   দুই আলাদা base_url-এ test_connection + স্ট্রিম চলে
+✅ E6.2   API key/পুরনো পাথ কখনো UI/JS response-এ ফেরত আসে না — leaks=none
+✅ E6.3   shell রাউট লগইন/টোকেন ছাড়া ব্লকড
+✅ E4.1   UI ফাইল টেস্ট-পরেও md5 একই (০ এডিট প্রমাণ) — md5=895eb75226cc2801834baaced2873bb1
+TOTAL: 11/11 PASS  (2445 ms)
+index.php md5: 895eb75226cc2801834baaced2873bb1 (unchanged)

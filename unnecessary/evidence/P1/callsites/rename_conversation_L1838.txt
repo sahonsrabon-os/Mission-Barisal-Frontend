@@ -1,0 +1,49 @@
+# route: rename_conversation  line: 1838  method: POST
+# params(arg): {conversation_id:aC,title:title.trim()}
+# response field reads seen in callback: success
+# NOTE: best-effort regex scan; verify against this dump.
+----------------------------------------------------------------------
+1836: 			var title=prompt('Enter new session title:',curSessionTitle());
+1837: 			if(title!==null&&title.trim()){
+1838: 				api('rename_conversation',{conversation_id:aC,title:title.trim()},function(e,r){
+1839: 					if(!e&&r&&r.success){
+1840: 						toast('Session renamed','ok');
+1841: 						loadSL();
+1842: 					}else{
+1843: 						toast('Failed to rename','err');
+1844: 					}
+1845: 				});
+1846: 			}
+1847: 			return;
+1848: 		}
+1849: 		if(c==='/help'){
+1850: 			document.getElementById('ocHlBtn').click();
+1851: 			return;
+1852: 		}
+1853: 		if(c==='/todo'){
+1854: 			var todoText=cmd.slice(1).join(' ');
+1855: 			if(!todoText){toast('Usage: /todo <task text>','warn');return}
+1856: 			addTodo(todoText,'medium','pending');
+1857: 			toast('Task added','ok');
+1858: 			return;
+1859: 		}
+1860: 		if(c==='/sound'){
+1861: 			_soundEnabled=!_soundEnabled;
+1862: 			localStorage.setItem('oc_sound_enabled',_soundEnabled?'1':'0');
+1863: 			applySndIcon(_soundEnabled);
+1864: 			toast('Sound Notifications - '+(_soundEnabled?'ON':'OFF'),'ok');
+1865: 			return;
+1866: 		}
+1867: 		if(c==='/notify'){
+1868: 			if(typeof Notification==='undefined'){toast('Notifications not supported','warn');return}
+1869: 			if(Notification.permission==='default'){
+1870: 				Notification.requestPermission(function(p){
+1871: 					_desktopNotifEnabled=(p==='granted');
+1872: 					applyNtfIcon(_desktopNotifEnabled);
+1873: 					toast('Desktop Notifications - '+(_desktopNotifEnabled?'ON':'OFF'),'ok');
+1874: 				});
+1875: 			}else if(Notification.permission==='granted'){
+1876: 				_desktopNotifEnabled=!_desktopNotifEnabled;
+1877: 				applyNtfIcon(_desktopNotifEnabled);
+1878: 				toast('Desktop Notifications - '+(_desktopNotifEnabled?'ON':'OFF'),'ok');
+1879: 			}else{

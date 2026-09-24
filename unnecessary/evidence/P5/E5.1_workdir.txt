@@ -1,0 +1,11 @@
+E5.1 — per-request working directory (path/project_id drive the env)
+
+default project file_tree files: ["README.md"]
+projB      project file_tree files: ["PROJ_B_ONLY.txt"]
+read_file PROJ_B_ONLY.txt @ default -> {"error":"File not found"}
+read_file README.md        @ projB  -> {"error":"File not found"}
+project_info @ projB overview first lines: ["Project type: custom","Project path: /tmp/oc_contract/home/projb"]
+shell pwd @ default: "/tmp/oc_contract/home/default"
+shell pwd @ projB  : "/tmp/oc_contract/home/projb"
+
+RESULT: ✅ each project_id/path gets its own working dir

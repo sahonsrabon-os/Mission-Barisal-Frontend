@@ -1,0 +1,49 @@
+# route: project_info  line: 4070  method: GET
+# params(arg): null
+# response field reads seen in callback: overview, type
+# NOTE: best-effort regex scan; verify against this dump.
+----------------------------------------------------------------------
+4068: });
+4069: 
+4070: api('project_info',null,function(e,d){
+4071: 	if(!e&&d){
+4072: 		var overviewText=(d.overview||'');
+4073: 		var lines=overviewText.split('\n');
+4074: 		var typeLine=lines[0]||'';
+4075: 		var pathLine=lines[1]||'';
+4076: 		var typeMatch=typeLine.match(/Project type:\s*(.+)/i);
+4077: 		var pathMatch=pathLine.match(/Project path:\s*(.+)/i);
+4078: 		var dispType=typeMatch?typeMatch[1].trim():(d.type||'unknown');
+4079: 		var dispPath=pathMatch?pathMatch.trim():SP;
+4080: 		if(dispPath&&HD&&dispPath.indexOf(HD)===0) dispPath=dispPath.substring(HD.length+1);
+4081: 		ctx='<b>Project Type:</b> '+esc(dispType)+'<br>'
+4082: 			+'<b>Path:</b> <code>'+esc(dispPath||SP)+'</code><br>';
+4083: 		var restOfOverview=lines.slice(2).join('\n').trim();
+4084: 		if(restOfOverview){
+4085: 			ctx+='<br>'+esc(restOfOverview.substring(0,300))+(restOfOverview.length>300?'...':'');
+4086: 		}
+4087: 		rCtx();
+4088: 	}
+4089: });
+4090: 
+4091: loadP();
+4092: loadSL();
+4093: 
+4094: var ftOpen=false,ftLoaded=false,ftPath='';
+4095: document.getElementById('ocFtBtn').addEventListener('click',function(){
+4096: 	var panel=document.getElementById('ocFt');
+4097: 	if(ftOpen==false){
+4098: 		panel.classList.add('open');
+4099: 		ftOpen=true;
+4100: 		if(!ftLoaded){loadFT('/');ftLoaded=true}
+4101: 	}else{
+4102: 		panel.classList.remove('open');
+4103: 		ftOpen=false;
+4104: 	}
+4105: });
+4106: document.getElementById('ocFtRef').addEventListener('click',function(){loadFT(ftPath||'/')});
+4107: document.getElementById('ocFv').addEventListener('click',function(e){if(e.target===this)this.classList.remove('open')});
+4108: document.getElementById('ocFvC').addEventListener('click',function(){document.getElementById('ocFv').classList.remove('open')});
+4109: 
+4110: function loadFT(path){
+4111: 	ftPath=path;

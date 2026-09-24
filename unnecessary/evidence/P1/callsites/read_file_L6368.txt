@@ -1,0 +1,49 @@
+# route: read_file  line: 6368  method: POST
+# params(arg): {path:relPath}
+# response field reads seen in callback: content, name, type
+# NOTE: best-effort regex scan; verify against this dump.
+----------------------------------------------------------------------
+6366: 		var endLine=rangeMatch[3]?parseInt(rangeMatch[3]):startLine;
+6367: 		var relPath=filePath.replace(/^\//,'');
+6368: 		api('read_file',{path:relPath},function(e,r){
+6369: 			if(!e&&r&&r.content){
+6370: 				var lines=r.content.split('\n');
+6371: 				var excerpt=lines.slice(startLine-1,endLine).join('\n');
+6372: 				pendingFiles.push({name:relPath+'#'+startLine+(endLine>startLine?'-'+endLine:''),content:excerpt});
+6373: 				toast('Attached '+relPath+':'+startLine+(endLine>startLine?'-'+endLine:''),'ok');
+6374: 			}else{
+6375: 				toast('Could not read '+relPath,'err');
+6376: 			}
+6377: 			inp.value=inp.value.replace(/@[^\s@]+#\d+(?:-\d+)?/,'').trim();
+6378: 			_origApiSend();
+6379: 		});
+6380: 	}else{
+6381: 		_origApiSend();
+6382: 	}
+6383: };
+6384: 
+6385: // ===== FEATURE: Grep/Search Results with Clickable File References =====
+6386: var _origRMsg3=rMsg;
+6387: rMsg=function(msg){
+6388: 	var el=_origRMsg3(msg);
+6389: 	if(!el)return el;
+6390: 	if(msg.role==='asst'){
+6391: 		var toolUses=(msg.parts||[]).filter(function(p){return p.type==='tool_use'});
+6392: 		toolUses.forEach(function(p){
+6393: 			if(p.name==='grep'||p.name==='search'||p.name==='glob'){
+6394: 				var toolEls=el.querySelectorAll('.ocTk');
+6395: 				toolEls.forEach(function(tEl){
+6396: 					var body=tEl.querySelector('.ocTkB');
+6397: 					if(body){
+6398: 						var text=body.textContent;
+6399: 						var html=text.replace(/([^\s:]+\.php|[^\s:]+\.js|[^\s:]+\.ts|[^\s:]+\.css|[^\s:]+\.html|[^\s:]+\.json):(\d+)/g,function(m,file,line){
+6400: 							return '<span class="ocGrepFile" data-file="'+file+'" data-line="'+line+'">'+file+'<span class="ocGrepLine">:'+line+'</span></span>';
+6401: 						});
+6402: 						body.innerHTML=html;
+6403: 						body.querySelectorAll('.ocGrepFile').forEach(function(fEl){
+6404: 							fEl.addEventListener('click',function(){
+6405: 								var f=this.dataset.file;
+6406: 								var l=parseInt(this.dataset.line);
+6407: 								api('read_file',{path:f},function(e,r){
+6408: 									if(!e&&r&&r.content){
+6409: 										var viewer=document.getElementById('ocFv');

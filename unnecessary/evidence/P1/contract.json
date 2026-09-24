@@ -1,0 +1,1188 @@
+{
+  "meta": {
+    "source": "/home/sahon/Videos/ui/index.php",
+    "md5": "895eb75226cc2801834baaced2873bb1",
+    "expected_md5": "895eb75226cc2801834baaced2873bb1",
+    "md5_match": true,
+    "bytes": 310233,
+    "lines": 6490,
+    "php_blocks": 0,
+    "xhr_points": 8,
+    "api_fn_line": 1116,
+    "base_url_line": 1066,
+    "generated_by": "extract_contract.py (read-only)"
+  },
+  "routes": {
+    "total_unique": 39,
+    "expected": 39,
+    "api_fn": [
+      "abort",
+      "changes",
+      "clear",
+      "compact",
+      "conversations",
+      "delete_conversation",
+      "diff",
+      "favorite_model",
+      "force_unlock",
+      "fork",
+      "new_session",
+      "project_info",
+      "projects_close",
+      "projects_create",
+      "projects_delete",
+      "projects_list",
+      "projects_wordpress",
+      "providers",
+      "read_file",
+      "redo",
+      "regenerate",
+      "rename_conversation",
+      "restore",
+      "set_mode",
+      "settings_delete",
+      "settings_load",
+      "settings_save",
+      "shell",
+      "start",
+      "status",
+      "switch_conversation",
+      "test_connection",
+      "toggle_permission",
+      "undo",
+      "unfavorite_model"
+    ],
+    "raw_xhr": [
+      "conversation",
+      "file_tree",
+      "read_file",
+      "resolve_file"
+    ],
+    "stream": "ai_chat_stream",
+    "list": [
+      "abort",
+      "ai_chat_stream",
+      "changes",
+      "clear",
+      "compact",
+      "conversation",
+      "conversations",
+      "delete_conversation",
+      "diff",
+      "favorite_model",
+      "file_tree",
+      "force_unlock",
+      "fork",
+      "new_session",
+      "project_info",
+      "projects_close",
+      "projects_create",
+      "projects_delete",
+      "projects_list",
+      "projects_wordpress",
+      "providers",
+      "read_file",
+      "redo",
+      "regenerate",
+      "rename_conversation",
+      "resolve_file",
+      "restore",
+      "set_mode",
+      "settings_delete",
+      "settings_load",
+      "settings_save",
+      "shell",
+      "start",
+      "status",
+      "switch_conversation",
+      "test_connection",
+      "toggle_permission",
+      "undo",
+      "unfavorite_model"
+    ]
+  },
+  "route_calls": [
+    {
+      "route": "start",
+      "line": 1442,
+      "method": "GET",
+      "params": [],
+      "raw_arg": "_sp",
+      "params_source": "dynamic(object)",
+      "response_fields_observed": [
+        "forEach",
+        "id",
+        "length",
+        "updated_at"
+      ]
+    },
+    {
+      "route": "switch_conversation",
+      "line": 1444,
+      "method": "POST",
+      "params": [
+        "conversation_id"
+      ],
+      "raw_arg": "{conversation_id:s.id}",
+      "params_source": "literal",
+      "response_fields_observed": [
+        "forEach",
+        "id",
+        "length",
+        "updated_at"
+      ]
+    },
+    {
+      "route": "conversations",
+      "line": 1449,
+      "method": "GET",
+      "params": [],
+      "raw_arg": "null",
+      "params_source": "literal",
+      "response_fields_observed": [
+        "forEach",
+        "id",
+        "length",
+        "updated_at"
+      ]
+    },
+    {
+      "route": "delete_conversation",
+      "line": 1513,
+      "method": "POST",
+      "params": [
+        "conversation_id"
+      ],
+      "raw_arg": "{conversation_id:s.id}",
+      "params_source": "literal",
+      "response_fields_observed": [
+        "id"
+      ]
+    },
+    {
+      "route": "start",
+      "line": 1524,
+      "method": "GET",
+      "params": [],
+      "raw_arg": "_sp",
+      "params_source": "dynamic(object)",
+      "response_fields_observed": [
+        "id"
+      ]
+    },
+    {
+      "route": "switch_conversation",
+      "line": 1526,
+      "method": "POST",
+      "params": [
+        "conversation_id"
+      ],
+      "raw_arg": "{conversation_id:s.id}",
+      "params_source": "literal",
+      "response_fields_observed": [
+        "id"
+      ]
+    },
+    {
+      "route": "conversations",
+      "line": 1630,
+      "method": "GET",
+      "params": [],
+      "raw_arg": "null",
+      "params_source": "literal",
+      "response_fields_observed": [
+        "context_tokens",
+        "cost",
+        "iterations",
+        "tool_calls",
+        "usage"
+      ]
+    },
+    {
+      "route": "new_session",
+      "line": 1699,
+      "method": "POST",
+      "params": [],
+      "raw_arg": "{}",
+      "params_source": "literal",
+      "response_fields_observed": [
+        "id",
+        "output"
+      ]
+    },
+    {
+      "route": "start",
+      "line": 1711,
+      "method": "GET",
+      "params": [],
+      "raw_arg": "_sp",
+      "params_source": "dynamic(object)",
+      "response_fields_observed": [
+        "error",
+        "output",
+        "returncode"
+      ]
+    },
+    {
+      "route": "shell",
+      "line": 1736,
+      "method": "POST",
+      "params": [
+        "command"
+      ],
+      "raw_arg": "{command:shellCmd}",
+      "params_source": "literal",
+      "response_fields_observed": [
+        "error",
+        "output",
+        "returncode"
+      ]
+    },
+    {
+      "route": "clear",
+      "line": 1760,
+      "method": "POST",
+      "params": [],
+      "raw_arg": "{}",
+      "params_source": "literal",
+      "response_fields_observed": []
+    },
+    {
+      "route": "set_mode",
+      "line": 1780,
+      "method": "POST",
+      "params": [
+        "mode"
+      ],
+      "raw_arg": "{mode:'plan'}",
+      "params_source": "literal",
+      "response_fields_observed": [
+        "error",
+        "messages",
+        "success"
+      ]
+    },
+    {
+      "route": "set_mode",
+      "line": 1781,
+      "method": "POST",
+      "params": [
+        "mode"
+      ],
+      "raw_arg": "{mode:'build'}",
+      "params_source": "literal",
+      "response_fields_observed": [
+        "error",
+        "messages",
+        "success"
+      ]
+    },
+    {
+      "route": "compact",
+      "line": 1784,
+      "method": "POST",
+      "params": [
+        "keep_last_n"
+      ],
+      "raw_arg": "{keep_last_n:3}",
+      "params_source": "literal",
+      "response_fields_observed": [
+        "error",
+        "messages",
+        "success"
+      ]
+    },
+    {
+      "route": "undo",
+      "line": 1803,
+      "method": "POST",
+      "params": [
+        "message_id"
+      ],
+      "raw_arg": "{message_id:lastUser.id}",
+      "params_source": "literal",
+      "response_fields_observed": [
+        "error",
+        "messages",
+        "success"
+      ]
+    },
+    {
+      "route": "redo",
+      "line": 1818,
+      "method": "POST",
+      "params": [],
+      "raw_arg": "{}",
+      "params_source": "literal",
+      "response_fields_observed": [
+        "error",
+        "messages",
+        "success"
+      ]
+    },
+    {
+      "route": "rename_conversation",
+      "line": 1838,
+      "method": "POST",
+      "params": [
+        "conversation_id"
+      ],
+      "raw_arg": "{conversation_id:aC,title:title.trim()}",
+      "params_source": "literal",
+      "response_fields_observed": [
+        "success"
+      ]
+    },
+    {
+      "route": "compact",
+      "line": 2174,
+      "method": "POST",
+      "params": [
+        "keep_last_n"
+      ],
+      "raw_arg": "{keep_last_n:3}",
+      "params_source": "literal",
+      "response_fields_observed": [
+        "conversation_id",
+        "input",
+        "title",
+        "tool"
+      ]
+    },
+    {
+      "route": "start",
+      "line": 2293,
+      "method": "POST",
+      "params": [
+        "provider"
+      ],
+      "raw_arg": "{provider:pp[0],model:pp.slice(1).join('/'),mode:document.getElementById('ocMode').value}",
+      "params_source": "literal",
+      "response_fields_observed": []
+    },
+    {
+      "route": "providers",
+      "line": 2316,
+      "method": "GET",
+      "params": [],
+      "raw_arg": "null",
+      "params_source": "literal",
+      "response_fields_observed": [
+        "connected",
+        "find",
+        "forEach",
+        "id",
+        "models",
+        "name"
+      ]
+    },
+    {
+      "route": "start",
+      "line": 2415,
+      "method": "GET",
+      "params": [],
+      "raw_arg": "_sp",
+      "params_source": "dynamic(object)",
+      "response_fields_observed": []
+    },
+    {
+      "route": "start",
+      "line": 2532,
+      "method": "GET",
+      "params": [],
+      "raw_arg": "_sp",
+      "params_source": "dynamic(object)",
+      "response_fields_observed": [
+        "connected",
+        "id",
+        "is_custom_type",
+        "models",
+        "name",
+        "slice"
+      ]
+    },
+    {
+      "route": "settings_delete",
+      "line": 2676,
+      "method": "POST",
+      "params": [
+        "provider_id"
+      ],
+      "raw_arg": "{provider_id:id}",
+      "params_source": "literal",
+      "response_fields_observed": [
+        "api_key",
+        "base_url",
+        "connected",
+        "name",
+        "provider_id"
+      ]
+    },
+    {
+      "route": "settings_save",
+      "line": 2728,
+      "method": "GET",
+      "params": [],
+      "raw_arg": "d",
+      "params_source": "dynamic(object)",
+      "response_fields_observed": [
+        "error",
+        "models",
+        "success"
+      ]
+    },
+    {
+      "route": "test_connection",
+      "line": 2769,
+      "method": "GET",
+      "params": [],
+      "raw_arg": "td",
+      "params_source": "dynamic(object)",
+      "response_fields_observed": [
+        "error",
+        "success"
+      ]
+    },
+    {
+      "route": "settings_delete",
+      "line": 2810,
+      "method": "POST",
+      "params": [
+        "provider_id"
+      ],
+      "raw_arg": "{provider_id:disBtn.dataset.id}",
+      "params_source": "literal",
+      "response_fields_observed": []
+    },
+    {
+      "route": "abort",
+      "line": 2918,
+      "method": "POST",
+      "params": [],
+      "raw_arg": "{}",
+      "params_source": "literal",
+      "response_fields_observed": []
+    },
+    {
+      "route": "fork",
+      "line": 3379,
+      "method": "POST",
+      "params": [
+        "message_id"
+      ],
+      "raw_arg": "{message_id:msgId}",
+      "params_source": "literal",
+      "response_fields_observed": [
+        "conversation_id",
+        "error",
+        "forked_content",
+        "success",
+        "title"
+      ]
+    },
+    {
+      "route": "abort",
+      "line": 3496,
+      "method": "POST",
+      "params": [],
+      "raw_arg": "{}",
+      "params_source": "literal",
+      "response_fields_observed": []
+    },
+    {
+      "route": "abort",
+      "line": 3507,
+      "method": "POST",
+      "params": [],
+      "raw_arg": "{}",
+      "params_source": "literal",
+      "response_fields_observed": [
+        "messages",
+        "success",
+        "summary"
+      ]
+    },
+    {
+      "route": "set_mode",
+      "line": 3540,
+      "method": "POST",
+      "params": [
+        "mode"
+      ],
+      "raw_arg": "{mode:'plan'}",
+      "params_source": "literal",
+      "response_fields_observed": [
+        "forEach",
+        "messages",
+        "name",
+        "path",
+        "project_id",
+        "success",
+        "summary"
+      ]
+    },
+    {
+      "route": "set_mode",
+      "line": 3541,
+      "method": "POST",
+      "params": [
+        "mode"
+      ],
+      "raw_arg": "{mode:'build'}",
+      "params_source": "literal",
+      "response_fields_observed": [
+        "forEach",
+        "messages",
+        "name",
+        "path",
+        "project_id",
+        "success",
+        "summary"
+      ]
+    },
+    {
+      "route": "clear",
+      "line": 3547,
+      "method": "POST",
+      "params": [],
+      "raw_arg": "{}",
+      "params_source": "literal",
+      "response_fields_observed": [
+        "forEach",
+        "messages",
+        "name",
+        "path",
+        "project_id",
+        "success",
+        "summary"
+      ]
+    },
+    {
+      "route": "compact",
+      "line": 3548,
+      "method": "POST",
+      "params": [
+        "keep_last_n"
+      ],
+      "raw_arg": "{keep_last_n:3}",
+      "params_source": "literal",
+      "response_fields_observed": [
+        "forEach",
+        "messages",
+        "name",
+        "path",
+        "project_id",
+        "success",
+        "summary"
+      ]
+    },
+    {
+      "route": "projects_list",
+      "line": 3555,
+      "method": "GET",
+      "params": [],
+      "raw_arg": "null",
+      "params_source": "literal",
+      "response_fields_observed": [
+        "forEach",
+        "name",
+        "path",
+        "project_id"
+      ]
+    },
+    {
+      "route": "set_mode",
+      "line": 3599,
+      "method": "POST",
+      "params": [
+        "mode"
+      ],
+      "raw_arg": "{mode:this.value}",
+      "params_source": "literal",
+      "response_fields_observed": [
+        "bottom",
+        "left"
+      ]
+    },
+    {
+      "route": "abort",
+      "line": 3889,
+      "method": "POST",
+      "params": [],
+      "raw_arg": "{}",
+      "params_source": "literal",
+      "response_fields_observed": []
+    },
+    {
+      "route": "status",
+      "line": 3986,
+      "method": "GET",
+      "params": [],
+      "raw_arg": "null",
+      "params_source": "literal",
+      "response_fields_observed": [
+        "connected",
+        "favorite_models",
+        "providers",
+        "session"
+      ]
+    },
+    {
+      "route": "project_info",
+      "line": 4070,
+      "method": "GET",
+      "params": [],
+      "raw_arg": "null",
+      "params_source": "literal",
+      "response_fields_observed": [
+        "overview",
+        "type"
+      ]
+    },
+    {
+      "route": "force_unlock",
+      "line": 4347,
+      "method": "POST",
+      "params": [],
+      "raw_arg": "{}",
+      "params_source": "literal",
+      "response_fields_observed": [
+        "message",
+        "success"
+      ]
+    },
+    {
+      "route": "set_mode",
+      "line": 4382,
+      "method": "POST",
+      "params": [
+        "mode"
+      ],
+      "raw_arg": "{mode:mode}",
+      "params_source": "literal",
+      "response_fields_observed": [
+        "content"
+      ]
+    },
+    {
+      "route": "fork",
+      "line": 4534,
+      "method": "POST",
+      "params": [
+        "message_id"
+      ],
+      "raw_arg": "{message_id:msgId}",
+      "params_source": "literal",
+      "response_fields_observed": [
+        "conversation_id",
+        "error",
+        "forked_content",
+        "success",
+        "title"
+      ]
+    },
+    {
+      "route": "regenerate",
+      "line": 4562,
+      "method": "POST",
+      "params": [],
+      "raw_arg": "{}",
+      "params_source": "literal",
+      "response_fields_observed": [
+        "success"
+      ]
+    },
+    {
+      "route": "fork",
+      "line": 4615,
+      "method": "POST",
+      "params": [
+        "message_id"
+      ],
+      "raw_arg": "{message_id:forkId}",
+      "params_source": "literal",
+      "response_fields_observed": [
+        "conversation_id",
+        "error",
+        "forked_content",
+        "success",
+        "title"
+      ]
+    },
+    {
+      "route": "changes",
+      "line": 4764,
+      "method": "GET",
+      "params": [],
+      "raw_arg": "null",
+      "params_source": "literal",
+      "response_fields_observed": [
+        "diff",
+        "id",
+        "message",
+        "restored",
+        "snapshots",
+        "time"
+      ]
+    },
+    {
+      "route": "restore",
+      "line": 4786,
+      "method": "POST",
+      "params": [
+        "id"
+      ],
+      "raw_arg": "{id:this.dataset.id}",
+      "params_source": "literal",
+      "response_fields_observed": [
+        "diff",
+        "restored"
+      ]
+    },
+    {
+      "route": "diff",
+      "line": 4797,
+      "method": "POST",
+      "params": [
+        "id"
+      ],
+      "raw_arg": "{id:snapId}",
+      "params_source": "literal",
+      "response_fields_observed": [
+        "diff"
+      ]
+    },
+    {
+      "route": "set_mode",
+      "line": 4848,
+      "method": "POST",
+      "params": [
+        "mode"
+      ],
+      "raw_arg": "{mode:'plan'}",
+      "params_source": "literal",
+      "response_fields_observed": [
+        "conversation_id",
+        "forked_content",
+        "messages",
+        "success",
+        "summary"
+      ]
+    },
+    {
+      "route": "set_mode",
+      "line": 4849,
+      "method": "POST",
+      "params": [
+        "mode"
+      ],
+      "raw_arg": "{mode:'build'}",
+      "params_source": "literal",
+      "response_fields_observed": [
+        "conversation_id",
+        "forked_content",
+        "messages",
+        "success",
+        "summary"
+      ]
+    },
+    {
+      "route": "compact",
+      "line": 4856,
+      "method": "POST",
+      "params": [
+        "keep_last_n"
+      ],
+      "raw_arg": "{keep_last_n:3}",
+      "params_source": "literal",
+      "response_fields_observed": [
+        "conversation_id",
+        "forked_content",
+        "messages",
+        "success",
+        "summary"
+      ]
+    },
+    {
+      "route": "clear",
+      "line": 4861,
+      "method": "POST",
+      "params": [],
+      "raw_arg": "{}",
+      "params_source": "literal",
+      "response_fields_observed": [
+        "conversation_id",
+        "forked_content",
+        "messages",
+        "success"
+      ]
+    },
+    {
+      "route": "undo",
+      "line": 4867,
+      "method": "POST",
+      "params": [
+        "message_id"
+      ],
+      "raw_arg": "{message_id:lu.id}",
+      "params_source": "literal",
+      "response_fields_observed": [
+        "conversation_id",
+        "favorite_models",
+        "forked_content",
+        "messages",
+        "success"
+      ]
+    },
+    {
+      "route": "fork",
+      "line": 4873,
+      "method": "POST",
+      "params": [
+        "message_id"
+      ],
+      "raw_arg": "{message_id:lu.id}",
+      "params_source": "literal",
+      "response_fields_observed": [
+        "conversation_id",
+        "favorite_models",
+        "forked_content",
+        "success"
+      ]
+    },
+    {
+      "route": "rename_conversation",
+      "line": 4891,
+      "method": "POST",
+      "params": [
+        "conversation_id"
+      ],
+      "raw_arg": "{conversation_id:aC,title:t.trim()}",
+      "params_source": "literal",
+      "response_fields_observed": [
+        "favorite_models",
+        "success"
+      ]
+    },
+    {
+      "route": "settings_load",
+      "line": 4902,
+      "method": "GET",
+      "params": [],
+      "raw_arg": "null",
+      "params_source": "literal",
+      "response_fields_observed": [
+        "favorite_models"
+      ]
+    },
+    {
+      "route": "favorite_model",
+      "line": 4921,
+      "method": "POST",
+      "params": [
+        "model_id"
+      ],
+      "raw_arg": "{model_id:modelId}",
+      "params_source": "literal",
+      "response_fields_observed": []
+    },
+    {
+      "route": "unfavorite_model",
+      "line": 4925,
+      "method": "POST",
+      "params": [
+        "model_id"
+      ],
+      "raw_arg": "{model_id:modelId}",
+      "params_source": "literal",
+      "response_fields_observed": []
+    },
+    {
+      "route": "toggle_permission",
+      "line": 4949,
+      "method": "POST",
+      "params": [
+        "permission"
+      ],
+      "raw_arg": "{permission:permKey,value:'allow_always'}",
+      "params_source": "literal",
+      "response_fields_observed": [
+        "success"
+      ]
+    },
+    {
+      "route": "rename_conversation",
+      "line": 4970,
+      "method": "POST",
+      "params": [
+        "conversation_id"
+      ],
+      "raw_arg": "{conversation_id:item.dataset.id,title:newTitle.trim()}",
+      "params_source": "literal",
+      "response_fields_observed": [
+        "success"
+      ]
+    },
+    {
+      "route": "projects_list",
+      "line": 4994,
+      "method": "GET",
+      "params": [],
+      "raw_arg": "null",
+      "params_source": "literal",
+      "response_fields_observed": [
+        "forEach",
+        "name",
+        "path"
+      ]
+    },
+    {
+      "route": "projects_wordpress",
+      "line": 5002,
+      "method": "GET",
+      "params": [],
+      "raw_arg": "null",
+      "params_source": "literal",
+      "response_fields_observed": [
+        "forEach",
+        "name",
+        "path",
+        "project_id"
+      ]
+    },
+    {
+      "route": "projects_close",
+      "line": 5056,
+      "method": "POST",
+      "params": [
+        "project_id"
+      ],
+      "raw_arg": "{project_id:p.project_id}",
+      "params_source": "literal",
+      "response_fields_observed": [
+        "error",
+        "name",
+        "path",
+        "project_id",
+        "success"
+      ]
+    },
+    {
+      "route": "projects_delete",
+      "line": 5078,
+      "method": "POST",
+      "params": [
+        "project_id"
+      ],
+      "raw_arg": "{project_id:p.project_id}",
+      "params_source": "literal",
+      "response_fields_observed": [
+        "error",
+        "name",
+        "path",
+        "project_id",
+        "success"
+      ]
+    },
+    {
+      "route": "projects_create",
+      "line": 5323,
+      "method": "POST",
+      "params": [
+        "name"
+      ],
+      "raw_arg": "{name:name,path:fullPath,type:type,insid:insid}",
+      "params_source": "literal",
+      "response_fields_observed": [
+        "error",
+        "project_id"
+      ]
+    },
+    {
+      "route": "set_mode",
+      "line": 5571,
+      "method": "POST",
+      "params": [
+        "mode"
+      ],
+      "raw_arg": "{mode:mode}",
+      "params_source": "literal",
+      "response_fields_observed": []
+    },
+    {
+      "route": "toggle_permission",
+      "line": 5690,
+      "method": "POST",
+      "params": [
+        "permission"
+      ],
+      "raw_arg": "{permission:document.getElementById('ocPermSub').textContent,value:'allow_always'}",
+      "params_source": "literal",
+      "response_fields_observed": [
+        "custom",
+        "customPlaceholder",
+        "header",
+        "multiple",
+        "options",
+        "question"
+      ]
+    },
+    {
+      "route": "read_file",
+      "line": 5877,
+      "method": "POST",
+      "params": [
+        "path"
+      ],
+      "raw_arg": "{path:el.dataset.path}",
+      "params_source": "literal",
+      "response_fields_observed": [
+        "content"
+      ]
+    },
+    {
+      "route": "set_mode",
+      "line": 6135,
+      "method": "POST",
+      "params": [
+        "mode"
+      ],
+      "raw_arg": "{mode:'plan'}",
+      "params_source": "literal",
+      "response_fields_observed": [
+        "classList",
+        "messages",
+        "success",
+        "summary"
+      ]
+    },
+    {
+      "route": "set_mode",
+      "line": 6136,
+      "method": "POST",
+      "params": [
+        "mode"
+      ],
+      "raw_arg": "{mode:'build'}",
+      "params_source": "literal",
+      "response_fields_observed": [
+        "classList",
+        "messages",
+        "success",
+        "summary"
+      ]
+    },
+    {
+      "route": "clear",
+      "line": 6150,
+      "method": "POST",
+      "params": [],
+      "raw_arg": "{}",
+      "params_source": "literal",
+      "response_fields_observed": [
+        "classList",
+        "messages",
+        "success",
+        "summary"
+      ]
+    },
+    {
+      "route": "compact",
+      "line": 6151,
+      "method": "POST",
+      "params": [
+        "keep_last_n"
+      ],
+      "raw_arg": "{keep_last_n:3}",
+      "params_source": "literal",
+      "response_fields_observed": [
+        "classList",
+        "messages",
+        "success",
+        "summary"
+      ]
+    },
+    {
+      "route": "read_file",
+      "line": 6368,
+      "method": "POST",
+      "params": [
+        "path"
+      ],
+      "raw_arg": "{path:relPath}",
+      "params_source": "literal",
+      "response_fields_observed": [
+        "content",
+        "name",
+        "type"
+      ]
+    },
+    {
+      "route": "read_file",
+      "line": 6407,
+      "method": "POST",
+      "params": [
+        "path"
+      ],
+      "raw_arg": "{path:f}",
+      "params_source": "literal",
+      "response_fields_observed": [
+        "content"
+      ]
+    }
+  ],
+  "raw_xhr_sites": [
+    {
+      "route": "conversation",
+      "line": 1413
+    },
+    {
+      "route": "file_tree",
+      "line": 4112
+    },
+    {
+      "route": "file_tree",
+      "line": 4181
+    },
+    {
+      "route": "read_file",
+      "line": 4251
+    },
+    {
+      "route": "resolve_file",
+      "line": 4407
+    },
+    {
+      "route": "conversation",
+      "line": 4706
+    }
+  ],
+  "stream": {
+    "route": "ai_chat_stream",
+    "line": 1945,
+    "events_expected": [
+      "done",
+      "error",
+      "iteration-start",
+      "permission-request",
+      "question",
+      "reasoning-delta",
+      "text-delta",
+      "title",
+      "todos",
+      "tool-call",
+      "tool-result",
+      "usage"
+    ],
+    "events_count": 12,
+    "wire_format": "data: {json}\\n",
+    "event_field": "_event"
+  },
+  "protocol": {
+    "url": "<A>&ai_php_api=<route>&csrf_token=<C>",
+    "method": "POST if data else GET",
+    "content_type": "application/x-www-form-urlencoded",
+    "accept": "application/json",
+    "success": "HTTP 200 + JSON"
+  }
+}

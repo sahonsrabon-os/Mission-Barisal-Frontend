@@ -1,0 +1,6 @@
+E1.7 — XHR construction points (Engineer)
+command: grep -c '.open(' index.php
+--------------------------------------------------
+count : 8   ✅ = 8
+lines : 1118, 1415, 1945, 4114, 4183, 4253, 4409, 4708
+note  : 1 of them lives inside api() (covers 35 routes); 4 raw routes + 1 stream + extras.

@@ -1,0 +1,49 @@
+# route: diff  line: 4797  method: POST
+# params(arg): {id:snapId}
+# response field reads seen in callback: diff
+# NOTE: best-effort regex scan; verify against this dump.
+----------------------------------------------------------------------
+4795: 						var snapId=this.dataset.id;
+4796: 						var snapMsg=this.dataset.msg;
+4797: 						api('diff',{id:snapId},function(e,r){
+4798: 							if(!e&&r&&r.diff){
+4799: 								var modal=document.getElementById('ocDiffMod');
+4800: 								var body=document.getElementById('ocDiffBd');
+4801: 								var toggleHtml='<div class="ocDiffToggle"><button class="ocDiffToggleBtn active" id="ocDiffUnifiedBtn">Unified</button><button class="ocDiffToggleBtn" id="ocDiffSplitBtn">Split</button></div>';
+4802: 								var diffHtml='<pre style="font-size:12px;overflow-x:auto;padding:8px;background:var(--bgS);border-radius:var(--r);line-height:1.6">';
+4803: 								var lines=r.diff.split('\n');
+4804: 								lines.forEach(function(line,i){
+4805: 									var cls='';
+4806: 									if(line.substring(0,1)==='+')cls='color:var(--ok)';
+4807: 									else if(line.substring(0,1)==='-')cls='color:var(--err)';
+4808: 									else if(line.substring(0,2)==='@@')cls='color:var(--p);font-weight:600';
+4809: 									diffHtml+='<div class="ocDiffHunkLine" data-line="'+(i+1)+'" style="'+cls+'">'+esc(line)+'</div>';
+4810: 								});
+4811: 								diffHtml+='</pre>';
+4812: 								var splitHtml='<div id="ocDiffSplitView" style="display:none"><div class="ocDiffSplit"><div class="ocDiffSplitL"><div style="padding:4px 8px;font-size:11px;color:var(--t3);border-bottom:1px solid var(--bd2);font-weight:500">Original</div></div><div class="ocDiffSplitR"><div style="padding:4px 8px;font-size:11px;color:var(--t3);border-bottom:1px solid var(--bd2);font-weight:500">Modified</div></div></div></div>';
+4813: 								body.innerHTML='<div style="margin-bottom:8px;font-size:13px;color:var(--t1);font-weight:500">'+esc(snapMsg||'Snapshot')+'</div>'+toggleHtml+'<div id="ocDiffUnifiedView">'+diffHtml+'</div>'+splitHtml;
+4814: 								modal.classList.add('open');
+4815: 								document.getElementById('ocDiffUnifiedBtn').addEventListener('click',function(){
+4816: 									this.classList.add('active');document.getElementById('ocDiffSplitBtn').classList.remove('active');
+4817: 									document.getElementById('ocDiffUnifiedView').style.display='block';
+4818: 									document.getElementById('ocDiffSplitView').style.display='none';
+4819: 								});
+4820: 								document.getElementById('ocDiffSplitBtn').addEventListener('click',function(){
+4821: 									this.classList.add('active');document.getElementById('ocDiffUnifiedBtn').classList.remove('active');
+4822: 									document.getElementById('ocDiffUnifiedView').style.display='none';
+4823: 									document.getElementById('ocDiffSplitView').style.display='block';
+4824: 									renderSplitDiff(r.diff);
+4825: 								});
+4826: 								showDiffHunkNav(body,r.diff);
+4827: 							}else{
+4828: 								toast('Failed to load diff: '+(e||'Unknown'),'err');
+4829: 							}
+4830: 						});
+4831: 					});
+4832: 				});
+4833: 			}
+4834: 		});
+4835: 	}
+4836: 	panel.classList.toggle('open',chgOpen);
+4837: });
+4838: document.getElementById('ocChgC').addEventListener('click',function(){

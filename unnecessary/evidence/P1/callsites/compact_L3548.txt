@@ -1,0 +1,49 @@
+# route: compact  line: 3548  method: POST
+# params(arg): {keep_last_n:3}
+# response field reads seen in callback: forEach, messages, name, path, project_id, success, summary
+# NOTE: best-effort regex scan; verify against this dump.
+----------------------------------------------------------------------
+3546: 	if(matchKey(e,getKeybinding('notifications'))){e.preventDefault();if(typeof Notification!=='undefined'){if(Notification.permission==='default')Notification.requestPermission(function(p){_desktopNotifEnabled=(p==='granted');applyNtfIcon(_desktopNotifEnabled)});else{_desktopNotifEnabled=!_desktopNotifEnabled;applyNtfIcon(_desktopNotifEnabled);toast('Desktop Notifications - '+(_desktopNotifEnabled?'ON':'OFF'),'ok')}}return}
+3547: 	if(matchKey(e,getKeybinding('clear'))){e.preventDefault();api('clear',{},function(){rMsgs([]);st('Cleared',true)});return}
+3548: 	if(matchKey(e,getKeybinding('compact'))){e.preventDefault();st('Compacting...',true);api('compact',{keep_last_n:3},function(e2,r){if(!e2&&r&&r.success){rMsgs(r.messages||[]);if(r.summary){toast('Nothing to compact','warn')}else{toast('Compacted','ok')}st('Ready',true)}else{toast('Failed','err');st('Ready',true)}});return}
+3549: 	if(matchKey(e,getKeybinding('export'))){e.preventDefault();showExportDialog();return}
+3550: 	if(matchKey(e,getKeybinding('copy'))){e.preventDefault();copyTranscript();return}
+3551: },true);
+3552: 
+3553: var ocProject=document.getElementById('ocProject');
+3554: function loadSidebarProjects(){
+3555: 	api('projects_list',null,function(e,d){
+3556: 		if(e||!d)return;
+3557: 		if(!ocProject)return;
+3558: 		ocProject.innerHTML='<option value="__new__">+ Add New Project</option>';
+3559: 		d.forEach(function(p){
+3560: 			var o=document.createElement('option');
+3561: 			o.value=p.project_id;
+3562: 			o.textContent=p.name||p.path;
+3563: 			if(p.project_id===PID) o.selected=true;
+3564: 			ocProject.appendChild(o);
+3565: 		});
+3566: 	});
+3567: }
+3568: if(ocProject){
+3569: 	loadSidebarProjects();
+3570: 	ocProject.addEventListener('change',function(){
+3571: 		var val=this.value;
+3572: 		if(val==='__new__'){
+3573: 			this.value=PID;
+3574: 			openProjectModal();
+3575: 			setTimeout(function(){
+3576: 				document.getElementById('ocProjNewForm').style.display='block';
+3577: 				document.getElementById('ocProjName').value='';
+3578: 				document.getElementById('ocProjPath').value='';
+3579: 				if(wordpressInstalls&&wordpressInstalls.length){
+3580: 					document.getElementById('ocProjWpSection').style.display='block';
+3581: 				}
+3582: 			},300);
+3583: 			return;
+3584: 		}
+3585: 		if(val && val!==PID){
+3586: 			switchToProject(val);
+3587: 		}
+3588: 	});
+3589: }

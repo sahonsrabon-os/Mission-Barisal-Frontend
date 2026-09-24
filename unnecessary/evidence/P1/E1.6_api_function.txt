@@ -1,0 +1,27 @@
+E1.6 — Request protocol is FIXED (Engineer)
+source: index.php line 1116
+--------------------------------------------------
+function api(a,d,cb){
+	var iP=!!d,u=A+'&ai_php_api='+a+'&csrf_token='+C,x=new XMLHttpRequest();
+	x.open(iP?'POST':'GET',u,true);
+	x.setRequestHeader('Accept','application/json');
+	if(iP)x.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+	x.onload=function(){
+		if(x.status===200){
+			try{cb(null,JSON.parse(x.responseText))}
+			catch(e){cb('Parse error')}
+		}else cb('HTTP '+x.status);
+	};
+	x.onerror=function(){cb('Network error')};
+	x.send(iP?bp(d):null);
+}
+
+function bp(o){
+--------------------------------------------------
+VERDICT:
+  URL pattern      : <A>&ai_php_api=<route>&csrf_token=<C>
+  method rule      : data present -> POST, absent -> GET
+  content-type     : application/x-www-form-urlencoded
+  accept           : application/json
+  response         : HTTP 200 + JSON body (else UI shows 'HTTP <code>')
+=> every server route must honour exactly this.

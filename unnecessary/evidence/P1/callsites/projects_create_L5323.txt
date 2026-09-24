@@ -1,0 +1,49 @@
+# route: projects_create  line: 5323  method: POST
+# params(arg): {name:name,path:fullPath,type:type,insid:insid}
+# response field reads seen in callback: error, project_id
+# NOTE: best-effort regex scan; verify against this dump.
+----------------------------------------------------------------------
+5321: 		type='wordpress';
+5322: 	}
+5323: 	api('projects_create',{name:name,path:fullPath,type:type,insid:insid},function(e,r){
+5324: 		if(!e&&r&&!r.error){
+5325: 			closeProjectModal();
+5326: 			if(r.project_id){
+5327: 				switchToProject(r.project_id);
+5328: 			}else{
+5329: 				toast('Project created but failed to switch','warn');
+5330: 				loadProjects(true);
+5331: 			}
+5332: 		}else{
+5333: 			toast('Failed to create project: '+(r&&r.error||e),'err');
+5334: 		}
+5335: 	});
+5336: });
+5337: 
+5338: // If no softpath, auto-open project modal
+5339: if(!SP){
+5340: 	setTimeout(openProjectModal,500);
+5341: }
+5342: 
+5343: // ========== Model Variants (Reasoning Effort) ==========
+5344: var modelVariants={
+5345: 	'anthropic/claude-sonnet-4-20250514':[{id:'default',label:'Default'},{id:'low',label:'Low'},{id:'medium',label:'Medium'},{id:'high',label:'High'}],
+5346: 	'anthropic/claude-opus-4-20250514':[{id:'default',label:'Default'},{id:'low',label:'Low'},{id:'medium',label:'Medium'},{id:'high',label:'High'}],
+5347: 	'anthropic/claude-3-5-sonnet-20241022':[{id:'default',label:'Default'},{id:'low',label:'Low'},{id:'medium',label:'Medium'},{id:'high',label:'High'}],
+5348: 	'openai/gpt-4o':[{id:'default',label:'Default'},{id:'low',label:'Low'},{id:'medium',label:'Medium'},{id:'high',label:'High'}],
+5349: 	'openai/gpt-4o-mini':[{id:'default',label:'Default'},{id:'low',label:'Low'},{id:'medium',label:'Medium'},{id:'high',label:'High'}],
+5350: 	'openai/gpt-4-turbo':[{id:'default',label:'Default'},{id:'low',label:'Low'},{id:'medium',label:'Medium'},{id:'high',label:'High'}],
+5351: 	'google/gemini-2.5-pro':[{id:'default',label:'Default'},{id:'low',label:'Low'},{id:'medium',label:'Medium'},{id:'high',label:'High'}],
+5352: 	'google/gemini-2.5-flash':[{id:'default',label:'Default'},{id:'low',label:'Low'},{id:'medium',label:'Medium'},{id:'high',label:'High'}],
+5353: 	'deepseek/deepseek-chat':[{id:'default',label:'Default'},{id:'low',label:'Low'},{id:'medium',label:'Medium'},{id:'high',label:'High'}],
+5354: 	'opencode_zen/deepseek-v4-flash-free':[{id:'default',label:'Default'},{id:'low',label:'Low'},{id:'medium',label:'Medium'},{id:'high',label:'High'}],
+5355: 	'opencode_zen/mimo-v2.5-free':[{id:'default',label:'Default'},{id:'low',label:'Low'},{id:'medium',label:'Medium'},{id:'high',label:'High'}],
+5356: 	'opencode_zen/minimax-m3-free':[{id:'default',label:'Default'},{id:'low',label:'Low'},{id:'medium',label:'Medium'},{id:'high',label:'High'}],
+5357: 	'opencode_zen/nemotron-3-ultra-free':[{id:'default',label:'Default'},{id:'low',label:'Low'},{id:'medium',label:'Medium'},{id:'high',label:'High'}],
+5358: 	'opencode_zen/north-mini-code-free':[{id:'default',label:'Default'},{id:'low',label:'Low'},{id:'medium',label:'Medium'},{id:'high',label:'High'}],
+5359: 	'opencode_zen/qwen3.6-plus-free':[{id:'default',label:'Default'},{id:'low',label:'Low'},{id:'medium',label:'Medium'},{id:'high',label:'High'}],
+5360: 	'ollama/llama3':[{id:'default',label:'Default'},{id:'low',label:'Low'},{id:'medium',label:'Medium'},{id:'high',label:'High'}],
+5361: 	'ollama/codellama':[{id:'default',label:'Default'},{id:'low',label:'Low'},{id:'medium',label:'Medium'},{id:'high',label:'High'}],
+5362: 	'ollama/mistral':[{id:'default',label:'Default'},{id:'low',label:'Low'},{id:'medium',label:'Medium'},{id:'high',label:'High'}]
+5363: };
+5364: var currentVariant={};

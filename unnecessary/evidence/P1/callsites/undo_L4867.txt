@@ -1,0 +1,49 @@
+# route: undo  line: 4867  method: POST
+# params(arg): {message_id:lu.id}
+# response field reads seen in callback: conversation_id, favorite_models, forked_content, messages, success
+# NOTE: best-effort regex scan; verify against this dump.
+----------------------------------------------------------------------
+4865: 		var lu=null;for(var i=rMsgs._lastMsgs.length-1;i>=0;i--){if(rMsgs._lastMsgs[i].role==='user'){lu=rMsgs._lastMsgs[i];break}}
+4866: 		if(!lu||!lu.id){toast('Cannot undo','warn');return}
+4867: 		api('undo',{message_id:lu.id},function(e,r){if(!e&&r&&r.success){rMsgs(r.messages||[]);toast('Undone','ok');st('Ready',true);loadSL()}else{toast('Failed','err');st('Ready',true)}});
+4868: 	}},
+4869: 	{cmd:'Fork Conversation',key:'/fork',action:function(){
+4870: 		if(!rMsgs._lastMsgs||!rMsgs._lastMsgs.length){toast('Nothing to fork','warn');return}
+4871: 		var lu=null;for(var i=rMsgs._lastMsgs.length-1;i>=0;i--){if(rMsgs._lastMsgs[i].role==='user'){lu=rMsgs._lastMsgs[i];break}}
+4872: 		if(!lu||!lu.id){toast('Cannot fork','warn');return}
+4873: 		api('fork',{message_id:lu.id},function(e,r){
+4874: 			if(!e&&r&&r.success){
+4875: 				aC=r.conversation_id;
+4876: 				updateURL(aC);
+4877: 				toast('Forked','ok');
+4878: 				st('Ready',true);
+4879: 				loadSL();
+4880: 				loadC(aC);
+4881: 				if(r.forked_content){
+4882: 					var inp=document.getElementById('ocIn');
+4883: 					inp.value=r.forked_content;
+4884: 					inp.focus();
+4885: 				}
+4886: 			}else{toast('Failed','err');st('Ready',true)}
+4887: 		});
+4888: 	}},
+4889: 	{cmd:'Rename Session',key:'/rename',action:function(){
+4890: 		var t=prompt('Enter new session title:',curSessionTitle());
+4891: 		if(t!==null&&t.trim()){api('rename_conversation',{conversation_id:aC,title:t.trim()},function(e,r){if(!e&&r&&r.success){toast('Renamed','ok');loadSL()}else{toast('Failed','err')}})}
+4892: 	}},
+4893: 	{cmd:'Help & FAQ',key:'',action:function(){document.getElementById('ocHlBtn').click()}}
+4894: ];
+4895: 
+4896: // Command palette is handled by _origCmdCommands and renderCmdList below
+4897: document.getElementById('ocCmdP').addEventListener('click',function(e){if(e.target===this)this.classList.remove('open')});
+4898: 
+4899: // Model Favorites
+4900: var favModels=[];
+4901: function loadFavModels(){
+4902: 	api('settings_load',null,function(e,d){
+4903: 		if(!e&&d&&d.favorite_models){
+4904: 			favModels=d.favorite_models;
+4905: 			refreshModelFavs();
+4906: 		}
+4907: 	});
+4908: }

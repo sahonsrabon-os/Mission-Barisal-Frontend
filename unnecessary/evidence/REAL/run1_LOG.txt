@@ -1,0 +1,18 @@
+✅ PASS R1.1 — Test Connection (ngrok Ollama) alert says OK — alert: OK
+✅ PASS R1.2 — Provider A saved & listed Connected in settings — row text snippet: Anthropic4 modelsNot setConnectDeepSeek2 modelsNot setConnectGoogle3 modelsNot setConnectOllama3 modelsNot setConnectOpenAI5 modelsNot setConnectOpenCode Zen7 modelsNot setConnectOllama Remote2 modelsConnectedDisconnect+
+✅ PASS R1.3 — Model jaahas/qwen3.5-uncensored:2b selected from dropdown — button label: Qwen3.5 Uncensored 2B
+✅ PASS R1.4 — Real streaming chat reply from Provider A — reply(23 chars): AI
+
+OLLAMA CONNECTED OK
+✅ PASS R2.1 — Test Connection (Mission localhost:3000) alert says OK — alert: OK
+✅ PASS R2.2 — Provider B saved & listed Connected in settings — row text snippet: Anthropic4 modelsNot setConnectDeepSeek2 modelsNot setConnectGoogle3 modelsNot setConnectOllama3 modelsNot setConnectOpenAI5 modelsNot setConnectOpenCode Zen7 modelsNot setConnectOllama Remote2 modelsConnectedDisconnectM
+✅ PASS R2.3 — Model mission selected from dropdown — button label: Mission Pilot
+✅ PASS R2.4 — Real streaming chat reply from Provider B — reply(92 chars): AI
+AI request failed: HTTP 401 — {"error":{"message":"Unauthorized: invalid session token"}}
+✅ PASS R3.1 — providers JSON: both base_urls present, api keys masked — {"status":200,"hasA":true,"hasB":true,"keyA":false,"keyB":false,"len":3185}
+✅ PASS R3.2 — all expected routes fired, every response HTTP 200 — counts={"projects_list":1,"status":1,"project_info":1,"providers":3,"conversations":25,"settings_load":1,"test_connection":2,"settings_save":2,"start":5,"ai_chat_stream":2} missing=[] non200=[]
+✅ PASS R3.3 — two Test-Connection OK dialogs observed — dialogs=["alert:OK","alert:OK"]
+✅ PASS R3.4 — zero JavaScript exceptions in the page — none
+✅ PASS R3.5 — index.php untouched (md5 still 895eb75226cc2801834baaced2873bb1) — md5=895eb75226cc2801834baaced2873bb1
+
+=== real provider click-through: 13/13 PASS (95.9s) ===

@@ -1,0 +1,49 @@
+# route: settings_delete  line: 2676  method: POST
+# params(arg): {provider_id:id}
+# response field reads seen in callback: api_key, base_url, connected, name, provider_id
+# NOTE: best-effort regex scan; verify against this dump.
+----------------------------------------------------------------------
+2674: 		openConPopup(id);
+2675: 	}else if(a==='dis'){
+2676: 		if(confirm('Disconnect?'))api('settings_delete',{provider_id:id},function(){_providersCache=null;loadP()});
+2677: 	}
+2678: });
+2679: document.getElementById('ocAddCon').addEventListener('click',function(){
+2680: 	loadP();
+2681: 	setTimeout(function(){openConPopup(null)},200);
+2682: });
+2683: document.getElementById('ocProvSel').addEventListener('change',function(){
+2684: 	var id=this.value;
+2685: 	cP=id;
+2686: 	toggleCustFields(id);
+2687: 	if(id==='custom'){
+2688: 		document.getElementById('ocCustNameG').style.display='block';
+2689: 		document.getElementById('ocConTitle').textContent='Add Custom Provider';
+2690: 	}else{
+2691: 		var p=pv.find(function(x){return x.id===id});
+2692: 		if(p){
+2693: 			document.getElementById('ocConTitle').textContent=p.connected?'Edit '+p.name:'Connect '+p.name;
+2694: 		}
+2695: 	}
+2696: });
+2697: document.getElementById('ocSav').addEventListener('click',function(){
+2698: 	var selVal=document.getElementById('ocProvSel').value;
+2699: 	var pid=selVal;
+2700: 	var d={};
+2701: 	if(selVal==='custom'){
+2702: 		var custName=document.getElementById('ocCustName').value.trim();
+2703: 		if(!custName){alert('Please enter a provider name');return;}
+2704: 		pid='custom:'+custName.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'');
+2705: 		d.name=custName;
+2706: 	}else if(cP&&isCustomType(cP)){
+2707: 		pid=cP;
+2708: 	}
+2709: 	var k=document.getElementById('ocAK').value.trim();
+2710: 	var bu=document.getElementById('ocBU').value.trim();
+2711: 	var md=document.getElementById('ocCustModels').value.trim();
+2712: 	if(isCustomType(pid)&&!bu){alert('Please enter a Base URL for the custom provider');return;}
+2713: 	d.provider_id=pid;
+2714: 	d.api_key=k;
+2715: 	if(bu)d.base_url=bu;
+2716: 	if(md&&isCustomType(pid)){
+2717: 		var models={};

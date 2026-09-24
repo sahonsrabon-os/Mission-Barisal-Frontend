@@ -1,0 +1,57 @@
+{
+  "title": "Say hello to the contract",
+  "done_auto_title": true,
+  "s5_pending_question": true,
+  "s6_error_message": "AI request failed: HTTP 500 — {\"error\":{\"message\":\"provider exploded (as scripted)\"}}",
+  "usage_sample": {
+    "_event": "usage",
+    "conversation_id": "conv_5b3ea98ea0c1",
+    "usage": {
+      "input_tokens": 42,
+      "output_tokens": 17,
+      "cached_tokens": 7
+    },
+    "context_tokens": 7,
+    "tool_calls": 0,
+    "iterations": 1,
+    "cost": 0
+  },
+  "question_sample": {
+    "_event": "question",
+    "conversation_id": "conv_af36076c1714",
+    "question": "Which route should I take?",
+    "header": "Route",
+    "options": [
+      {
+        "label": "Option Alpha",
+        "value": "alpha"
+      },
+      {
+        "label": "Option Beta",
+        "value": "beta"
+      }
+    ],
+    "multiple": false,
+    "custom": true,
+    "customPlaceholder": "Type your own answer..."
+  },
+  "todos_count": 2,
+  "permission_tool": "write_file",
+  "tool_results": [
+    {
+      "name": "read_file",
+      "is_error": false,
+      "has_diff": false
+    },
+    {
+      "name": "write_file",
+      "is_error": false,
+      "has_diff": false
+    },
+    {
+      "name": "todo_write",
+      "is_error": false,
+      "has_diff": false
+    }
+  ]
+}

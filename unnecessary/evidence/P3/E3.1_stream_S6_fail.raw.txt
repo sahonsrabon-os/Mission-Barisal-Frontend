@@ -1,0 +1,3 @@
+data: {"_event":"iteration-start","conversation_id":"conv_04bc3ec45a79","iteration":1}
+data: {"_event":"error","message":"AI request failed: HTTP 500 — {\"error\":{\"message\":\"provider exploded (as scripted)\"}}","conversation_id":"conv_04bc3ec45a79"}
+data: {"_event":"done","conversation_id":"conv_04bc3ec45a79","usage":{"input_tokens":0,"output_tokens":0,"cached_tokens":0},"context_tokens":0,"tool_calls":0,"iterations":1,"cost":0,"error":"AI request failed: HTTP 500 — {\"error\":{\"message\":\"provider exploded (as scripted)\"}}"}

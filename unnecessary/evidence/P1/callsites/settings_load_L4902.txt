@@ -1,0 +1,49 @@
+# route: settings_load  line: 4902  method: GET
+# params(arg): null
+# response field reads seen in callback: favorite_models
+# NOTE: best-effort regex scan; verify against this dump.
+----------------------------------------------------------------------
+4900: var favModels=[];
+4901: function loadFavModels(){
+4902: 	api('settings_load',null,function(e,d){
+4903: 		if(!e&&d&&d.favorite_models){
+4904: 			favModels=d.favorite_models;
+4905: 			refreshModelFavs();
+4906: 		}
+4907: 	});
+4908: }
+4909: function refreshModelFavs(){
+4910: 	if(_providersCache){
+4911: 		renderModelSelect(_providersCache);
+4912: 		renderModelDropdown(_providersCache);
+4913: 		syncModelBtn();
+4914: 		syncModelDropdownSelection();
+4915: 	}
+4916: }
+4917: function toggleFavModel(modelId){
+4918: 	var idx=favModels.indexOf(modelId);
+4919: 	if(idx===-1){
+4920: 		favModels.push(modelId);
+4921: 		api('favorite_model',{model_id:modelId},function(){});
+4922: 		toast('Added to favorites','ok');
+4923: 	}else{
+4924: 		favModels.splice(idx,1);
+4925: 		api('unfavorite_model',{model_id:modelId},function(){});
+4926: 		toast('Removed from favorites','info');
+4927: 	}
+4928: }
+4929: 
+4930: // Permission System
+4931: var permConfig={};
+4932: var permResolve=null;
+4933: function askPermission(permType,detail){
+4934: 	var permKey=permType;
+4935: 	if(permConfig[permKey]==='allow_always')return Promise.resolve(true);
+4936: 	if(permConfig[permKey]==='deny')return Promise.resolve(false);
+4937: 	return new Promise(function(resolve){
+4938: 		var mod=document.getElementById('ocPermMod');
+4939: 		document.getElementById('ocPermTitle').textContent='Allow '+permType+'?';
+4940: 		document.getElementById('ocPermSub').textContent=permType;
+4941: 		var detailText='';
+4942: 		if(typeof detail==='string')detailText=detail;
+4943: 		else if(typeof detail==='object')detailText=JSON.stringify(detail,null,2);

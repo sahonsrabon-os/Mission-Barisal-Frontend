@@ -1,0 +1,84 @@
+# stream request builder  line: 1945
+----------------------------------------------------------------------
+1923: 	setGenTab(aC);
+1924: 
+1925:  	var doSend=function(){
+1926: 		var bb=null,full='',firstContent=false,reasonDiv=null,reasonText='',errorShown=false;
+1927: 		// Capture this stream's conversation id at send time. Events only render
+1928: 		// when the user is viewing THIS session; this keeps multiple concurrent
+1929: 		// streams (one session thinking while another is worked on) fully isolated
+1930: 		// — events from a background session must never bleed into the active view.
+1931: 		var streamSid=aC;
+1932: 		var sendText=text;
+1933: 		if(pendingFiles.length>0){
+1934: 			sendText+='\n\n[Attached files:]';
+1935: 			pendingFiles.forEach(function(f){
+1936: 				sendText+='\n\n--- '+f.name+' ---\n'+f.content;
+1937: 			});
+1938: 		}
+1939: 		var params='content='+encodeURIComponent(sendText)+'&csrf_token='+C;
+1940: 		if(aC)params+='&conversation_id='+encodeURIComponent(aC);
+1941: 		if(pendingFiles.length>0)params+='&attachments='+encodeURIComponent(JSON.stringify(pendingFiles));
+1942: 		pendingFiles=[];
+1943: 		document.getElementById('ocFile').value='';
+1944: 		var xhr=new XMLHttpRequest();
+1945: 		xhr.open('POST',A+'&ai_chat_stream=1',true);
+1946: 		xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+1947: 		// Store XHR in per-session state instead of global cS
+1948: 		if(!_ss[aC]) _ss[aC]={};
+1949: 		_ss[aC].xhr=xhr;
+1950: 		_ss[aC].streaming=true;
+1951: 		_ss[aC].lockActive=true;
+1952: 		_ss[aC].firstContent=false;
+1953: 		_ss[aC].bb=null;
+1954: 		_ss[aC].full='';
+1955: 		_ss[aC].reasonDiv=null;
+1956: 		_ss[aC].reasonText='';
+1957: 		_ss[aC].errorShown=false;
+1958: 		cS=xhr;
+1959: 		var buf='';
+1960: 		var lineBuf='';
+1961: 		xhr.onprogress=function(){
+1962: 			var nt=xhr.responseText.substring(buf.length);
+1963: 			buf=xhr.responseText;
+1964: 			lineBuf+=nt;
+1965: 			var lines=lineBuf.split('\n');
+1966: 			lineBuf=lines.pop();
+1967: 			lines.forEach(function(line){
+1968: 				if(line.indexOf('data: ')!==0)return;
+1969: 				try{
+1970: 					var d=JSON.parse(line.substring(6));
+1971: 					var ev=d._event||'';
+1972: 				// Session isolation: this stream belongs to one conversation (streamSid).
+1973: 				// While the user is viewing a *different* session, real-time events
+1974: 				// must not write into the visible chat, status bar, todo list or modal
+1975: 				// dialogs. 'done', 'title', 'error' and 'question' carry their own
+1976: 				// conversation_id (d.conversation_id) and are session-aware, so they
+1977: 				// always run to keep the per-session state correct.
+1978: 				if(streamSid!==aC && ev!=='done' && ev!=='title' && ev!=='error' && ev!=='question' && ev!=='permission-request'){return;}
+1979: 			if(!firstContent&&(ev==='text-delta'||ev==='tool-call'||ev==='tool-result'||ev==='reasoning-delta')){
+1980: 					firstContent=true;
+1981: 					if(thinkBubble){
+1982: 						var msgEl=thinkBubble.closest('.ocMsg');
+1983: 						if(msgEl&&msgEl.parentNode)msgEl.parentNode.removeChild(msgEl);
+1984: 						thinkBubble=null;
+1985: 					}
+1986: 					if(_activeThinkBubble){
+1987: 						var msgEl2=_activeThinkBubble.closest('.ocMsg');
+1988: 						if(msgEl2&&msgEl2.parentNode)msgEl2.parentNode.removeChild(msgEl2);
+1989: 						_activeThinkBubble=null;
+1990: 					}
+1991: 				}
+1992: 				if(ev==='reasoning-delta'&&d.text){
+1993: 						reasonText+=d.text;
+1994: 						if(!bb){bb=rMsg({role:'asst',content:'',parts:[]})}
+1995: 						if(!reasonDiv){
+1996: 							reasonDiv=document.createElement('div');
+1997: 							reasonDiv.className='ocReason open';
+1998: 							reasonDiv.innerHTML='<span>Thinking...</span><div class="ocReasonB"></div>';
+1999: 							reasonDiv.addEventListener('click',function(){this.classList.toggle('open')});
+2000: 							var rds=bb.querySelectorAll('.ocReason');
+2001: 							if(rds.length)bb.insertBefore(reasonDiv,rds[rds.length-1].nextSibling);
+2002: 							else bb.insertBefore(reasonDiv,bb.firstChild);
+2003: 							updateReasonToggle();
+2004: 						}

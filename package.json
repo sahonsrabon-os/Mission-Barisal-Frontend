@@ -1,0 +1,19 @@
+{
+  "name": "code-with-ai-backend",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Contract-first Node.js backend for the Code with AI UI (index.php served byte-identically, 39 routes + 12 stream events, no runtime dependencies)",
+  "main": "server/server.js",
+  "scripts": {
+    "start": "node start.js",
+    "stop": "node stop.js",
+    "test": "node server/test/contract_test.js && node server/test/user_test.js",
+    "test:contract": "node server/test/contract_test.js",
+    "test:user": "node server/test/user_test.js",
+    "test:real": "node server/test/real_provider_test.js",
+    "test:qna": "node server/test/qna_test.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

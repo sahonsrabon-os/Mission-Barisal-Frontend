@@ -1,0 +1,48 @@
+# raw XHR route: read_file  line: 4251
+----------------------------------------------------------------------
+4247: 	x.send();
+4248: }
+4249: 
+4250: function viewFile(path,name){
+4251: 	var u=A+'&ai_php_api=read_file&csrf_token='+C+'&path='+encodeURIComponent(path);
+4252: 	var x=new XMLHttpRequest();
+4253: 	x.open('GET',u,true);
+4254: 	x.setRequestHeader('Accept','application/json');
+4255: 	x.onload=function(){
+4256: 		if(x.status===200){
+4257: 			try{
+4258: 				var d=JSON.parse(x.responseText);
+4259: 				document.getElementById('ocFvT').textContent=name||path;
+4260: 				var pre=document.getElementById('ocFvPre');
+4261: 				if(d.content!==undefined){
+4262: 					try{pre.innerHTML=hljs.highlightAuto(d.content).value}
+4263: 					catch(e){pre.textContent=d.content}
+4264: 				}else{
+4265: 					pre.textContent=d.error||'Failed to read file';
+4266: 				}
+4267: 				document.getElementById('ocFv').classList.add('open');
+4268: 			}catch(e){}
+4269: 		}
+4270: 	};
+4271: 	x.send();
+4272: }
+4273: 
+4274: function fmtSize(b){
+4275: 	if(b<1024)return b+'B';
+4276: 	if(b<1048576)return (b/1024).toFixed(1)+'K';
+4277: 	return (b/1048576).toFixed(1)+'M';
+4278: }
+4279: function fmtTok(n){
+4280: 	if(n>=1000000)return (n/1000000).toFixed(1)+'M';
+4281: 	if(n>=1000)return (n/1000).toFixed(1)+'k';
+4282: 	return n;
+4283: }
+4284: function updateURL(convId){
+4285: 	var u=new URL(window.location);
+4286: 	if(convId)u.searchParams.set('session',convId);
+4287: 	else u.searchParams.delete('session');
+4288: history.replaceState(null,'',u.toString());
+4289: }
+4290: 
+4291: // Toast notifications
+4292: function toast(msg,type,dur){

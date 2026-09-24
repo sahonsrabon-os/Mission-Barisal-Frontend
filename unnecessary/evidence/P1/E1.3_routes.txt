@@ -1,0 +1,12 @@
+E1.3 — Route inventory = 39 (Engineer)
+commands: grep -oE "api\('[a-z_]+'" | sort -u
+           grep -oE "ai_php_api=[a-z_]+" | sort -u
+           grep "ai_chat_stream=1"
+--------------------------------------------------
+api() routes          : 35   -> abort, changes, clear, compact, conversations, delete_conversation, diff, favorite_model, force_unlock, fork, new_session, project_info, projects_close, projects_create, projects_delete, projects_list, projects_wordpress, providers, read_file, redo, regenerate, rename_conversation, restore, set_mode, settings_delete, settings_load, settings_save, shell, start, status, switch_conversation, test_connection, toggle_permission, undo, unfavorite_model
+raw XHR routes        : 4   -> conversation, file_tree, read_file, resolve_file
+overlap (both places) : 1   -> read_file
+stream route          : 1   -> ai_chat_stream
+UNION (unique total)  : 39   ✅ = 39
+--------------------------------------------------
+unique = api(35) + raw-not-in-api(3) + stream(1) = 39

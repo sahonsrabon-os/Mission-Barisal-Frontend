@@ -1,0 +1,49 @@
+# route: abort  line: 3507  method: POST
+# params(arg): {}
+# response field reads seen in callback: messages, success, summary
+# NOTE: best-effort regex scan; verify against this dump.
+----------------------------------------------------------------------
+3505: 		e.stopPropagation();
+3506: 		if(confirm('A generation is still running in the background. If you refresh the page, the process will be terminated and any in-progress work may be lost.\n\nDo you want to refresh anyway?')){
+3507: 			api('abort',{},function(){});
+3508: 			_intentionalUnload=true;
+3509: 			location.reload();
+3510: 		}
+3511: 		return;
+3512: 	}
+3513: 	var inp=document.getElementById('ocIn');
+3514: 	// Panel toggles work even while typing
+3515: 	if(matchKey(e,getKeybinding('toggle_modified'))){e.preventDefault();var _fp=document.getElementById('ocFilesP');_fp.classList.toggle('open');if(_fp.classList.contains('open'))loadModifiedFiles();return}
+3516: 	if(matchKey(e,getKeybinding('toggle_todos'))){e.preventDefault();document.getElementById('ocTodoP').classList.toggle('open');return}
+3517: 	if(matchKey(e,getKeybinding('toggle_files'))){e.preventDefault();document.getElementById('ocFtBtn').click();return}
+3518: 	if(matchKey(e,getKeybinding('toggle_sidebar'))){e.preventDefault();document.getElementById('ocSb').classList.toggle('hid');return}
+3519: 	// Alt+1..9 session switching (separate from keybindings system)
+3520: 	// Supports Alt+10..99: press Alt+1 then Alt+0 within 500ms for session 10.
+3521: 	if(e.altKey&&!e.shiftKey&&!e.ctrlKey&&!e.metaKey&&e.key>='0'&&e.key<='9'){
+3522: 		e.preventDefault();
+3523: 		_altNumBuf+=e.key;
+3524: 		var idx=parseInt(_altNumBuf,10)-1;
+3525: 		if(_altNumTimer)clearTimeout(_altNumTimer);
+3526: 		if(_altNumBuf.length>=2){
+3527: 			// Two-digit complete — switch to the 2-digit session and reset
+3528: 			if(_sessions&&_sessions[idx]){switchToSessionIdx(idx)}
+3529: 			_altNumBuf='';_altNumTimer=null;
+3530: 		}else{
+3531: 			// Single digit — switch immediately but allow override if a second digit comes within 500ms
+3532: 			if(_sessions&&_sessions[idx]){switchToSessionIdx(idx)}
+3533: 			_altNumTimer=setTimeout(function(){_altNumBuf='';_altNumTimer=null;},500);
+3534: 		}
+3535: 		return;
+3536: 	}
+3537: 	if(document.activeElement===inp)return;
+3538: 	// Below only when not typing in input
+3539: 	if(matchKey(e,getKeybinding('new_session'))){e.preventDefault();newS();return}
+3540: 	if(matchKey(e,getKeybinding('plan_mode'))){e.preventDefault();document.getElementById('ocMode').value='plan';api('set_mode',{mode:'plan'},function(){});return}
+3541: 	if(matchKey(e,getKeybinding('build_mode'))){e.preventDefault();document.getElementById('ocMode').value='build';api('set_mode',{mode:'build'},function(){});return}
+3542: 	if(matchKey(e,getKeybinding('settings'))){e.preventDefault();document.getElementById('ocSetMod').classList.add('open');loadP();return}
+3543: 	if(matchKey(e,getKeybinding('keybindings'))){e.preventDefault();renderKeybindings();document.getElementById('ocKbMod').classList.add('open');return}
+3544: 	if(matchKey(e,getKeybinding('help'))){e.preventDefault();document.getElementById('ocHlBtn').click();return}
+3545: 	if(matchKey(e,getKeybinding('sound'))){e.preventDefault();_soundEnabled=!_soundEnabled;localStorage.setItem('oc_sound_enabled',_soundEnabled?'1':'0');applySndIcon(_soundEnabled);toast('Sound Notifications - '+(_soundEnabled?'ON':'OFF'),'ok');return}
+3546: 	if(matchKey(e,getKeybinding('notifications'))){e.preventDefault();if(typeof Notification!=='undefined'){if(Notification.permission==='default')Notification.requestPermission(function(p){_desktopNotifEnabled=(p==='granted');applyNtfIcon(_desktopNotifEnabled)});else{_desktopNotifEnabled=!_desktopNotifEnabled;applyNtfIcon(_desktopNotifEnabled);toast('Desktop Notifications - '+(_desktopNotifEnabled?'ON':'OFF'),'ok')}}return}
+3547: 	if(matchKey(e,getKeybinding('clear'))){e.preventDefault();api('clear',{},function(){rMsgs([]);st('Cleared',true)});return}
+3548: 	if(matchKey(e,getKeybinding('compact'))){e.preventDefault();st('Compacting...',true);api('compact',{keep_last_n:3},function(e2,r){if(!e2&&r&&r.success){rMsgs(r.messages||[]);if(r.summary){toast('Nothing to compact','warn')}else{toast('Compacted','ok')}st('Ready',true)}else{toast('Failed','err');st('Ready',true)}});return}

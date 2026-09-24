@@ -1,0 +1,20 @@
+E5.2 — path-traversal jail (OC_ROOTS=/tmp/oc_contract/home)
+
+✅ file_tree path=../../etc
+   status=403 body={"error":"Path escapes the project working directory","directories":[],"files":[]}
+✅ file_tree path=/etc (absolute outside jail)
+   status=403 body={"error":"Path escapes the project working directory","directories":[],"files":[]}
+✅ read_file path=../../../etc/passwd
+   status=403 body={"error":"Path escapes the project working directory"}
+✅ read_file path=/etc/passwd
+   status=403 body={"error":"Path escapes the project working directory"}
+✅ resolve_file path=../../etc/hosts
+   status=403 body={"error":"Path escapes the project working directory"}
+✅ projects_create path=/etc/evil
+   status=200 body={"error":"Path is outside the allowed project roots: /etc/evil"}
+✅ projects_create path=../../evil (escapes OC_HOME)
+   status=200 body={"error":"Path is outside the allowed project roots: /tmp/evil"}
+✅ tool write_file path=../../evil.txt via stream (S7)
+   status=undefined body=undefined
+
+RESULT: ✅ all traversal attempts blocked

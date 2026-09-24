@@ -1,0 +1,49 @@
+# route: switch_conversation  line: 1526  method: POST
+# params(arg): {conversation_id:s.id}
+# response field reads seen in callback: id
+# NOTE: best-effort regex scan; verify against this dump.
+----------------------------------------------------------------------
+1524: 			api('start',_sp,function(){
+1525: 				aC=s.id;
+1526: 				api('switch_conversation',{conversation_id:s.id},function(){
+1527: 					loadC(s.id);
+1528: 				});
+1529: 				});
+1530: 			});
+1531: 			ls.appendChild(it);
+1532: 		});
+1533: 		syncSessionStates(d);
+1534: 	});
+1535: }
+1536: 
+1537: function hlS(id){
+1538: 	document.querySelectorAll('.ocSi').forEach(function(el){
+1539: 		el.classList.toggle('act',el.dataset.id===id);
+1540: 	});
+1541: }
+1542: 
+1543: function setGenTab(id){
+1544: 	if(!id)return;
+1545: 	var el=document.querySelector('#ocSL .ocSi[data-id="'+(window.CSS&&CSS.escape?CSS.escape(id):id.replace(/["\\]/g,'\\$&'))+'"]');
+1546: 	if(!el)return;
+1547: 	// 'gen' (red, "thinking") applies to the generating session including when
+1548: 	// it is the currently-viewed (active) session. CSS ordering (.gen after .act)
+1549: 	// makes the red dot override the active green dot while generating.
+1550: 	el.classList.remove('unread');
+1551: 	el.classList.add('gen');
+1552: }
+1553: 
+1554: 
+1555: function clearGenTab(id){
+1556: 	if(!id)return;
+1557: 	var el=document.querySelector('#ocSL .ocSi[data-id="'+(window.CSS&&CSS.escape?CSS.escape(id):id.replace(/["\\]/g,'\\$&'))+'"]');
+1558: 	if(el){
+1559: 		el.classList.remove('gen');
+1560: 		var gt=el.querySelector('.ocSiGt');
+1561: 		if(gt)gt.remove();
+1562: 	}
+1563: }
+1564: 
+1565: function clearAllGenTabs(){
+1566: 	document.querySelectorAll('#ocSL .ocSi.gen').forEach(function(el){
+1567: 		el.classList.remove('gen');

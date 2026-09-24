@@ -1,0 +1,49 @@
+# route: start  line: 2415  method: GET
+# params(arg): _sp
+# response field reads seen in callback: (none/indirect)
+# NOTE: best-effort regex scan; verify against this dump.
+----------------------------------------------------------------------
+2413: 		selModel=defaultModel;
+2414: 		var _sp={provider:pp[0],model:pp.slice(1).join('/'),mode:document.getElementById('ocMode').value};
+2415: 		api('start',_sp,function(){});
+2416: 	}
+2417: 	}
+2418: }
+2419: function renderProviders(d){
+2420: 		pv=d;
+2421: 		syncModelCtx(d);
+2422: 		renderModelSelect(d);
+2423: 		rPL(d);
+2424: 		renderModelDropdown(d);
+2425: 		syncModelBtn();
+2426: 		updateVariantBadge();
+2427: 	}
+2428: 
+2429: var _heartSvg='<svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>';
+2430: var _modelOptionsCache=[];
+2431: function renderModelDropdown(d){
+2432: 	var drop=document.getElementById('ocModelDrop');
+2433: 	if(!drop)return;
+2434: 	drop.innerHTML='';
+2435: 	_modelOptionsCache=[];
+2436: 	var allOpts=[];
+2437: 	function addGroup(label,items){
+2438: 		if(!items.length)return;
+2439: 		var grp=document.createElement('div');
+2440: 		grp.className='ocModelGrp';
+2441: 		grp.textContent=label;
+2442: 		drop.appendChild(grp);
+2443: 		items.forEach(function(item){
+2444: 			allOpts.push(item);
+2445: 			var row=document.createElement('div');
+2446: 			row.className='ocModelOpt';
+2447: 			row.dataset.value=item.value;
+2448: 			var _favRemove='Remove from favorites';
+2449: 			var _favAdd='Add to favorites';
+2450: 			row.innerHTML='<span class="ocModelOptT">'+esc(item.name)+'</span><button class="ocModelFav'+(item.isFav?' isFav':'')+'" data-fav="'+item.value+'" title="'+(item.isFav?_favRemove:_favAdd)+'" type="button">'+_heartSvg+'</button>';
+2451: 			row.addEventListener('click',function(e){
+2452: 				if(e.target.closest('.ocModelFav'))return;
+2453: 				selectModel(item.value);
+2454: 			});
+2455: 			drop.appendChild(row);
+2456: 		});

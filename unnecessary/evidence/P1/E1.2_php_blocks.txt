@@ -1,0 +1,7 @@
+E1.2 — Language neutrality (Engineer)
+command: grep -c '<?php' index.php
+--------------------------------------------------
+php blocks   : 0
+verdict      : 0 PHP blocks -> server language is FREE (Node default modules OK)  ✅
+extension    : .php (name only)
+actual       : pure HTML + JavaScript

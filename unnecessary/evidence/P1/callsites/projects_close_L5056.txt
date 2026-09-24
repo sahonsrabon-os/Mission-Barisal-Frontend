@@ -1,0 +1,49 @@
+# route: projects_close  line: 5056  method: POST
+# params(arg): {project_id:p.project_id}
+# response field reads seen in callback: error, name, path, project_id, success
+# NOTE: best-effort regex scan; verify against this dump.
+----------------------------------------------------------------------
+5054: 			ev.stopPropagation();
+5055: 			if(confirm('Close project "'+(p.name||p.path)+'"?\n\nThis will remove the project from your project list. No conversations, sessions or context data will be deleted.')){
+5056: 				api('projects_close',{project_id:p.project_id},function(e,r){
+5057: 					if(!e&&r&&r.success){
+5058: 						if(p.project_id===PID){
+5059: 							var u=new URL(window.location);
+5060: 							u.searchParams.delete('project_id');
+5061: 							u.searchParams.delete('insid');
+5062: 							u.searchParams.delete('path');
+5063: 							u.searchParams.delete('session');
+5064: 							window.location.href=u.toString();
+5065: 						}else{
+5066: 							loadProjects(true);
+5067: 							toast('Project closed','ok');
+5068: 						}
+5069: 					}else{
+5070: 						toast(r&&r.error?r.error:'Failed to close project','err');
+5071: 					}
+5072: 				});
+5073: 			}
+5074: 		});
+5075: 		item.querySelector('[data-del]').addEventListener('click',function(ev){
+5076: 			ev.stopPropagation();
+5077: 			if(confirm('Delete project "'+(p.name||p.path)+'"?\n\nThis will permanently delete all conversations, sessions and context data for this project.')){
+5078: 				api('projects_delete',{project_id:p.project_id},function(e,r){
+5079: 					if(!e&&r&&r.success){
+5080: 						if(p.project_id===PID){
+5081: 							var u=new URL(window.location);
+5082: 							u.searchParams.delete('project_id');
+5083: 							u.searchParams.delete('insid');
+5084: 							u.searchParams.delete('path');
+5085: 							u.searchParams.delete('session');
+5086: 							window.location.href=u.toString();
+5087: 						}else{
+5088: 							loadProjects(true);
+5089: 							toast('Project deleted','ok');
+5090: 						}
+5091: 					}else{
+5092: 						toast(r&&r.error?r.error:'Failed to delete project','err');
+5093: 					}
+5094: 				});
+5095: 			}
+5096: 		});
+5097: 		list.appendChild(item);

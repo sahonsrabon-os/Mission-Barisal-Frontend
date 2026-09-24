@@ -1,0 +1,20 @@
+data: {"_event":"iteration-start","conversation_id":"conv_3bd420bad2f4","iteration":1}
+data: {"_event":"usage","conversation_id":"conv_3bd420bad2f4","usage":{"input_tokens":42,"output_tokens":17,"cached_tokens":7},"context_tokens":7,"tool_calls":0,"iterations":1,"cost":0}
+data: {"_event":"tool-call","id":"call_e1","name":"write_file","input":{"path":"../../evil.txt","content":"escape attempt"},"conversation_id":"conv_3bd420bad2f4"}
+data: {"_event":"permission-request","tool":"write_file","input":{"path":"../../evil.txt","content":"escape attempt"},"conversation_id":"conv_3bd420bad2f4"}
+data: {"_event":"tool-result","id":"call_e1","name":"write_file","input":{"path":"../../evil.txt","content":"escape attempt"},"output":"Path escapes the project working directory: ../../evil.txt","is_error":true,"conversation_id":"conv_3bd420bad2f4"}
+data: {"_event":"iteration-start","conversation_id":"conv_3bd420bad2f4","iteration":2}
+data: {"_event":"reasoning-delta","text":"Tool output received; wrapping up.","conversation_id":"conv_3bd420bad2f4"}
+data: {"_event":"text-delta","text":"TOOLS_DONE ","conversation_id":"conv_3bd420bad2f4"}
+data: {"_event":"text-delta","text":"marker=FAKE_A ","conversation_id":"conv_3bd420bad2f4"}
+data: {"_event":"text-delta","text":"— ","conversation_id":"conv_3bd420bad2f4"}
+data: {"_event":"text-delta","text":"the ","conversation_id":"conv_3bd420bad2f4"}
+data: {"_event":"text-delta","text":"tool ","conversation_id":"conv_3bd420bad2f4"}
+data: {"_event":"text-delta","text":"ran ","conversation_id":"conv_3bd420bad2f4"}
+data: {"_event":"text-delta","text":"and ","conversation_id":"conv_3bd420bad2f4"}
+data: {"_event":"text-delta","text":"I ","conversation_id":"conv_3bd420bad2f4"}
+data: {"_event":"text-delta","text":"am ","conversation_id":"conv_3bd420bad2f4"}
+data: {"_event":"text-delta","text":"done.","conversation_id":"conv_3bd420bad2f4"}
+data: {"_event":"usage","conversation_id":"conv_3bd420bad2f4","usage":{"input_tokens":84,"output_tokens":34,"cached_tokens":7},"context_tokens":34,"tool_calls":1,"iterations":2,"cost":0}
+data: {"_event":"title","title":"ESCAPE write outside jail","conversation_id":"conv_3bd420bad2f4"}
+data: {"_event":"done","conversation_id":"conv_3bd420bad2f4","usage":{"input_tokens":84,"output_tokens":34,"cached_tokens":7},"context_tokens":34,"tool_calls":1,"iterations":2,"cost":0,"auto_title":true}

@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ময়নাতদন্ত প্রতিবেদন ২ — কেন এই সার্ভার ডিজাইন, কেন সব ফিচার অক্ষত থাকবে</title>
+<style>
+ :root{
+  --bg:#0b1220;--card:#121826;--card2:#1b2333;--bd:#2b3445;
+  --t1:#E5E7EB;--t2:#94A3B8;--t3:#64748B;
+  --p:#3b82f6;--s:#8b5cf6;--ok:#22c55e;--err:#ef4444;--wr:#f59e0b;--info:#38bdf8;
+ }
+ *{box-sizing:border-box;margin:0;padding:0}
+ body{font-family:'Segoe UI',ui-sans-serif,system-ui,sans-serif;background:var(--bg);color:var(--t1);line-height:1.75;padding:26px 18px;max-width:1080px;margin:0 auto;font-size:15px}
+ h1{font-size:25px;background:linear-gradient(135deg,var(--p),var(--s));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:6px;line-height:1.4}
+ h2{font-size:20px;margin:38px 0 12px;color:#60a5fa;border-left:4px solid var(--p);padding-left:11px}
+ h3{font-size:16.5px;margin:20px 0 8px;color:#a78bfa}
+ h4{font-size:14.5px;margin:14px 0 6px;color:#7dd3fc}
+ .sub{color:var(--t3);font-size:13px;margin-bottom:18px}
+ .card{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:16px 18px;margin:12px 0}
+ .ok{border-left:4px solid var(--ok)} .warn{border-left:4px solid var(--wr)}
+ .bad{border-left:4px solid var(--err)} .info{border-left:4px solid var(--info)}
+ table{width:100%;border-collapse:collapse;margin:10px 0;font-size:13.3px;display:block;overflow-x:auto}
+ th,td{border:1px solid var(--bd);padding:7px 9px;text-align:left;vertical-align:top}
+ th{background:var(--card2);color:#93c5fd;font-weight:600;white-space:nowrap}
+ code{background:#0f1623;border:1px solid var(--bd);border-radius:5px;padding:1px 6px;font-size:12.5px;color:#fbbf24;font-family:ui-monospace,Menlo,monospace;word-break:break-all}
+ .pill{display:inline-block;background:var(--card2);border:1px solid var(--bd);border-radius:99px;padding:2px 10px;font-size:12px;margin:2px 3px 2px 0;color:var(--t2)}
+ .pill b{color:#93c5fd}
+ ul,ol{padding-left:22px;margin:8px 0}
+ li{margin:5px 0}
+ .num{color:#fbbf24;font-weight:700}
+ .verdict{background:linear-gradient(135deg,rgba(59,130,246,.12),rgba(139,92,246,.12));border:1px solid #3b82f6;border-radius:14px;padding:18px 20px;margin:16px 0}
+ .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin:12px 0}
+ .stat{background:var(--card2);border:1px solid var(--bd);border-radius:10px;padding:12px;text-align:center}
+ .stat .v{font-size:22px;font-weight:800;color:#fbbf24;font-family:ui-monospace,monospace}
+ .stat .k{font-size:11.5px;color:var(--t3);margin-top:3px}
+ .foot{color:var(--t3);font-size:12.5px;margin-top:36px;border-top:1px solid var(--bd);padding-top:12px}
+ .toc{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:14px 18px;margin:14px 0;font-size:13.5px}
+ .toc a{color:#60a5fa;text-decoration:none} .toc a:hover{text-decoration:underline}
+ .toc li{margin:3px 0}
+ .yes{color:var(--ok);font-weight:700} .no{color:var(--err);font-weight:700}
+ .flow{background:#0f1623;border:1px solid var(--bd);border-radius:10px;padding:14px;font-family:ui-monospace,Menlo,monospace;font-size:12.5px;color:#93c5fd;overflow-x:auto;white-space:pre;line-height:1.6}
+ small{color:var(--t3)}
+</style>
+</head>
+<body>
+
+<h1>🔬 ময়নাতদন্ত প্রতিবেদন ২</h1>
+<div class="sub">কোন কারণে এই সার্ভার ডিজাইন · বিনিময়ে কেন সব ফিচার অক্ষত থাকবে · কেন কাজ করবে<br>
+তৈরি: ২৪ সেপ্টেম্বর ২০২৬ · উৎস: <code>/home/sahon/Videos/ui/index.php</code> + <code>Plain Text.txt</code> · কোনো ফাইল পরিবর্তন করা হয়নি</div>
+
+<div class="grid">
+ <div class="stat"><div class="v">৬,৪৯০</div><div class="k">লাইন (UI)</div></div>
+ <div class="stat"><div class="v">৩১০,২৩৩</div><div class="k">বাইট</div></div>
+ <div class="stat"><div class="v">০</div><div class="k">PHP ব্লক</div></div>
+ <div class="stat"><div class="v">৩৯</div><div class="k">রাউট</div></div>
+ <div class="stat"><div class="v">১২</div><div class="k">স্ট্রিম ইভেন্ট</div></div>
+ <div class="stat"><div class="v">১২১</div><div class="k">JS ফাংশন</div></div>
+ <div class="stat"><div class="v">৮</div><div class="k">XHR পয়েন্ট</div></div>
+ <div class="stat"><div class="v">895eb7…</div><div class="k">md5 (ইনপুট)</div></div>
+</div>
+
+<div class="toc">
+<b>সূচিপত্র</b>
+<ol>
+ <li><a href="#s0">Section 0 — TL;DR (এক পাতায় সব)</a></li>
+ <li><a href="#s1">Section 1 — যুক্তি ১: ফ্রন্টএন্ডই হলো স্পেসিফিকেশন (UI অক্ষত + contract-first)</a></li>
+ <li><a href="#s2">Section 2 — যুক্তি ২: ৩৯ রাউটের পূর্ণাঙ্গ কনট্রাক্ট</a></li>
+ <li><a href="#s3">Section 3 — স্ট্রিম কনট্রাক্ট: ১২টি ইভেন্ট ও তাদের ফিল্ড</a></li>
+ <li><a href="#s4">Section 4 — বিনিময়ে কেন সব ফিচার অক্ষত থাকবে</a></li>
+ <li><a href="#s5">Section 5 — কেন এটা সত্যিই কাজ করবে (কার্যকারিতার যুক্তি)</a></li>
+ <li><a href="#s6">Section 6 — সার্ভার ব্লুপ্রিন্ট (ডিফল্ট Node মডিউল, কোনো npm নয়)</a></li>
+ <li><a href="#s7">Section 7 — ঝুঁকি ও প্রতিকার (সৎ তালিকা)</a></li>
+ <li><a href="#s8">Section 8 — যাচাই পরিকল্পনা (৩৯-রাউট ম্যাট্রিক্স)</a></li>
+ <li><a href="#s9">Section 9 — Plain Text.txt আসলে কী ছিল</a></li>
+</ol>
+</div>
+
+<!-- ================= SECTION 0 ================= -->
+<h2 id="s0">Section 0 — TL;DR</h2>
+<div class="verdict">
+<p><b>মূল সত্য:</b> <code>index.php</code> নামে <b>৬,৪৯০ লাইনের ফাইলটি ভেতরে বিশুদ্ধ HTML+JavaScript — ০টি PHP ব্লক।</b> নামে .php হলেও এটা কোনো সার্ভার-সাইড কোড নয়। এটি <b>শুধু ক্লায়েন্ট</b>। এর সব কল যায় একটাই ঠিকানায়: <code>index.live.php?act=ai…&amp;ai_php_api=&lt;রাউট&gt;</code> — সেই <code>index.live.php</code>-এর আসল সোর্স <b>আপনার কাছে নেই</b>।</p>
+<p><b>তাই এই ডিজাইন:</b> UI-কেই স্পেসিফিকেশন ধরা হচ্ছে (contract-first)। কারণ UI কোডে লেখা আছে <b>প্রতিটি রিকোয়েস্ট কেমন যায়</b> আর <b>প্রতিটি রেসপন্সের কোন ফিল্ড পড়া হয়</b>। আমাদের সার্ভার যদি <b>ঠিক ওই নামের ফিল্ডগুলো</b> ফেরত দেয় — বাড়তি ফিল্ড নয়, <b>হুবহু প্রয়োজনীয় ফিল্ড</b> — তাহলে প্রতিটি ফিচার নিজে থেকেই চলবে।</p>
+<p><b>বিনিময়ে যা অক্ষত থাকে:</b> UI ফাইল <b>byte-identical</b> (md5 <code>895eb75226cc2801834baaced2873bb1</code>), <b>০ লাইন এডিট</b>, ৩৯টি রাউটের নাম-প্যারামিটার-রেসপন্স অপরিবর্তিত, ১২টি ইভেন্টের নাম অপরিবর্তিত। ফলে <b>কোনো ফিচার ভাঙতে পারে না</b> — কারণ ভাঙতে হলে UI বদলাতে হতো, আর UI বদলাচ্ছে না।</p>
+<p><b>সম্পূর্ণ প্রমাণ:</b> নিচে Section 2-তে ৩৯ রাউটের টেবিল (প্রতিটির প্যারামিটার + যে ফিল্ড UI পড়ে), Section 3-তে ১২ ইভেন্টের পেলোড — <b>সবই সরাসরি <code>index.php</code>-এর লাইন ধরে তোলা</b>।</p>
+</div>
+
+<!-- ================= SECTION 1 ================= -->
+<h2 id="s1">Section 1 — যুক্তি ১: ফ্রন্টএন্ডই হলো স্পেসিফিকেশন</h2>
+
+<div class="card ok">
+<h3 style="margin-top:0">কেন UI-কে স্পেসিফিকেশন ধরা যায় — ৪টি প্রমাণ</h3>
+
+<h4>প্রমাণ ১ — পুরো API কল মাত্র ১১ লাইনের একটি ফাংশনে আটকে (লাইন ১১১৬)</h4>
+<div class="flow">function api(a,d,cb){
+    var iP=!!d, u=A+'&ai_php_api='+a+'&csrf_token='+C, x=new XMLHttpRequest();
+    x.open(iP?'POST':'GET', u, true);                 // ডেটা থাকলে POST, নাইলে GET
+    x.setRequestHeader('Accept','application/json');  // সব রেসপন্স = JSON
+    if(iP) x.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+    x.onload=function(){ if(x.status===200){ cb(null,JSON.parse(x.responseText)) } else cb('HTTP '+x.status) };
+    x.onerror=function(){ cb('Network error') };
+    x.send(iP?bp(d):null);                            // bp = form-urlencoded বান্ডলার
+}</div>
+<p>এই এক ফাংশনই <b>৩৫টি রাউটের</b> পুরো রিকোয়েস্ট কনট্রাক্ট। অর্থাৎ:</p>
+<ul>
+ <li><b>URL প্যাটার্ন একটি:</b> <code>&lt;A&gt;&amp;ai_php_api=&lt;রাউট&gt;&amp;csrf_token=&lt;C&gt;</code></li>
+ <li><b>Method নিয়ম একটি:</b> প্যারামিটার আছে → POST (form-urlencoded), নেই → GET</li>
+ <li><b>Response একটি:</b> সবসময় JSON (HTTP 200), নাহলে UI "HTTP ###" দেখায়</li>
+ <li>বাকি ৪টি রাউট সরাসরি XHR দিয়ে যায় (<code>conversation</code>, <code>file_tree</code>, <code>read_file</code>, <code>resolve_file</code>) + ১টি স্ট্রিম POST (<code>ai_chat_stream</code>) = <b>মোট ৩৯</b></li>
+</ul>
+
+<h4>প্রমাণ ২ — প্রতিটি রেসপন্সের যেসব ফিল্ড UI পড়ে, সেগুলো কোডে সরাসরি লেখা</h4>
+<p>UI কোডে <code>d.session</code>, <code>d.providers</code>, <code>r.output</code>, <code>d.directories</code> … যেভাবে লেখা, <b>সার্ভারও ঠিক ওই নামে ফিল্ড দিলেই</b> কাজ হয়ে যায়। UI কোনোদিন জানে না সার্ভার ভেতরে PHP না Node — UI শুধু JSON-এর key খোঁজে। <b>এটাই contract-first-এর মূল কথা।</b></p>
+
+<h4>প্রমাণ ৩ — UI-তে ০টি PHP, তাই সার্ভার ভাষা সম্পূর্ণ মুক্ত</h4>
+<p><code>grep -c "&lt;?php"</code> → <b>০</b>। ফাইলের নামে .php থাকলেও ভেতরে কোনো সার্ভার-সাইড লজিক নেই। মানে সার্ভার আমরা <b>যে ভাষায় চাই</b> লিখতে পারি — Node-এর ডিফল্ট মডিউলেই চলবে, PHP লাগবে না।</p>
+
+<h4>প্রমাণ ৪ — UI অক্ষত রাখলে drift অসম্ভব</h4>
+<p>UI ফাইল কখনো না বদলালে (md5 একই থাকলে) কনট্রাক্টও একই থাকে। তাই "আমাদের এডিট করে ফিচার ভেঙে ফেলেছি" — এই ধরনের দুর্ঘটনা <b>বাতিল</b>।</p>
+</div>
+
+<div class="card warn">
+<h3 style="margin-top:0">⚠️ এই যুক্তির সীমা (যেন ভুলে না যান)</h3>
+<ul>
+ <li><b>UI শুধু happy path দেখায়:</b> error响应, 403/401, rate-limit — এগুলোর আসল আকৃত UI কোডে পরোক্ষ (যেমন <code>r.error</code>, <code>d.message</code>), তাই সেগুলো <b>প্রমাণ নয়, বলবৎ অনুমান</b> — Section 7-তে প্রতিকার।</li>
+ <li><b>md5 same ≠ ফিচার correct:</b> md5 প্রমাণ করে UI বদলায়নি, ফিচার ঠিক আছে কিনা তা Section 8-এর রাউট-ম্যাট্রিক্স দিয়ে আলাদা যাচাই লাগবে।</li>
+ <li><b>বাড়তি ফিল্ড বিপজ্জনক নয়, ঘাটতি ফিল্ড বিপজ্জনক:</b> UI বাড়তি key উপেক্ষা করে; কিন্তু প্রয়োজনীয় key না দিলে ফিচার নিঃশব্দে হাতায়। তাই Section 2-তে <b>প্রয়োজনীয়</b> আর <b>ঐচ্ছিক</b> আলাদা করা।</li>
+</ul>
+</div>
+
+<!-- ================= SECTION 2 ================= -->
+<h2 id="s2">Section 2 — যুক্তি ২: ৩৯ রাউটের পূর্ণাঙ্গ কনট্রাক্ট</h2>
+<div class="card info">
+<p>সব রাউটের ঠিকানা: <code>var A='index.live.php?act=ai&amp;path=public_html&amp;project_id=alistiyab_a6093d3b779b'</code> (লাইন ১০৬৬) — তারপর <code>&amp;ai_php_api=&lt;নাম&gt;&amp;csrf_token=&lt;C&gt;</code>।
+<b>ওয়ার্কিং ডিরেক্টরি</b> এখানেই সেট হয়: <code>path=public_html</code>, <code>SP='/home/alistiyab/public_html'</code>, <code>HD='/home/alistiyab'</code>, <code>PID='alistiyab_a6093d3b779b'</code>।
+<b>সার্ভার যা করবে:</b> এই URL প্যারামিটার পড়ে ঐ ইউজারের working directory ধরে কাজ করবে — cPanel-এর individual environment-এর ঠিক মতো।</p>
+<p><span class="pill"><b>মার্কিং:</b> <span class="yes">■</span> = বাধ্যতামূলক ফিল্ড (ঘাটলে ফিচার ভাঙবে)</span>
+<span class="pill"><span style="color:var(--wr);font-weight:700">■</span> = ঐচ্ছিক (না দিলে UI চলবে, কিছু UI ফিচার কমবে)</span></p>
+</div>
+
+<h3>ক · চ্যাট ও সেশন — ১৩টি</h3>
+<table>
+<tr><th>#</th><th>রাউট</th><th>Method</th><th>প্যারামিটার (UI পাঠায়)</th><th>রেসপন্স ফিল্ড (UI পড়ে)</th></tr>
+<tr><td>1</td><td><code>start</code></td><td>POST</td><td><code>provider, model, mode</code></td><td><span style="color:var(--t3)">(ফল পরোক্ষ — পরের কলে ব্যবহৃত)</span></td></tr>
+<tr><td>2</td><td><code>conversations</code></td><td>GET</td><td>—</td><td><span class="yes">■</span> array: <code>s.id, s.title, s.updated_at, s.message_count</code></td></tr>
+<tr><td>3</td><td><code>conversation</code></td><td>GET</td><td><code>conversation_id</code></td><td><span class="yes">■</span> <code>d.messages[]</code> (<code>m.role, m.content, m.parts</code>)</td></tr>
+<tr><td>4</td><td><code>switch_conversation</code></td><td>POST</td><td><code>conversation_id</code></td><td>—</td></tr>
+<tr><td>5</td><td><code>delete_conversation</code></td><td>POST</td><td><code>conversation_id</code></td><td>—</td></tr>
+<tr><td>6</td><td><code>rename_conversation</code></td><td>POST</td><td><code>conversation_id, title</code></td><td><span class="yes">■</span> <code>r.success</code></td></tr>
+<tr><td>7</td><td><code>new_session</code></td><td>POST</td><td><code>{}</code></td><td><span class="yes">■</span> <code>r.id</code></td></tr>
+<tr><td>8</td><td><b><code>ai_chat_stream</code></b></td><td><b>POST</b></td><td><code>content, conversation_id?, attachments? (JSON), csrf_token</code></td><td><b>SSE:</b> <code>data: {json}</code> লাইন — Section 3</td></tr>
+<tr><td>9</td><td><code>regenerate</code></td><td>POST</td><td>—</td><td><span class="yes">■</span> <code>r.success</code></td></tr>
+<tr><td>10</td><td><code>fork</code></td><td>POST</td><td><code>message_id</code></td><td><span class="yes">■</span> <code>r.success, r.conversation_id, r.title</code> <span class="pill"><span style="color:var(--wr)">■</span> <code>r.forked_content</code></span></td></tr>
+<tr><td>11</td><td><code>compact</code></td><td>POST</td><td><code>keep_last_n:3</code></td><td>—</td></tr>
+<tr><td>12</td><td><code>abort</code></td><td>POST</td><td>—</td><td>—</td></tr>
+<tr><td>13</td><td><code>status</code></td><td>GET</td><td>—</td><td><b>বড় পেলোড:</b> <span class="yes">■</span> <code>d.session{provider,model,mode,active_conversation}</code>, <span class="yes">■</span> <code>d.providers[].{id,name,models,connected}</code> <span style="color:var(--wr)">■</span> <code>d.favorite_models[], d.model_info{id:{context}}, d.lock.locked, d.running_conversations[], d.usage, d.context_tokens</code></td></tr>
+</table>
+
+<h3>খ · ফাইল ও প্রজেক্ট — ১২টি</h3>
+<table>
+<tr><th>#</th><th>রাউট</th><th>Method</th><th>প্যারামিটার</th><th>রেসপন্স ফিল্ড</th></tr>
+<tr><td>14</td><td><code>file_tree</code></td><td>GET</td><td><code>path, depth=1</code></td><td><span class="yes">■</span> <code>data.directories[]</code> (<code>{name,path}</code>), <span style="color:var(--wr)">■</span> <code>data.files[]</code> (<code>{name,path,size}</code>)</td></tr>
+<tr><td>15</td><td><code>read_file</code></td><td>GET</td><td><code>path</code></td><td><span class="yes">■</span> <code>d.content</code> / <code>d.error</code></td></tr>
+<tr><td>16</td><td><code>resolve_file</code></td><td>GET</td><td><code>path</code> (#line সহ)</td><td><span class="yes">■</span> <code>d.content</code> <span style="color:var(--wr)">■</span> <code>d.map</code></td></tr>
+<tr><td>17</td><td><code>diff</code></td><td>GET/POST</td><td><code>id</code> (snapshot)</td><td><span class="yes">■</span> <code>r.diff</code></td></tr>
+<tr><td>18</td><td><code>changes</code></td><td>GET</td><td>—</td><td><span class="yes">■</span> <code>d.snapshots[]</code> (<code>{id,message,time}</code>)</td></tr>
+<tr><td>19</td><td><code>restore</code></td><td>POST</td><td><code>id</code></td><td><span class="yes">■</span> <code>r.restored</code></td></tr>
+<tr><td>20</td><td><code>project_info</code></td><td>GET</td><td>—</td><td><span class="yes">■</span> <code>d.overview</code> (মাল্টি-লাইন), <span style="color:var(--wr)">■</span> <code>d.type</code></td></tr>
+<tr><td>21</td><td><code>projects_list</code></td><td>GET</td><td>—</td><td><span class="yes">■</span> array: <code>{project_id, name, path}</code></td></tr>
+<tr><td>22</td><td><code>projects_create</code></td><td>POST</td><td><code>name, path, type, insid</code></td><td><span class="yes">■</span> <code>r.project_id</code> / <code>r.error</code></td></tr>
+<tr><td>23</td><td><code>projects_delete</code></td><td>POST</td><td><code>project_id</code></td><td>—</td></tr>
+<tr><td>24</td><td><code>projects_close</code></td><td>POST</td><td><code>project_id</code></td><td>—</td></tr>
+<tr><td>25</td><td><code>projects_wordpress</code></td><td>GET</td><td>—</td><td><span class="yes">■</span> array (WP ইনস্টল তালিকা)</td></tr>
+</table>
+
+<h3>গ · সেটিংস ও প্রোভাইডার — ৮টি</h3>
+<table>
+<tr><th>#</th><th>রাউট</th><th>Method</th><th>প্যারামিটার</th><th>রেসপন্স ফিল্ড</th></tr>
+<tr><td>26</td><td><code>providers</code></td><td>GET</td><td>—</td><td><span class="yes">■</span> array: <code>{id, name, models, connected}</code> <span style="color:var(--wr)">■ <code>label</code></span></td></tr>
+<tr><td>27</td><td><code>settings_load</code></td><td>GET</td><td>—</td><td><span style="color:var(--wr)">■</span> <code>d.favorite_models[]</code></td></tr>
+<tr><td>28</td><td><code>settings_save</code></td><td>POST</td><td><code>name, provider_id, api_key, base_url?, models(JSON)</code></td><td><span class="yes">■</span> <code>r.success</code>/<code>r.error</code></td></tr>
+<tr><td>29</td><td><code>settings_delete</code></td><td>POST</td><td><code>provider_id</code></td><td>—</td></tr>
+<tr><td>30</td><td><code>test_connection</code></td><td>POST</td><td><code>provider_id, base_url, models, model</code></td><td><span class="yes">■</span> <code>r.success, r.error</code></td></tr>
+<tr><td>31</td><td><code>favorite_model</code></td><td>POST</td><td><code>model_id</code></td><td>—</td></tr>
+<tr><td>32</td><td><code>unfavorite_model</code></td><td>POST</td><td><code>model_id</code></td><td>—</td></tr>
+<tr><td>33</td><td><code>toggle_permission</code></td><td>POST</td><td><code>permission, value:'allow_always'</code></td><td>—</td></tr>
+</table>
+
+<h3>ঘ · সিস্টেম ও ইতিহাস — ৬টি</h3>
+<table>
+<tr><th>#</th><th>রাউট</th><th>Method</th><th>প্যারামিটার</th><th>রেসপন্স ফিল্ড</th></tr>
+<tr><td>34</td><td><b><code>shell</code></b></td><td>POST</td><td><code>command</code></td><td><span class="yes">■</span> <code>r.output, r.error, r.returncode</code></td></tr>
+<tr><td>35</td><td><code>set_mode</code></td><td>POST</td><td><code>mode: 'plan'|'build'</code></td><td>—</td></tr>
+<tr><td>36</td><td><code>undo</code></td><td>POST</td><td><code>message_id</code></td><td><span class="yes">■</span> <code>r.success, r.messages, r.error</code></td></tr>
+<tr><td>37</td><td><code>redo</code></td><td>POST</td><td>—</td><td><span class="yes">■</span> <code>r.success, r.messages, r.error</code></td></tr>
+<tr><td>38</td><td><code>clear</code></td><td>POST</td><td><code>{}</code></td><td>—</td></tr>
+<tr><td>39</td><td><code>force_unlock</code></td><td>POST</td><td>—</td><td><span class="yes">■</span> <code>r.success</code></td></tr>
+</table>
+
+<p class="foot" style="border:none;padding:0"><b>যাচাই:</b> <code>grep -oE "api\('[a-z_]+'" index.php | sort -u</code> = ৩৫টি + সরাসরি XHR ৪টি (<code>conversation, file_tree, read_file, resolve_file</code>) + <code>ai_chat_stream</code> = <b>৩৯</b>।</p>
+
+<!-- ================= SECTION 3 ================= -->
+<h2 id="s3">Section 3 — স্ট্রিম কনট্রাক্ট: ১২টি ইভেন্ট</h2>
+<div class="card info">
+<p><code>ai_chat_stream</code> রেসপন্স: প্রতিটি লাইন <code>data: {json}</code> হয়ে আসে। UI লাইনে <code>data: </code> না পেলে বাদ দেয়, তারপর <code>JSON.parse</code> করে <code>d._event</code> দেখে ব্রাঞ্চ করে (লাইন ~১৯৬২)। <b>সার্ভারকে ঠিক এই ১২টি নাম ও নিচের ফিল্ড ব্যবহার করতে হবে।</b></p>
+</div>
+<table>
+<tr><th>#</th><th><code>_event</code></th><th>ফিল্ড যা UI পড়ে</th><th>UI কী করে</th></tr>
+<tr><td>1</td><td><code>reasoning-delta</code></td><td><span class="yes">■ <code>d.text</code></span></td><td>"Thinking…" ব্লকে জমায়</td></tr>
+<tr><td>2</td><td><code>text-delta</code></td><td><span class="yes">■ <code>d.text</code></span></td><td>Markdown-এ ধারাবাহিক রেন্ডার (marked+hljs+DOMPurify)</td></tr>
+<tr><td>3</td><td><code>tool-call</code></td><td><span class="yes">■ <code>d.id, d.name, d.input</code></span></td><td>টুল চিপ দেখায়, <code>bash</code> হলে <code>d.input.command</code> প্রিভিউ</td></tr>
+<tr><td>4</td><td><code>tool-result</code></td><td><span class="yes">■ <code>d.id</code> (match), <code>d.name, d.output, d.is_error</code></span> <span style="color:var(--wr)">■ <code>d.diff</code></span></td><td>ডিফ ভিউয়ার, write/edit/patch হলে modified-file ট্র্যাক</td></tr>
+<tr><td>5</td><td><code>permission-request</code></td><td><span class="yes">■ <code>d.tool, d.input</code></span></td><td>Allow once / Always / Deny মোডাল (UI-তে আগে থেকেই আছে)</td></tr>
+<tr><td>6</td><td><code>question</code></td><td><span class="yes">■ <code>d.question, d.header, d.options, d.multiple</code></span> <span style="color:var(--wr)">■ <code>d.custom, d.customPlaceholder</code></span></td><td>ব্যবহারকারীকে প্রশ্ন করে উত্তর ইনপুটে বসায়</td></tr>
+<tr><td>7</td><td><code>title</code></td><td><span class="yes">■ <code>d.title, d.conversation_id</code></span></td><td>সাইডবারে সেশনের নাম বদলায়</td></tr>
+<tr><td>8</td><td><code>todos</code></td><td><span class="yes">■ <code>d.todos[]: {text, status, priority, content}</code></span></td><td>টু-ডু প্যানেল আপডেট</td></tr>
+<tr><td>9</td><td><code>iteration-start</code></td><td>—</td><td>reasoning রিসেট</td></tr>
+<tr><td>10</td><td><code>usage</code></td><td><span style="color:var(--wr)">■ পুরো <code>updateStats(d)</code> পেলোড</span></td><td>স্ট্যাটাস-বার আপডেট</td></tr>
+<tr><td>11</td><td><code>done</code></td><td><span class="yes">■ <code>d.conversation_id</code></span> <span style="color:var(--wr)">■ <code>d.auto_title, d.pending_question, d.error</code></span></td><td>স্ট্রিম শেষ, স্ট্যাটাস Ready, unread সিগন্যাল</td></tr>
+<tr><td>12</td><td><code>error</code></td><td><span class="yes">■ <code>d.message</code></span> <span style="color:var(--wr)">■ <code>d.conversation_id</code></span></td><td>লাল বার্তা; "already in progress" হলে Force Unlock বাটন</td></tr>
+</table>
+
+<h4><code>usage</code>/<code>done</code>-এর স্ট্যাট ফিল্ড (<code>updateStats</code>, লাইন ~4045)</h4>
+<div class="grid">
+ <div class="stat"><div class="v" style="font-size:15px">context_tokens</div><div class="k">মূল</div></div>
+ <div class="stat"><div class="v" style="font-size:15px">usage.input_tokens</div><div class="k">মূল</div></div>
+ <div class="stat"><div class="v" style="font-size:15px">usage.output_tokens</div><div class="k">মূল</div></div>
+ <div class="stat"><div class="v" style="font-size:15px">usage.cached_tokens</div><div class="k">ঐচ্ছিক</div></div>
+ <div class="stat"><div class="v" style="font-size:15px">tool_calls</div><div class="k">ঐচ্ছিক</div></div>
+ <div class="stat"><div class="v" style="font-size:15px">iterations</div><div class="k">ঐচ্ছিক</div></div>
+ <div class="stat"><div class="v" style="font-size:15px">cost</div><div class="k">ঐচ্ছিক</div></div>
+</div>
+<p><small>ঐচ্ছিক ফিল্ডগুলো UI-তে <code>||0</code> দিয়ে গার্ড করা — না দিলেও ক্র্যাশ হবে না, শুধু ০ দেখাবে। এটাই "ঘাটতি ফিল্ড" ঝুঁকির নরম অংশ; <b>কঠিন অংশ হলো বাধ্যতামূলক <span class="yes">■</span> ফিল্ড।</b></small></p>
+
+<!-- ================= SECTION 4 ================= -->
+<h2 id="s4">Section 4 — বিনিময়ে কেন সব ফিচার অক্ষত থাকবে</h2>
+
+<div class="card ok">
+<h3 style="margin-top:0">যুক্তি: প্রতিটি ফিচার = একাধিক রাউট/ইভেন্ট + স্থির ফিল্ড। রাউট ও ফিল্ড যদি অপরিবর্তিত থাকে, ফিচার অক্ষত।</h3>
+<p>UI-এর প্রতিটি ভিজ্যুয়াল ফিচারের পেছনে যে কনট্রাক্ট কাজ করে তা নিচে ম্যাপ করা — <b>ডান কলামের শর্ত পূরণ হলেই বাঁ কলামের ফিচার চলবে</b>:</p>
+<table>
+<tr><th>ফিচার (UI-তে যা দেখেন)</th><th>নির্ভর করে</th><th>শর্ত</th></tr>
+<tr><td>লাইভ চ্যাট স্ট্রিম (টাইপ করলেই উত্তর)</td><td><code>ai_chat_stream</code> + <code>start</code></td><td><code>data: {json}</code> লাইন + <code>text-delta/text</code></td></tr>
+<tr><td>Thinking/reasoning ব্লক</td><td>ইভেন্ট</td><td><code>reasoning-delta.text</code></td></tr>
+<tr><td>ইনলাইন টুল-কল চিপ + ডিফ ভিউয়ার</td><td>ইভেন্ট</td><td><code>tool-call{id,name,input}</code> + <code>tool-result{id,output,is_error,diff}</code></td></tr>
+<tr><td>পারমিশন মোডাল (Allow/Deny)</td><td>ইভেন্ট + রাউট</td><td><code>permission-request{tool,input}</code> + <code>toggle_permission</code></td></tr>
+<tr><td>AI-র প্রশ্নের উত্তর ফর্ম</td><td>ইভেন্ট</td><td><code>question{question,header,options,multiple}</code></td></tr>
+<tr><td>সাইডবার সেশন তালিকা/নাম বদল</td><td><code>conversations</code>, <code>title</code></td><td><code>s.{id,title,updated_at,message_count}</code></td></tr>
+<tr><td>সেশন খোলা/মুছা/রিনেম/নতুন</td><td><code>conversation</code>, <code>delete</code>, <code>rename</code>, <code>new_session</code></td><td><code>d.messages[]</code>, <code>r.id</code>, <code>r.success</code></td></tr>
+<tr><td>ফাইল-ট্রি (ক্লিকে এক্সপ্যান্ড)</td><td><code>file_tree</code></td><td><code>directories[], files[]</code></td></tr>
+<tr><td>ফাইল ভিউয়ার (syntax highlight)</td><td><code>read_file</code>, <code>resolve_file</code></td><td><code>d.content</code></td></tr>
+<tr><td>মডিফাইড ফাইল প্যানেল + ডিফ/রিস্টোর</td><td><code>changes</code>, <code>diff</code>, <code>restore</code></td><td><code>snapshots[]</code>, <code>r.diff</code>, <code>r.restored</code></td></tr>
+<tr><td>প্রজেক্ট সুইচার/ক্রিয়েট/ডিলিট/WP</td><td><code>projects_*</code>, <code>project_info</code></td><td><code>{project_id,name,path}</code>, <code>d.overview</code></td></tr>
+<tr><td>মডেল ড্রপডাউন + প্রোভাইডার</td><td><code>status</code>, <code>providers</code></td><td><code>d.providers[].{id,name,models,connected}</code></td></tr>
+<tr><td>প্রোভাইডার যোগ/সেভ/টেস্ট (কাস্টমার বদলাতে পারবে)</td><td><code>settings_save</code>, <code>test_connection</code></td><td><code>base_url, api_key, models</code> গ্রহণ + <code>r.success</code></td></tr>
+<tr><td>ফেভারিট মডেল ★</td><td><code>favorite_model/unfavorite</code>, <code>settings_load</code></td><td><code>d.favorite_models[]</code></td></tr>
+<tr><td>টু-ডু প্যানেল</td><td>ইভেন্ট</td><td><code>todos[]</code></td></tr>
+<tr><td>স্ট্যাটাস-বার (টোকেন/কস্ট/ইটারেশন)</td><td><code>usage</code>, <code>done</code>, <code>status</code></td><td><code>updateStats</code> পেলোড</td></tr>
+<tr><td>শেল টার্মিনাল (! কমান্ড)</td><td><code>shell</code></td><td><code>{output,error,returncode}</code></td></tr>
+<tr><td>বিল্ড/প্ল্যান মোড, undo/redo/clear/compact/fork/regenerate</td><td>ঐ রাউটগুলো</td><td>মাঝেমধ্যে <code>r.success</code>, <code>r.messages</code></td></tr>
+<tr><td>স্ট্রিম থামানো (Stop), লক রিসেট</td><td><code>abort</code>, <code>force_unlock</code></td><td><code>r.success</code> (force_unlock)</td></tr>
+</table>
+<p><b>উপসংহার:</b> ফিচার-রাউট ম্যাপিং সম্পূর্ণ (৩৯/৩৯ + ১২/১২ ইভেন্ট)। <b>কোনো ফিচার এমন নেই যার জন্য UI বদলাতে হবে</b> — তাই ০-এডিট শর্তে সব ফিচার অক্ষত।</p>
+</div>
+
+<div class="card">
+<h3 style="margin-top:0">অতিরিক্ত সুরক্ষা: UI-তে আগে থেকেই বহু ফিচার সার্ভার-নিরপেক্ষ</h3>
+<ul>
+ <li><b>টু-ডু:</b> <code>loadTodos()</code> পড়ে <code>localStorage['oc_todos_'+aC]</code> — লোকাল, সার্ভার ছাড়াই চলে।</li>
+ <li><b>স্ল্যাশ কমান্ড</b> (<code>/build /clear /export /copy /compact /undo /redo /fork /rename /todo /sound /notify /keybindings /timeline /help</code>): UI-সাইডেই বেশিরভাগ, সার্ভার শুধু <code>clear/compact/undo/redo/fork</code> পাঠায়।</li>
+ <li><b>মাল্টি-সেশন আইসোলেশন:</b> প্রতি সেশনে <code>_ss[aC]</code> আলাদা — সার্ভার শুধু <code>conversation_id</code> সঠিক রাখলেই হবে।</li>
+ <li><b>প্রতিটি ইভেন্টে <code>d.conversation_id</code>:</b> UI এটা দিয়ে ঠিক করে কোন সেশনে লিখবে — সার্ভার প্রতিটি ইভেন্টে সঠিক id বসালে ব্যাকগ্রাউন্ড স্ট্রিমও নিরাপদ।</li>
+</ul>
+</div>
+
+<!-- ================= SECTION 5 ================= -->
+<h2 id="s5">Section 5 — কেন এটা সত্যিই কাজ করবে</h2>
+
+<div class="card">
+<h3 style="margin-top:0">৫.১ — কার্যকারিতার যুক্তি (mechanism)</h3>
+<ol>
+ <li><b>ক্লায়েন্ট-সার্ভার যোগাযোগ শুধু দুই জায়গা দিয়ে:</b> (ক) রিকোয়েস্ট URL+বডি, (খ) রেসপন্স JSON। UI-তে এই দুটোর বাইরে কোনো ডিপেন্ডেন্সি নেই। আমরা এই দুইটিই হুবহু পুনরুৎপাদন করছি।</li>
+ <li><b>UI "কী পায়" তা দেখে সিদ্ধান্ত নেয়, "কীভাবে তৈরি হলো" জানে না:</b> <code>JSON.parse(x.responseText)</code> — এর পরে UI শুধু key খোঁজে। Node-এ <code>JSON.stringify</code> বানানো object PHP-র <code>json_encode</code>-এর object-এর সাথে byte-সমান হলেই ফল অভিন্ন।</li>
+ <li><b>টুল-এজেন্ট লুপ সার্ভারের দায়িত্ব, UI-এর নয়:</b> UI শুধু দেখে <code>tool-call</code> → <code>tool-result</code>। লুপ চালানো, মডেল কল, টুল এক্সিকিউশন — সব নতুন সার্ভারে। UI কেবল ইভেন্ট খায়। তাই ইভেন্টের নাম-ফিল্ড মিললেই সম্পূর্ণ এজেন্ট আচরণ UI-তে ঠিক দেখাবে।</li>
+ <li><b>যা UI পড়ে না, সেটা বাদ দিলেও চলে:</b> আমাদের সার্ভার বাড়তি কিছু না দিলে UI-তে কোনো প্রভাব নেই। অর্থাৎ <b>কনট্রাক্টের ছোট হাত করলেও ফিচার চলে</b> — শুধু বড় হাত করলে চলে না। এটা ঝুঁকির দিক থেকে আমাদের পক্ষে।</li>
+ <li><b>এটা ইন্ডাস্ট্রি-প্রতিষ্ঠিত পদ্ধতি:</b> একেই বলে consumer-driven contract testing। বড় বড় কোম্পানি ক্লায়েন্টের প্রত্যাশা ধরে সার্ভার লেখে — আমরা এখানে ক্লায়েন্ট (UI) কাছে প্রত্যাশা শুধু <b>কোড পড়ে</b> বের করছি, অনুমান করছি না।</li>
+</ol>
+</div>
+
+<div class="card">
+<h3 style="margin-top:0">৫.২ — কেন ভুল হওয়ার সম্ভাবনা কম</h3>
+<ul>
+ <li><b>ফিল্ডের নাম অনুমান নয়, উদ্ধৃত:</b> Section 2-3-এর প্রতিটি ফিল্ড <code>index.php</code>-এর grep থেকে এসেছে।</li>
+ <li><b>প্যারামিটারের নাম অনুমান নয়:</b> <code>api('fork',{message_id:msgId})</code> — নাম কোডেই লেখা।</li>
+ <li><b>Method/Content-Type স্পষ্ট:</b> <code>iP?'POST':'GET'</code> + <code>application/x-www-form-urlencoded</code> — তাই Node-এ <code>URLSearchParams</code> দিয়ে হুবহু পার্স করলেই মেলবে।</li>
+ <li><b>স্ট্রিম ফরম্যাট স্পষ্ট:</b> <code>line.indexOf('data: ')</code> + <code>JSON.parse(line.substring(6))</code> — সার্ভার প্রতি ইভেন্টে <code>data: </code> দিয়ে শুরু করে <code>\n</code> দিয়ে শেষ করলেই হবে।</li>
+ <li><b>CSRF:</b> UI-তে <code>C=''</code> (খালি) — আসল সার্ভার PHP রেন্ডার সময় ভরত। আমাদের সার্ভার index রেন্ডার করলেই <code>C</code> বসাতে পারে, তাই একই নাম ধরে রাখা যায়।</li>
+</ul>
+</div>
+
+<div class="card warn">
+<h3 style="margin-top:0">৫.৩ — সৎ কথা: md5 যা প্রমাণ করে, যা করে না</h3>
+<ul>
+ <li><span class="yes">✓</span> md5 একই থাকলে প্রমাণ: <b>UI অপরিবর্তিত</b> → কনট্রাক্ট অপরিবর্তিত → আগের ফিচার-লিস্ট অক্ষত।</li>
+ <li><span class="no">✗</span> md5 একই থাকলে প্রমাণ <b>হয় না</b>: আমাদের নতুন সার্ভার সব ফিল্ড সত্যিই দিচ্ছে কিনা।</li>
+ <li><b>সমাধান:</b> তাই Section 8-এ md5-এর পাশাপাশি <b>৩৯-রাউট ব্যাবহারিক টেস্ট</b> বাধ্যতামূলক — দুইটাই মিলে পূর্ণ প্রমাণ।</li>
+</ul>
+</div>
+
+<!-- ================= SECTION 6 ================= -->
+<h2 id="s6">Section 6 — সার্ভার ব্লুপ্রিন্ট (ডিফল্ট Node মডিউল, কোনো npm নয়)</h2>
+
+<div class="card">
+<h3 style="margin-top:0">৬.১ — কেন ডিফল্ট Node মডিউলই যথেষ্ট</h3>
+<table>
+<tr><th>প্রয়োজন</th><th>ডিফল্ট মডিউল</th><th>কাজ</th></tr>
+<tr><td>HTTP সার্ভার + রাউটার</td><td><code>node:http</code></td><td>একটাই সার্ভার, URL পড়ে <code>ai_php_api</code> ম্যাচ করে ৩৯ হ্যান্ডলারে পাঠাবে</td></tr>
+<tr><td>ফাইল/ফোল্ডার (file_tree, read_file, write, edit)</td><td><code>node:fs</code>, <code>node:fs/promises</code>, <code>node:path</code></td><td>টুল এক্সিকিউশন</td></tr>
+<tr><td>ফর্ম পার্স + URL</td><td><code>node:url</code>, <code>URLSearchParams</code></td><td>form-urlencoded বডি ও কোয়েরি পার্স</td></tr>
+<tr><td>CSRF টোকেন</td><td><code>node:crypto</code></td><td><code>C</code> জেনারেট/যাচাই</td></tr>
+<tr><td>শেল (<code>shell</code> রাউট)</td><td><code>node:child_process</code> (execFile/spawn)</td><td><code>{output,error,returncode}</code></td></tr>
+<tr><td>স্ট্রিম (SSE-শৈলী)</td><td>হেডার <code>Content-Type:text/event-stream</code> + <code>res.write('data: …\n\n')</code></td><td>১২ ইভেন্ট</td></tr>
+<tr><td>মডেল কল (OpenAI-compatible)</td><td><code>fetch</code> (Node 18+ গ্লোবাল)</td><td><code>/v1/chat/completions</code> প্রক্সি</td></tr>
+<tr><td>সেশন/কথোপকথন সংরক্ষণ</td><td><code>node:fs</code> + JSON ফাইল</td><td><code>ai/projects/…</code> প্যাটার্ন ধরে রাখা</td></tr>
+</table>
+<p><b>ফল:</b> ০টি npm প্যাকেজ, ০ লক-ফাইল, যেকোনো Node 18+-এ সরাসরি চলবে।</p>
+</div>
+
+<div class="card">
+<h3 style="margin-top:0">৬.২ — Working directory: cPanel-এর individual environment-এর আদর্শ প্রতিলিপি</h3>
+<p>UI নিজে থেকে URL-এ বহন করে কোন ইউজার/প্রজেক্টের জন্য কাজ করা হচ্ছে:</p>
+<div class="flow">A   = 'index.live.php?act=ai&amp;path=public_html&amp;project_id=alistiyab_a6093d3b779b'
+SP  = '/home/alistiyab/public_html'      ← কাজের ডিরেক্টরি (working dir)
+HD  = '/home/alistiyab'                  ← হোম ডিরেক্টরি
+PID = 'alistiyab_a6093d3b779b'           ← প্রজেক্ট আইডি</div>
+<p><b>সার্ভার যা করবে:</b> প্রতিটি রিকোয়েস্টের URL থেকে <code>path</code> + <code>project_id</code> পড়ে, সেটিকে <b>process.cwd()</b> বা কাজের root হিসেবে সেট করে সব ফাইল অপারেশন (file_tree/read_file/write_file/…) ওই ডিরেক্টরির মধ্যেই সীমাবদ্ধ রাখবে। <b>ফলে প্রতিটি ইউজার/প্রজেক্ট আলাদা environment পাবে — ঠিক cPanel-এর মতো, কিন্তু যেকোনো সার্ভারে।</b></p>
+<p><b>সুরক্ষা:</b> ফাইল পাথ resolve করে root-এর বাইরে গেলে (<code>..</code> দিয়ে) ব্লক — path traversal ঠেকাতে হবে।</p>
+</div>
+
+<div class="card">
+<h3 style="margin-top:0">৬.৩ — কাস্টমার নিজের প্রোভাইডার বদলাতে পারবে</h3>
+<p>UI-তেই আছে <code>settings_save{name, provider_id, api_key, base_url, models}</code> + <code>test_connection</code>। অর্থাৎ:</p>
+<ul>
+ <li>কাস্টমার Settings-এ গিয়ে <b>নিজের base_url + API key + মডেল-তালিকা</b> বসাবে।</li>
+ <li>সার্ভার সেটি সংরক্ষণ করে স্ট্রিম কলে ওই base_url-এই পাঠাবে।</li>
+ <li><code>test_connection</code> দিয়ে আগে যাচাই — <code>r.success/r.error</code> UI দেখায়।</li>
+ <li><b>লোকাল বা ফ্রি রুট</b> (Ollama, যেকোনো OpenAI-compatible endpoint) — খরচ ৳০, API key ঐচ্ছিক।</li>
+</ul>
+</div>
+
+<div class="card bad">
+<h3 style="margin-top:0">৬.৪ — যা <b>অবশ্যই</b> বাদ দিতে হবে (secret) আর যা বদলাবে</h3>
+<table>
+<tr><th>বিষয়</th><th>বর্তমান মান (UI-তে লেখা)</th><th>কী করবে</th></tr>
+<tr><td>হার্ড-কোডেড অন্য কারো পাথ</td><td><code>SP='/home/alistiyab/public_html'</code>, <code>HD='/home/alistiyab'</code></td><td><b>বাদ</b> → config/URL থেকে</td></tr>
+<tr><td>অন্য অ্যাকাউন্টের project_id</td><td><code>alistiyab_a6093d3b779b</code></td><td><b>বদলানো</b> → নিজের project_id</td></tr>
+<tr><td>CSRF</td><td><code>C=''</code></td><td>সার্ভার রেন্ডারে <b>ভরবে</b></td></tr>
+<tr><td>API key</td><td>সার্ভার-সাইড সংরক্ষিত থাকবে</td><td><b>কখনো UI/JS-এ নয়</b> (আগের অডিটে High ঝুঁকি)</td></tr>
+<tr><td>ফিচার/রাউট/ইভেন্ট/ফিল্ড</td><td>৩৯ + ১২ + টেবিলের নামগুলো</td><td><span class="yes">অপরিবর্তিত থাকবে</span></td></tr>
+<tr><td>UI ফাইল</td><td>md5 <code>895eb75226cc2801834baaced2873bb1</code></td><td><span class="yes">byte-identical (০ এডিট)</span></td></tr>
+</table>
+<p><b>সারসংক্ষেপ:</b> বদলাবে শুধু <b>config মান</b> (পাথ, project_id, টোকেন)। <b>কনট্রাক্ট (নাম, ফিল্ড, ইভেন্ট) কোনোটাই বদলাবে না।</b> এটাই "সব ফিচার অক্ষত" রাখার মূল চাবিকাঠি।</p>
+</div>
+
+<!-- ================= SECTION 7 ================= -->
+<h2 id="s7">Section 7 — ঝুঁকি ও প্রতিকার (সৎ তালিকা)</h2>
+<table>
+<tr><th>#</th><th>ঝুঁকি</th><th>প্রভাব</th><th>প্রতিকার</th></tr>
+<tr><td>1</td><td>UI শুধু happy path দেখায়; error响应/স্ট্যাটাস-কোড অসম্পূর্ণ প্রমাণ</td><td>মাঝেমধ্যে ভুল বার্তা</td><td>প্রতিটি রাউটের জন্য error case টেস্ট; <code>r.error</code>/<code>d.message</code> ফর্ম্যাট সাধারণ রাখা</td></tr>
+<tr><td>2</td><td>বাধ্যতামূলক <span class="yes">■</span> ফিল্ড বাদ পড়লে ফিচার নিঃশব্দে হাতায়</td><td>নীরব ব্যর্থতা (সবচেয়ে বিপজ্জনক)</td><td>Section 2-র <span class="yes">■</span> তালিকা দিয়ে প্রতিটি রাউটের JSON স্কিমা টেস্ট</td></tr>
+<tr><td>3</td><td>md5 = non-drift, correctness নয়</td><td>ভুল আত্মবিশ্বাস</td><td>Section 8-এর রাউট-ম্যাট্রিক্স বাধ্যতামূলক</td></tr>
+<tr><td>4</td><td>পাথ ট্রাভার্সাল (<code>../</code>) — <code>shell</code> রাউট = যেকোনো কমান্ড</td><td><b>নিরাপত্তা</b></td><td>working-dir jail + <b>পাবলি URL করলে লগইন/টোকেন বাধ্যতামূলক</b> + <code>bash</code> পারমিশন গেট (UI-তে আছে, সার্ভারেও বসাতে হবে)</td></tr>
+<tr><td>5</td><td>API key JS-দিয়ে যাওয়ার পুরনো ঝুঁকি</td><td>কী লিক</td><td>key শুধু সার্ভার-সাইড; <code>settings_save</code> রেসপন্সে key ফেরত নয়</td></tr>
+<tr><td>6</td><td>মাল্টি-সেশন স্ট্রিম ক্রস-রাইট</td><td>ডেটা মিশে যাওয়া</td><td>প্রতিটি ইভেন্টে সঠিক <code>conversation_id</code> (UI এটাই ধরে)</td></tr>
+<tr><td>7</td><td>মডেল সার্ভার ধীর/বন্ধ</td><td>স্ট্রিম কাটা</td><td><code>error</code> ইভেন্ট + <code>abort</code>/<code>force_unlock</code> সার্ভারে সত্যিকারের লক রিলিজ করবে</td></tr>
+</table>
+
+<!-- ================= SECTION 8 ================= -->
+<h2 id="s8">Section 8 — যাচাই পরিকল্পনা (৩৯-রাউট ম্যাট্রিক্স)</h2>
+<div class="card">
+<ol>
+ <li><b>পর্যায় ১ — স্থিরতা:</b> <code>md5sum index.php</code> = <code>895eb75226cc2801834baaced2873bb1</code> (এডিট হয়নি কিনা)।</li>
+ <li><b>পর্যায় ২ — কনট্রাক্ট টেস্ট:</b> প্রতিটি রাউট কল করে Section 2-র <span class="yes">■</span> ফিল্ডগুলো JSON-এ <b>আছে কিনা</b> যাচাই (৩৯/৩৯)।</li>
+ <li><b>পর্যায় ৩ — স্ট্রিম টেস্ট:</b> একটি চ্যাটে ১২টি ইভেন্টের প্রতিটি আসে কিনা, <code>data: </code> প্রিফিক্স ও <code>_event</code> সঠিক কিনা।</li>
+ <li><b>পর্যায় ৪ — ফিচার ধোঁয়া পরীক্ষা (UI খুলে):</b> চ্যাট স্ট্রিম → টুল চিপ → ডিফ → পারমিশন → শেল → ফাইল-ট্রি → প্রজেক্ট সুইচ → প্রোভাইডার সেভ/টেস্ট → undo/redo/fork → Stop বাটন। প্রতিটি ক্লিকের ফলাফল মিলছে কিনা।</li>
+ <li><b>পর্যায় ৫ — ওয়ার্কিং-ডিরেক্টরি পরীক্ষা:</b> <code>path</code>/<code>project_id</code> বদলে কল করলে ফাইল-ট্রিই ওই ডিরেক্টরি দেখায় কিনা, ও রুটের বাইরে যায় না কিনা।</li>
+ <li><b>পর্যায় ৬ — প্রোভাইডার সুইচ:</b> দুইটি আলাদা <code>base_url</code> বসিয়ে <code>test_connection</code> + স্ট্রিম দুটোই চলে কিনা।</li>
+</ol>
+<p><b>সাফল্যের শর্ত:</b> ৩৯/৩৯ রাউট + ১২/১২ ইভেন্ট + ০ md5-পরিবর্তন = <b>সব ফিচার অক্ষতের সম্পূর্ণ প্রমাণ।</b></p>
+</div>
+
+<!-- ================= SECTION 9 ================= -->
+<h2 id="s9">Section 9 — Plain Text.txt আসলে কী ছিল</h2>
+<div class="card info">
+<p><b>৩.১ MB ফাইলটি কোনো cPanel নেটওয়ার্ক ডাম্প নয়</b> — এটি একটি <b>OpenCode সেশন এক্সপোর্ট (JSON)</b>: <code>ses_f30d35981ffe…</code>, ১৪১টি মেসেজ, শিরোনাম "ওপেনকোড ইনস্টল কনফ্লিক্ট ও রিজিস্ট্রি ক্লিনআপ", outcome <code>interrupted</code>।</p>
+<ul>
+ <li>এর ভেতরেই আগের ময়নাতদন্তের সব ডেটা ছিল (মেসেজ ১২৪–১২৭): base URL, <code>api()</code> ফাংশন, রাউট-তালিকা, ইভেন্ট, ফিল্ড-রিড।</li>
+ <li>মেসেজ ১৩৫-এ "ময়নাতদন্ত প্রতিবেদন ২"-এর রূপরেখা দেওয়া হয়, কিন্তু আগের এজেন্ট <b>একই লুফে আটকে</b> রিপোর্ট বানাতে পারেনি (মেসেজ ১৩৮: "তুই বারবার…এই একই লুফে আটকে যাচ্ছ কেন") এবং সেশন বিচ্ছিন্ন হয়।</li>
+ <li><b>এই রিপোর্টটিই সেই ব্যর্থ কাজ সম্পন্ন করছে</b> — এবার তথ্য সরাসরি <code>index.php</code> নিজে থেকে পুনরায় যাচাই করে নেওয়া হয়েছে (grep/sed দিয়ে), তাই আগের লুফ-ত্রুটির উপর নির্ভর করে না।</li>
+</ul>
+</div>
+
+<div class="verdict">
+<h3 style="margin-top:0">চূড়ান্ত রায়</h3>
+<p>✅ <b>এই ডিজাইন যৌক্তিক ও কার্যকর।</b> কারণ:</p>
+<ol>
+ <li><b>স্পেসিফিকেশন প্রামাণিক:</b> ৩৯ রাউট + ১২ ইভেন্ট + প্রতিটি ফিল্ড সরাসরি UI কোড থেকে উদ্ধৃত — অনুমান নয়।</li>
+ <li><b>UI অক্ষত:</b> md5 সেইম, ০ এডিট → কনট্রাক্ট স্থির → ফিচার-লিস্ট স্থির।</li>
+ <li><b>সার্ভার মুক্ত:</b> ০ PHP ব্লক প্রমাণ করে UI ভাষা-নিরপেক্ষ → ডিফল্ট Node মডিউলেই পুরোটা সম্ভব, ০ npm।</li>
+ <li><b>working-dir + প্রোভাইডার-সুইচ</b> বিল্ট-ইন কনট্রাক্টে আছে (URL প্যারাম + settings_save) — আলাদা করে বানাতে হবে না।</li>
+ <li><b>ঘাটতি ফিল্ড ঝুঁকিমুক্ত, বাড়তি ফিল্ড ঝুঁকিমুক্ত</b> — শুধু <span class="yes">■</span> ফিল্ড ঠিক থাকলেই হবে, যেগুলো Section 8-এ টেস্ট করা।</li>
+</ol>
+<p><b>শর্ত:</b> secret (পাথ, project_id, টোকেন) বাদ + <code>shell</code> রাউটে পাবলি অ্যাক্সেসে লগইন। এই দুইটা ছাড়া বাকি সব — নাম, ফিল্ড, ইভেন্ট — <b>হুবহু রাখতে হবে</b>, তাহলেই বিনিময়ে সব ফিচার অক্ষত থাকবে।</p>
+</div>
+
+<div class="foot">
+প্রমাণ: সব সংখ্যা ও ফিল্ড <code>/home/sahon/Videos/ui/index.php</code> (৬,৪৯০ লাইন) থেকে grep/sed দিয়ে ধরা —
+<code>grep -oE "api\('[a-z_]+'" | sort -u</code> (৩৫) · <code>grep "ai_php_api="</code> (+৪) · <code>grep "ev==='"</code> (১২) ·
+<code>sed -n '1116,1130p'</code> (api fn) · <code>sed -n '1066p'</code> (var A) · <code>grep -c "&lt;?php"</code> (০) · <code>md5sum</code> ·
+<code>wc -l</code>/<code>stat -c%s</code>। সেশন-তথ্য: <code>Plain Text.txt</code> JSON পার্স করে (১৪১ মেসেজ)। <b>কোনো উৎস ফাইল পরিবর্তন/মুছে ফেলা হয়নি।</b>
+</div>
+
+</body>
+</html>

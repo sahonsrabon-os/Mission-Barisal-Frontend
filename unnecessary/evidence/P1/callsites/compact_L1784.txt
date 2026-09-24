@@ -1,0 +1,49 @@
+# route: compact  line: 1784  method: POST
+# params(arg): {keep_last_n:3}
+# response field reads seen in callback: error, messages, success
+# NOTE: best-effort regex scan; verify against this dump.
+----------------------------------------------------------------------
+1782: 		if(c==='/compact'){
+1783: 			st('Compacting...',true);
+1784: 			api('compact',{keep_last_n:3},function(e2,r2){
+1785: 				if(!e2&&r2&&r2.success){
+1786: 					rMsgs(r2.messages||[]);
+1787: 					if(r2.summary){toast('Nothing to compact','warn')}else{toast('Conversation compacted','ok')}
+1788: 					st('Ready',true);
+1789: 				}else{
+1790: 					toast('Failed to compact: '+(e2||(r2&&r2.error)||'Unknown error'),'err');
+1791: 					st('Ready',true);
+1792: 				}
+1793: 			});
+1794: 			return;
+1795: 		}
+1796: 		if(c==='/undo'){
+1797: 			if(!rMsgs._lastMsgs||!rMsgs._lastMsgs.length){toast('Nothing to undo','warn');return}
+1798: 			var lastUser=null;
+1799: 			for(var i=rMsgs._lastMsgs.length-1;i>=0;i--){
+1800: 				if(rMsgs._lastMsgs[i].role==='user'){lastUser=rMsgs._lastMsgs[i];break}
+1801: 			}
+1802: 			if(!lastUser||!lastUser.id){toast('Cannot undo: no user message found','warn');return}
+1803: 			api('undo',{message_id:lastUser.id},function(e,r){
+1804: 				if(!e&&r&&r.success){
+1805: 					rMsgs(r.messages||[]);
+1806: 					toast('Message undone (use /redo to restore)','ok');
+1807: 					st('Ready',true);
+1808: 					loadSL();
+1809: 				}else{
+1810: 					toast('Failed to undo: '+(e||(r&&r.error)||'Unknown error'),'err');
+1811: 					st('Ready',true);
+1812: 				}
+1813: 			});
+1814: 			return;
+1815: 		}
+1816: 		if(c==='/redo'){
+1817: 			st('Redoing...',true);
+1818: 			api('redo',{},function(e,r){
+1819: 				if(!e&&r&&r.success){
+1820: 					rMsgs(r.messages||[]);
+1821: 					toast('Message restored','ok');
+1822: 					st('Ready',true);
+1823: 					loadSL();
+1824: 				}else{
+1825: 					toast('Nothing to redo: '+(e||(r&&r.error)||'Unknown error'),'err');

@@ -1,0 +1,49 @@
+# route: compact  line: 2174  method: POST
+# params(arg): {keep_last_n:3}
+# response field reads seen in callback: conversation_id, input, title, tool
+# NOTE: best-effort regex scan; verify against this dump.
+----------------------------------------------------------------------
+2172: 									st('Auto-compacting...',true);
+2173: 									toast('Context at '+Math.round(pct*100)+'% - auto-compacting...','warn');
+2174: 									api('compact',{keep_last_n:3},function(e3,r3){
+2175: 										if(!e3&&r3&&r3.success){rMsgs(r3.messages||[]);if(r3.summary){toast('Nothing to compact','warn')}else{toast('Auto-compacted','ok')}st('Ready',true)}
+2176: 										else{toast('Auto-compaction failed: '+(e3||(r3&&r3.error)||'Unknown'),'err');st('Ready',true)}
+2177: 									});
+2178: 								};
+2179: 									setTimeout(doCompact,500);
+2180: 								}
+2181: 							}
+2182: 						}
+2183: 					}
+2184: 					if(ev==='usage'){
+2185: 						updateStats(d);
+2186: 					}
+2187: 					if(ev==='iteration-start'){
+2188: 						reasonDiv=null;
+2189: 						reasonText='';
+2190: 					}
+2191: 					if(ev==='question'){
+2192: 						var qData=d;
+2193: 						showQuestion(qData).then(function(answer){
+2194: 							var ansText=answer.type==='custom'?answer.answer:(Array.isArray(answer.answer)?answer.answer.map(function(a){return a.value||a.label||a}).join(', '):(answer.answer.value||answer.answer.label||answer.answer));
+2195: 							var inp=document.getElementById('ocIn');
+2196: 							inp.value=ansText;
+2197: 							origSend();
+2198: 						});
+2199: 					}
+2200: 					if(ev==='permission-request'){
+2201: 						askPermission(d.tool,d.input).then(function(allowed){
+2202: 							if(!allowed){
+2203: 								toast(d.tool+' denied. You can allow it in Settings > Permissions.','warn');
+2204: 							}
+2205: 						});
+2206: 					}
+2207: 					if(ev==='title'&&d.title){
+2208: 						var sid=d.conversation_id||aC;
+2209: 						var si=document.querySelector('#ocSL .ocSi[data-id="'+(window.CSS&&CSS.escape?CSS.escape(sid):sid.replace(/["\\]/g,'\\$&'))+'"]');
+2210: 						if(si){
+2211: 							var stEl=si.querySelector('.ocSiT');
+2212: 							if(stEl)stEl.textContent=d.title;
+2213: 						}
+2214: 						loadSL();
+2215: 					}

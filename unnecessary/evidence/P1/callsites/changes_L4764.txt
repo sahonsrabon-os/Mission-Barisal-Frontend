@@ -1,0 +1,49 @@
+# route: changes  line: 4764  method: GET
+# params(arg): null
+# response field reads seen in callback: diff, id, message, restored, snapshots, time
+# NOTE: best-effort regex scan; verify against this dump.
+----------------------------------------------------------------------
+4762: 	var panel=document.getElementById('ocChg');
+4763: 	if(chgOpen){
+4764: 		api('changes',null,function(e,d){
+4765: 			if(e||!d){toast('Failed to load changes','err');return}
+4766: 			var list=document.getElementById('ocChgL');
+4767: 			list.innerHTML='';
+4768: 			var snaps=d.snapshots||[];
+4769: 			if(!snaps.length){
+4770: 				list.innerHTML='<div style="padding:14px;color:var(--t3);font-size:12px;text-align:center">No changes yet</div>';
+4771: 			}else{
+4772: 				snaps.forEach(function(s){
+4773: 					var item=document.createElement('div');
+4774: 					item.className='ocChgI';
+4775: 					var dt=new Date((s.time||0)*1000);
+4776: 					var ts=dt.toLocaleDateString()===new Date().toLocaleDateString()
+4777: 						?dt.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})
+4778: 						:dt.toLocaleDateString([],{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'});
+4779: 				item.innerHTML='<span>'+esc(s.message||'Snapshot')+' <span style="color:var(--t3);font-size:10px">'+ts+'</span></span>'
+4780: 					+'<div style="display:flex;gap:4px"><button class="ocChgBtn ocChgDiffBtn" data-id="'+esc(s.id||'')+'" data-msg="'+esc(s.message||'')+'">Diff</button><button class="ocChgBtn" data-id="'+esc(s.id||'')+'">Restore</button></div>';
+4781: 				list.appendChild(item);
+4782: 				});
+4783: 				list.querySelectorAll('.ocChgBtn:not(.ocChgDiffBtn)').forEach(function(btn){
+4784: 					btn.addEventListener('click',function(){
+4785: 						if(confirm('Restore this snapshot?')){
+4786: 							api('restore',{id:this.dataset.id},function(e,r){
+4787: 								if(!e&&r&&r.restored)toast('Snapshot restored','ok');
+4788: 								else toast('Failed to restore','err');
+4789: 							});
+4790: 						}
+4791: 					});
+4792: 				});
+4793: 				list.querySelectorAll('.ocChgDiffBtn').forEach(function(btn){
+4794: 					btn.addEventListener('click',function(){
+4795: 						var snapId=this.dataset.id;
+4796: 						var snapMsg=this.dataset.msg;
+4797: 						api('diff',{id:snapId},function(e,r){
+4798: 							if(!e&&r&&r.diff){
+4799: 								var modal=document.getElementById('ocDiffMod');
+4800: 								var body=document.getElementById('ocDiffBd');
+4801: 								var toggleHtml='<div class="ocDiffToggle"><button class="ocDiffToggleBtn active" id="ocDiffUnifiedBtn">Unified</button><button class="ocDiffToggleBtn" id="ocDiffSplitBtn">Split</button></div>';
+4802: 								var diffHtml='<pre style="font-size:12px;overflow-x:auto;padding:8px;background:var(--bgS);border-radius:var(--r);line-height:1.6">';
+4803: 								var lines=r.diff.split('\n');
+4804: 								lines.forEach(function(line,i){
+4805: 									var cls='';

@@ -1,0 +1,49 @@
+# route: settings_delete  line: 2810  method: POST
+# params(arg): {provider_id:disBtn.dataset.id}
+# response field reads seen in callback: (none/indirect)
+# NOTE: best-effort regex scan; verify against this dump.
+----------------------------------------------------------------------
+2808: 	if(disBtn&&disBtn.dataset.id&&disBtn.dataset.id.indexOf('custom:')===0){
+2809: 		if(confirm('Disconnect this custom provider?')){
+2810: 			api('settings_delete',{provider_id:disBtn.dataset.id},function(){_providersCache=null;loadP()});
+2811: 		}
+2812: 		return;
+2813: 	}
+2814: });
+2815: document.getElementById('ocCtxMod').addEventListener('click',function(e){
+2816: 	if(e.target===this)this.classList.remove('open');
+2817: });
+2818: document.getElementById('ocCtxC').addEventListener('click',function(){
+2819: 	document.getElementById('ocCtxMod').classList.remove('open');
+2820: });
+2821: 
+2822: function showCtxDetail(){
+2823: 	var bd=document.getElementById('ocCtxBd');
+2824: 	var u=lastStats.usage||{};
+2825: 	var inT=u.input_tokens||0;
+2826: 	var outT=u.output_tokens||0;
+2827: 	var cachedT=u.cached_tokens||0;
+2828: 	var ctxT=lastStats.context_tokens||0;
+2829: 	var tools=lastStats.tool_calls||0;
+2830: 	var iters=lastStats.iterations||0;
+2831: 	var cost=lastStats.cost||0;
+2832: 	if(!cachedT&&rMsgs._lastMsgs){
+2833: 		rMsgs._lastMsgs.forEach(function(m){
+2834: 			if(m.role==='assistant'&&m.usage){
+2835: 				cachedT+=(m.usage.cached_tokens||0)+(m.usage.cache_read_input_tokens||0)+(m.usage.cache_creation_input_tokens||0);
+2836: 				if(m.usage.prompt_tokens_details&&m.usage.prompt_tokens_details.cached_tokens)cachedT+=m.usage.prompt_tokens_details.cached_tokens;
+2837: 				if(!inT)inT+=(m.usage.prompt_tokens||0)+(m.usage.input_tokens||0);
+2838: 			}
+2839: 		});
+2840: 	}
+2841: 	var mv=document.getElementById('ocModel').value;
+2842: 	var isFreeModel=mv&&mv.indexOf('opencode_zen/')===0;
+2843: 	var msgs=0;
+2844: 	var ch=document.getElementById('ocCI');
+2845: 	ch.querySelectorAll('.ocMsg').forEach(function(){msgs++});
+2846: 	var html='';
+2847: 	html+='<div class="ocCtxR"><span class="ocCtxL">Model</span><span class="ocCtxV">'+(document.getElementById('ocModel').selectedOptions[0]?document.getElementById('ocModel').selectedOptions[0].textContent:'-')+'</span></div>';
+2848: 	html+='<div class="ocCtxR"><span class="ocCtxL">Provider</span><span class="ocCtxV">'+(selModel?selModel.split('/')[0]:'-')+'</span></div>';
+2849: 	html+='<div class="ocCtxR"><span class="ocCtxL">Mode</span><span class="ocCtxV">'+document.getElementById('ocMode').value+'</span></div>';
+2850: 	html+='<div class="ocCtxR"><span class="ocCtxL">Messages in view</span><span class="ocCtxV">'+msgs+'</span></div>';
+2851: 	html+='<div class="ocCtxS"><div class="ocCtxSt">Tokens</div>';

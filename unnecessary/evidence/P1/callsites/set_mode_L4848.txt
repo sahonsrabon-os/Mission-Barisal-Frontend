@@ -1,0 +1,49 @@
+# route: set_mode  line: 4848  method: POST
+# params(arg): {mode:'plan'}
+# response field reads seen in callback: conversation_id, forked_content, messages, success, summary
+# NOTE: best-effort regex scan; verify against this dump.
+----------------------------------------------------------------------
+4846: var cmdPaletteCommands=[
+4847: 	{cmd:'New Session',key:'Ctrl+Shift+N',action:function(){newS()}},
+4848: 	{cmd:'Plan Mode',key:'Ctrl+Shift+P',action:function(){document.getElementById('ocMode').value='plan';api('set_mode',{mode:'plan'},function(){toast('Plan mode','ok')})}},
+4849: 	{cmd:'Build Mode',key:'',action:function(){document.getElementById('ocMode').value='build';api('set_mode',{mode:'build'},function(){toast('Build mode','ok')})}},
+4850: 	{cmd:'Settings',key:'Ctrl+,',action:function(){document.getElementById('ocSetMod').classList.add('open');loadP()}},
+4851: 	{cmd:'Toggle Files',key:'',action:function(){document.getElementById('ocFtBtn').click()}},
+4852: 	{cmd:'Toggle Sidebar',key:'',action:function(){document.getElementById('ocTogSb').click()}},
+4853: 	{cmd:'Toggle Theme',key:'',action:function(){document.getElementById('ocThBtn').click()}},
+4854: 	{cmd:'Compact Conversation',key:'/compact',action:function(){
+4855: 		st('Compacting...',true);
+4856: 		api('compact',{keep_last_n:3},function(e,r){
+4857: 			if(!e&&r&&r.success){rMsgs(r.messages||[]);if(r.summary){toast('Nothing to compact','warn')}else{toast('Compacted','ok')}st('Ready',true)}
+4858: 			else{toast('Failed','err');st('Ready',true)}
+4859: 		});
+4860: 	}},
+4861: 	{cmd:'Clear Conversation',key:'/clear',action:function(){api('clear',{},function(){rMsgs([]);st('Cleared',true)})}},
+4862: 	{cmd:'Export as Markdown',key:'/export',action:function(){exportChat()}},
+4863: 	{cmd:'Undo Last Message',key:'/undo',action:function(){
+4864: 		if(!rMsgs._lastMsgs||!rMsgs._lastMsgs.length){toast('Nothing to undo','warn');return}
+4865: 		var lu=null;for(var i=rMsgs._lastMsgs.length-1;i>=0;i--){if(rMsgs._lastMsgs[i].role==='user'){lu=rMsgs._lastMsgs[i];break}}
+4866: 		if(!lu||!lu.id){toast('Cannot undo','warn');return}
+4867: 		api('undo',{message_id:lu.id},function(e,r){if(!e&&r&&r.success){rMsgs(r.messages||[]);toast('Undone','ok');st('Ready',true);loadSL()}else{toast('Failed','err');st('Ready',true)}});
+4868: 	}},
+4869: 	{cmd:'Fork Conversation',key:'/fork',action:function(){
+4870: 		if(!rMsgs._lastMsgs||!rMsgs._lastMsgs.length){toast('Nothing to fork','warn');return}
+4871: 		var lu=null;for(var i=rMsgs._lastMsgs.length-1;i>=0;i--){if(rMsgs._lastMsgs[i].role==='user'){lu=rMsgs._lastMsgs[i];break}}
+4872: 		if(!lu||!lu.id){toast('Cannot fork','warn');return}
+4873: 		api('fork',{message_id:lu.id},function(e,r){
+4874: 			if(!e&&r&&r.success){
+4875: 				aC=r.conversation_id;
+4876: 				updateURL(aC);
+4877: 				toast('Forked','ok');
+4878: 				st('Ready',true);
+4879: 				loadSL();
+4880: 				loadC(aC);
+4881: 				if(r.forked_content){
+4882: 					var inp=document.getElementById('ocIn');
+4883: 					inp.value=r.forked_content;
+4884: 					inp.focus();
+4885: 				}
+4886: 			}else{toast('Failed','err');st('Ready',true)}
+4887: 		});
+4888: 	}},
+4889: 	{cmd:'Rename Session',key:'/rename',action:function(){

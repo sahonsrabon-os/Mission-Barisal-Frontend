@@ -1,0 +1,49 @@
+# route: test_connection  line: 2769  method: GET
+# params(arg): td
+# response field reads seen in callback: error, success
+# NOTE: best-effort regex scan; verify against this dump.
+----------------------------------------------------------------------
+2767: 	}
+2768: 	st('Testing...',true);
+2769: 	api('test_connection',td,function(e,r){
+2770: 		alert(!e&&r&&r.success?'OK':'Failed: '+(e||(r&&r.error)||''));
+2771: 		st('Ready',true);
+2772: 	});
+2773: });
+2774: function closeConPopup(){
+2775: 	document.getElementById('ocConMod').classList.remove('open');
+2776: 	cP=null;
+2777: }
+2778: document.getElementById('ocCan2').addEventListener('click',closeConPopup);
+2779: document.getElementById('ocConC').addEventListener('click',closeConPopup);
+2780: document.getElementById('ocConMod').addEventListener('click',function(e){
+2781: 	if(e.target===this)closeConPopup();
+2782: });
+2783: 
+2784: document.getElementById('ocSetBtnF').addEventListener('click',function(){
+2785: 	document.getElementById('ocSetMod').classList.add('open');
+2786: 	loadP();
+2787: });
+2788: document.getElementById('ocSetC').addEventListener('click',function(){
+2789: 	document.getElementById('ocSetMod').classList.remove('open');
+2790: });
+2791: document.getElementById('ocSetMod').addEventListener('click',function(e){
+2792: 	if(e.target===this)this.classList.remove('open');
+2793: });
+2794: document.getElementById('ocSetSearch').addEventListener('input',function(){
+2795: 	if(!pv||!pv.length){
+2796: 		loadP();
+2797: 		return;
+2798: 	}
+2799: 	rPL(pv,this.value);
+2800: });
+2801: document.addEventListener('click',function(e){
+2802: 	var row=e.target.closest('#ocCustAddRow');
+2803: 	if(row){
+2804: 		openConPopup('custom');
+2805: 		return;
+2806: 	}
+2807: 	var disBtn=e.target.closest('#ocPL button[data-a="dis"]');
+2808: 	if(disBtn&&disBtn.dataset.id&&disBtn.dataset.id.indexOf('custom:')===0){
+2809: 		if(confirm('Disconnect this custom provider?')){
+2810: 			api('settings_delete',{provider_id:disBtn.dataset.id},function(){_providersCache=null;loadP()});

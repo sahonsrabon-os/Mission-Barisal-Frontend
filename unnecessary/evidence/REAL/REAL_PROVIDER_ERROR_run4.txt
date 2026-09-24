@@ -1,0 +1,5 @@
+Error: waitFor timeout: ai_chat_stream done (last=false)
+    at waitFor (/home/sahon/Videos/ui/server/test/real_provider_test.js:292:13)
+    at async chatOnce (/home/sahon/Videos/ui/server/test/real_provider_test.js:393:7)
+    at async chat (/home/sahon/Videos/ui/server/test/real_provider_test.js:403:19)
+    at async main (/home/sahon/Videos/ui/server/test/real_provider_test.js:437:20)

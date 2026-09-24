@@ -1,0 +1,710 @@
+{
+  "all_pass": true,
+  "rows": [
+    {
+      "route": "status",
+      "params": {},
+      "checks": [
+        {
+          "desc": "session object",
+          "pass": true
+        },
+        {
+          "desc": "session.provider",
+          "pass": true
+        },
+        {
+          "desc": "session.model",
+          "pass": true
+        },
+        {
+          "desc": "session.mode",
+          "pass": true
+        },
+        {
+          "desc": "session.active_conversation",
+          "pass": true
+        },
+        {
+          "desc": "session.provider===custom:fakea",
+          "pass": true
+        },
+        {
+          "desc": "session.model===fast",
+          "pass": true
+        },
+        {
+          "desc": "providers[]",
+          "pass": true
+        },
+        {
+          "desc": "providers[0]{id,name,connected,models}",
+          "pass": true
+        },
+        {
+          "desc": "custom:fakea connected===true",
+          "pass": true
+        },
+        {
+          "desc": "favorite_models[]",
+          "pass": true
+        },
+        {
+          "desc": "model_info object w/ fast",
+          "pass": true
+        },
+        {
+          "desc": "lock{locked}",
+          "pass": true
+        },
+        {
+          "desc": "running_conversations[]",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "route": "start",
+      "params": {
+        "provider": "custom:fakea",
+        "model": "fast",
+        "mode": "build"
+      },
+      "checks": [
+        {
+          "desc": "success===true",
+          "pass": true
+        },
+        {
+          "desc": "session object",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "route": "conversations",
+      "params": {},
+      "checks": [
+        {
+          "desc": "array",
+          "pass": true
+        },
+        {
+          "desc": "item{id,title,updated_at,message_count,running,last_status}",
+          "pass": true
+        },
+        {
+          "desc": "types (updated_at number, running bool, message_count number)",
+          "pass": true
+        },
+        {
+          "desc": "renamed title visible in list (post-matrix)",
+          "pass": true
+        },
+        {
+          "desc": "deleted conv absent (post-matrix)",
+          "pass": true
+        },
+        {
+          "desc": "convMain present (post-matrix)",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "route": "new_session",
+      "params": {},
+      "checks": [
+        {
+          "desc": "id string",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "route": "conversation",
+      "params": {
+        "conversation_id": "conv_5b3ea98ea0c1"
+      },
+      "checks": [
+        {
+          "desc": "messages[]",
+          "pass": true
+        },
+        {
+          "desc": "todos[]",
+          "pass": true
+        },
+        {
+          "desc": "messages non-empty",
+          "pass": true
+        },
+        {
+          "desc": "message{role,content,id}",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "route": "switch_conversation",
+      "params": {
+        "conversation_id": "conv_5b3ea98ea0c1"
+      },
+      "checks": [
+        {
+          "desc": "success===true",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "route": "rename_conversation",
+      "params": {
+        "conversation_id": "conv_5b3ea98ea0c1",
+        "title": "Renamed session"
+      },
+      "checks": [
+        {
+          "desc": "success===true",
+          "pass": true
+        },
+        {
+          "desc": "title echoed",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "route": "delete_conversation",
+      "params": {
+        "conversation_id": "conv_ef94fd81b950"
+      },
+      "checks": [
+        {
+          "desc": "success===true",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "route": "regenerate",
+      "params": {},
+      "checks": [
+        {
+          "desc": "success===true",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "route": "fork",
+      "params": {
+        "message_id": "m_349efdd23c"
+      },
+      "checks": [
+        {
+          "desc": "success===true",
+          "pass": true
+        },
+        {
+          "desc": "conversation_id string",
+          "pass": true
+        },
+        {
+          "desc": "forked_content present",
+          "pass": true
+        },
+        {
+          "desc": "title string (fork suffix)",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "route": "compact",
+      "params": {
+        "keep_last_n": 3
+      },
+      "checks": [
+        {
+          "desc": "success===true",
+          "pass": true
+        },
+        {
+          "desc": "messages[]",
+          "pass": true
+        },
+        {
+          "desc": "summary present on no-op path (UI: \"Nothing to compact\")",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "route": "compact",
+      "params": {
+        "keep_last_n": 1
+      },
+      "checks": [
+        {
+          "desc": "success===true",
+          "pass": true
+        },
+        {
+          "desc": "messages[]",
+          "pass": true
+        },
+        {
+          "desc": "summary ABSENT on real compaction",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "route": "undo",
+      "params": {
+        "message_id": "m_349efdd23c"
+      },
+      "checks": [
+        {
+          "desc": "success===true",
+          "pass": true
+        },
+        {
+          "desc": "messages[]",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "route": "redo",
+      "params": {},
+      "checks": [
+        {
+          "desc": "success===true",
+          "pass": true
+        },
+        {
+          "desc": "messages[]",
+          "pass": true
+        },
+        {
+          "desc": "messages restored (non-empty)",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "route": "abort",
+      "params": {},
+      "checks": [
+        {
+          "desc": "success===true",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "route": "file_tree",
+      "params": {
+        "path": "."
+      },
+      "checks": [
+        {
+          "desc": "directories[]",
+          "pass": true
+        },
+        {
+          "desc": "files[]",
+          "pass": true
+        },
+        {
+          "desc": "files[].name+path+size",
+          "pass": true
+        },
+        {
+          "desc": "README.md listed",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "route": "read_file",
+      "params": {
+        "path": "README.md"
+      },
+      "checks": [
+        {
+          "desc": "content string",
+          "pass": true
+        },
+        {
+          "desc": "content has README heading",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "route": "resolve_file",
+      "params": {
+        "path": "README.md"
+      },
+      "checks": [
+        {
+          "desc": "content string",
+          "pass": true
+        },
+        {
+          "desc": "content has README heading",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "route": "changes",
+      "params": {},
+      "checks": [
+        {
+          "desc": "snapshots[]",
+          "pass": true
+        },
+        {
+          "desc": "snapshot present (from S3 write)",
+          "pass": true
+        },
+        {
+          "desc": "item{id,message,time}",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "route": "diff",
+      "params": {
+        "id": "snap_c8bf9afd65ee"
+      },
+      "checks": [
+        {
+          "desc": "diff string non-empty",
+          "pass": true
+        },
+        {
+          "desc": "diff mentions greeting.txt",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "route": "restore",
+      "params": {
+        "id": "snap_c8bf9afd65ee"
+      },
+      "checks": [
+        {
+          "desc": "restored===true",
+          "pass": true
+        },
+        {
+          "desc": "diff string",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "route": "project_info",
+      "params": {},
+      "checks": [
+        {
+          "desc": "overview string",
+          "pass": true
+        },
+        {
+          "desc": "overview line1 Project type:",
+          "pass": true
+        },
+        {
+          "desc": "overview line2 Project path:",
+          "pass": true
+        },
+        {
+          "desc": "type string",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "route": "projects_list",
+      "params": {},
+      "checks": [
+        {
+          "desc": "array",
+          "pass": true
+        },
+        {
+          "desc": "item{project_id,name,path}",
+          "pass": true
+        },
+        {
+          "desc": "contains ProjB",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "route": "projects_create",
+      "params": {
+        "name": "MatrixTmp",
+        "path": "matrixtmp"
+      },
+      "checks": [
+        {
+          "desc": "project_id string",
+          "pass": true
+        },
+        {
+          "desc": "no error field",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "route": "projects_close",
+      "params": {
+        "project_id": "proj_4915afe35314"
+      },
+      "checks": [
+        {
+          "desc": "success===true",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "route": "projects_delete",
+      "params": {
+        "project_id": "proj_7e6d71ee8dea"
+      },
+      "checks": [
+        {
+          "desc": "success===true",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "route": "projects_wordpress",
+      "params": {},
+      "checks": [
+        {
+          "desc": "array",
+          "pass": true
+        },
+        {
+          "desc": "empty list acceptable (no WP in jail)",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "route": "providers",
+      "params": {},
+      "checks": [
+        {
+          "desc": "array",
+          "pass": true
+        },
+        {
+          "desc": "item{id,name,connected,models,is_custom_type}",
+          "pass": true
+        },
+        {
+          "desc": "custom:fakea+custom:fakeb present & connected",
+          "pass": true
+        },
+        {
+          "desc": "builtin anthropic present (catalog)",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "route": "settings_load",
+      "params": {},
+      "checks": [
+        {
+          "desc": "favorite_models[]",
+          "pass": true
+        },
+        {
+          "desc": "permissions object",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "route": "settings_save",
+      "params": {
+        "provider_id": "custom",
+        "name": "TempProbe",
+        "base_url": "http://127.0.0.1:18899/v1"
+      },
+      "checks": [
+        {
+          "desc": "success===true",
+          "pass": true
+        },
+        {
+          "desc": "provider_id derived (custom:tempprobe)",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "route": "settings_delete",
+      "params": {
+        "provider_id": "custom:tempprobe"
+      },
+      "checks": [
+        {
+          "desc": "success===true",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "route": "test_connection",
+      "params": {
+        "provider_id": "custom:fakea",
+        "api_key": "sk-supersecret-TESTKEY-9d4f2",
+        "base_url": "http://127.0.0.1:18871/v1"
+      },
+      "checks": [
+        {
+          "desc": "success===true",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "route": "favorite_model",
+      "params": {
+        "model_id": "custom:fakea/fast"
+      },
+      "checks": [
+        {
+          "desc": "success===true",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "route": "unfavorite_model",
+      "params": {
+        "model_id": "custom:fakea/fast"
+      },
+      "checks": [
+        {
+          "desc": "success===true",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "route": "toggle_permission",
+      "params": {
+        "permission": "bash",
+        "value": "allow_always"
+      },
+      "checks": [
+        {
+          "desc": "success===true",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "route": "shell",
+      "params": {
+        "command": "echo contract-shell-ok"
+      },
+      "checks": [
+        {
+          "desc": "output string",
+          "pass": true
+        },
+        {
+          "desc": "output contains contract-shell-ok",
+          "pass": true
+        },
+        {
+          "desc": "returncode===0",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "route": "set_mode",
+      "params": {
+        "mode": "plan"
+      },
+      "checks": [
+        {
+          "desc": "success===true",
+          "pass": true
+        },
+        {
+          "desc": "mode echoed",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "route": "clear",
+      "params": {},
+      "checks": [
+        {
+          "desc": "success===true",
+          "pass": true
+        },
+        {
+          "desc": "messages[] empty",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "route": "force_unlock",
+      "params": {},
+      "checks": [
+        {
+          "desc": "success===true",
+          "pass": true
+        },
+        {
+          "desc": "message string (UI failure path reads r.message)",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "route": "ai_chat_stream",
+      "params": {
+        "content": "matrix route check"
+      },
+      "checks": [
+        {
+          "desc": "HTTP 200 + text/event stream CT",
+          "pass": true
+        },
+        {
+          "desc": "SSE lines all `data: ` + JSON",
+          "pass": true
+        }
+      ]
+    }
+  ],
+  "post_matrix": {
+    "permVerify": true,
+    "favEmptyAfterUnfav": true
+  }
+}

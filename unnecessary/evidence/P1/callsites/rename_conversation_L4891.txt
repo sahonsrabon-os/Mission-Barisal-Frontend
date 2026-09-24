@@ -1,0 +1,49 @@
+# route: rename_conversation  line: 4891  method: POST
+# params(arg): {conversation_id:aC,title:t.trim()}
+# response field reads seen in callback: favorite_models, success
+# NOTE: best-effort regex scan; verify against this dump.
+----------------------------------------------------------------------
+4889: 	{cmd:'Rename Session',key:'/rename',action:function(){
+4890: 		var t=prompt('Enter new session title:',curSessionTitle());
+4891: 		if(t!==null&&t.trim()){api('rename_conversation',{conversation_id:aC,title:t.trim()},function(e,r){if(!e&&r&&r.success){toast('Renamed','ok');loadSL()}else{toast('Failed','err')}})}
+4892: 	}},
+4893: 	{cmd:'Help & FAQ',key:'',action:function(){document.getElementById('ocHlBtn').click()}}
+4894: ];
+4895: 
+4896: // Command palette is handled by _origCmdCommands and renderCmdList below
+4897: document.getElementById('ocCmdP').addEventListener('click',function(e){if(e.target===this)this.classList.remove('open')});
+4898: 
+4899: // Model Favorites
+4900: var favModels=[];
+4901: function loadFavModels(){
+4902: 	api('settings_load',null,function(e,d){
+4903: 		if(!e&&d&&d.favorite_models){
+4904: 			favModels=d.favorite_models;
+4905: 			refreshModelFavs();
+4906: 		}
+4907: 	});
+4908: }
+4909: function refreshModelFavs(){
+4910: 	if(_providersCache){
+4911: 		renderModelSelect(_providersCache);
+4912: 		renderModelDropdown(_providersCache);
+4913: 		syncModelBtn();
+4914: 		syncModelDropdownSelection();
+4915: 	}
+4916: }
+4917: function toggleFavModel(modelId){
+4918: 	var idx=favModels.indexOf(modelId);
+4919: 	if(idx===-1){
+4920: 		favModels.push(modelId);
+4921: 		api('favorite_model',{model_id:modelId},function(){});
+4922: 		toast('Added to favorites','ok');
+4923: 	}else{
+4924: 		favModels.splice(idx,1);
+4925: 		api('unfavorite_model',{model_id:modelId},function(){});
+4926: 		toast('Removed from favorites','info');
+4927: 	}
+4928: }
+4929: 
+4930: // Permission System
+4931: var permConfig={};
+4932: var permResolve=null;

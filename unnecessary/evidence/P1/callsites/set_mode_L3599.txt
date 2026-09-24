@@ -1,0 +1,49 @@
+# route: set_mode  line: 3599  method: POST
+# params(arg): {mode:this.value}
+# response field reads seen in callback: bottom, left
+# NOTE: best-effort regex scan; verify against this dump.
+----------------------------------------------------------------------
+3597: });
+3598: document.getElementById('ocMode').addEventListener('change',function(){
+3599: 	api('set_mode',{mode:this.value},function(){});
+3600: });
+3601: 
+3602: // Custom model dropdown toggle
+3603: (function(){
+3604: 	var btn=document.getElementById('ocModelBtn');
+3605: 	var drop=document.getElementById('ocModelDrop');
+3606: 	btn.addEventListener('click',function(e){
+3607: 		e.stopPropagation();
+3608: 		var isOpen=drop.classList.contains('open');
+3609: 		if(isOpen){
+3610: 			drop.classList.remove('open');
+3611: 			return;
+3612: 		}
+3613: 		// Position the fixed dropdown under the button, clamped to viewport
+3614: 		var r=btn.getBoundingClientRect();
+3615: 		var availH=window.innerHeight-(r.bottom+8);
+3616: 		var maxH=Math.max(200,Math.min(420,availH));
+3617: 		drop.style.left=r.left+'px';
+3618: 		drop.style.top=(r.bottom+4)+'px';
+3619: 		drop.style.maxHeight=maxH+'px';
+3620: 		drop.classList.add('open');
+3621: 		syncModelDropdownSelection();
+3622: 		// Scroll selected into view (defer so it doesn't trigger the close-on-scroll guard)
+3623: 		setTimeout(function(){
+3624: 			if(!drop.classList.contains('open'))return;
+3625: 			var sel=drop.querySelector('.ocModelOpt.selected');
+3626: 			if(sel)sel.scrollIntoView({block:'nearest'});
+3627: 		},0);
+3628: 	});
+3629: 	btn.addEventListener('keydown',function(e){
+3630: 		if(e.key==='Enter'||e.key===' '){e.preventDefault();btn.click()}
+3631: 	});
+3632: 	// Close on outside click (bubbling phase; btn handler stops propagation so btn clicks are safe)
+3633: 	document.addEventListener('click',function(e){
+3634: 		if(!drop.classList.contains('open'))return;
+3635: 		if(drop.contains(e.target)||btn.contains(e.target)||e.target===btn)return;
+3636: 		drop.classList.remove('open');
+3637: 	});
+3638: 	// Close on Escape
+3639: 	document.addEventListener('keydown',function(e){
+3640: 		if(e.key==='Escape')drop.classList.remove('open');

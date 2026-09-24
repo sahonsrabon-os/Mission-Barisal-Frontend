@@ -1,0 +1,49 @@
+# route: new_session  line: 1699  method: POST
+# params(arg): {}
+# response field reads seen in callback: id, output
+# NOTE: best-effort regex scan; verify against this dump.
+----------------------------------------------------------------------
+1697: 	// Don't abort an in-flight stream just to open a blank session — the previous
+1698: 	// session may still be thinking and should keep running independently.
+1699: 	api('new_session',{},function(e,r){
+1700: 		if(!e&&r&&r.id){
+1701: 			aC=r.id;
+1702: 			updateURL(aC);
+1703: 			syncStreamUI();
+1704: 			rMsgs([]);
+1705: 			loadPromptHistoryForSession();
+1706: 			loadSL();
+1707: 			setTimeout(function(){hlS(aC)},100);
+1708: 			var mv=document.getElementById('ocModel').value;
+1709: 			var pp=mv.split('/');
+1710: 		var _sp={provider:pp[0],model:pp.slice(1).join('/'),mode:document.getElementById('ocMode').value};
+1711: 		api('start',_sp,function(){});
+1712: 		}
+1713: 	});
+1714: }
+1715: 
+1716: function send(){
+1717: 	var inp=document.getElementById('ocIn');
+1718: 	var text=inp.value.trim();
+1719: 	if(!text)return;
+1720: 	// Only block if the CURRENT session is streaming, not other sessions
+1721: 	if(_ss[aC]&&_ss[aC].streaming)return;
+1722: 
+1723: 	if(text.charAt(0)==='!'&&text.length>1){
+1724: 		var shellCmd=text.substring(1);
+1725: 		inp.value='';autoResize(inp);
+1726: 		if(text&&!(_ss[aC]&&_ss[aC].streaming)){promptHistory.push(text);if(promptHistory.length>50)promptHistory.shift();promptHistoryIdx=-1;savePromptHistory()}
+1727: 		rMsg({role:'user',content:text});
+1728: 		var shellEl=rMsg({role:'asst',content:'',parts:[]});
+1729: 		shellEl.innerHTML='<div class="ocShellPrompt">'+esc(shellCmd)+'</div><div class="ocTerm">Running...</div>';
+1730: 		// Per-session: mark this session as streaming too
+1731: 		if(!_ss[aC]) _ss[aC]={};
+1732: 		_ss[aC].streaming=true;
+1733: 		_ss[aC].lockActive=true;
+1734: 		syncStreamUI();
+1735: 		st('Running shell...',true);
+1736: 		api('shell',{command:shellCmd},function(e,r){
+1737: 			if(aC&&_ss[aC]){_ss[aC].streaming=false;_ss[aC].lockActive=false}
+1738: 			syncStreamUI();
+1739: 			if(!e&&r){
+1740: 				var output=r.output||'';

@@ -1,0 +1,49 @@
+# route: fork  line: 4534  method: POST
+# params(arg): {message_id:msgId}
+# response field reads seen in callback: conversation_id, error, forked_content, success, title
+# NOTE: best-effort regex scan; verify against this dump.
+----------------------------------------------------------------------
+4532: 			if(!msgId||msgIdx<0){toast('Cannot fork: message ID not found','warn');return}
+4533: 			st('Forking...',true);
+4534: 			api('fork',{message_id:msgId},function(e,r){
+4535: 				if(!e&&r&&r.success){
+4536: 					aC=r.conversation_id;
+4537: 					updateURL(aC);
+4538: 					toast('Forked to new session: '+(r.title||'Untitled'),'ok');
+4539: 					st('Ready',true);
+4540: 					loadSL();
+4541: 					loadC(aC);
+4542: 					if(r.forked_content){
+4543: 						var inp=document.getElementById('ocIn');
+4544: 						inp.value=r.forked_content;
+4545: 						inp.focus();
+4546: 					}
+4547: 				}else{
+4548: 					toast('Failed to fork: '+(e||(r&&r.error)||'Unknown error'),'err');
+4549: 					st('Ready',true);
+4550: 				}
+4551: 			});
+4552: 		});
+4553: 		act.appendChild(forkBtn);
+4554: 	}
+4555: 	if(isLast&&!isU){
+4556: 		var regenBtn=document.createElement('button');
+4557: 		regenBtn.className='ocMsgActB';
+4558: 		regenBtn.innerHTML='<svg xmlns="http://www.w3.org/2000/svg" height="12" viewBox="0 -960 960 960" width="12" fill="currentColor"><path d="M396-200q-97 0-166.5-63T160-420q0-94 69.5-157T396-640h252L544-744l56-56 200 200-200 200-56-56 104-104H396q-63 0-109.5 40T240-420q0 60 46.5 100T396-280h284v80H396Z"/></svg>';
+4559: 		regenBtn.title='Regenerate';
+4560: 		regenBtn.addEventListener('click',function(ev){
+4561: 			ev.stopPropagation();
+4562: 			api('regenerate',{},function(e,r){
+4563: 				if(!e&&r&&r.success){
+4564: 					msg.parentNode.removeChild(msg);
+4565: 					toast('Regenerating...','info');
+4566: 					var lastUserMsg='';
+4567: 					document.querySelectorAll('#ocCI .ocMsg.u').forEach(function(m){
+4568: 						lastUserMsg=m.querySelector('.ocMbb').textContent||'';
+4569: 					});
+4570: 					if(lastUserMsg){
+4571: 						var inp=document.getElementById('ocIn');
+4572: 						inp.value=lastUserMsg;
+4573: 						origSend();
+4574: 						inp.value='';
+4575: 					}

@@ -1,0 +1,49 @@
+# route: set_mode  line: 6135  method: POST
+# params(arg): {mode:'plan'}
+# response field reads seen in callback: classList, messages, success, summary
+# NOTE: best-effort regex scan; verify against this dump.
+----------------------------------------------------------------------
+6133: var _origCmdCommands=[
+6134: 	{kb:'new_session',cmd:'New Session',desc:'Start a new conversation',action:function(){newS()}},
+6135: 	{kb:'plan_mode',cmd:'Plan Mode',desc:'Switch to read-only plan mode',action:function(){document.getElementById('ocMode').value='plan';api('set_mode',{mode:'plan'},function(){})}},
+6136: 	{kb:'build_mode',cmd:'Build Mode',desc:'Switch to build mode (read+write)',action:function(){document.getElementById('ocMode').value='build';api('set_mode',{mode:'build'},function(){})}},
+6137: 	{kb:'toggle_sidebar',cmd:'Toggle Sidebar',desc:'Show/hide session history',action:function(){document.getElementById('ocSb').classList.toggle('hid')}},
+6138: 	{kb:'toggle_files',cmd:'Toggle Files',desc:'Show/hide file tree panel',action:function(){document.getElementById('ocFtBtn').click()}},
+6139: 	{kb:'toggle_todos',cmd:'Toggle Tasks',desc:'Show/hide tasks panel',action:function(){document.getElementById('ocTodoP').classList.toggle('open')}},
+6140: 	{kb:'toggle_modified',cmd:'Toggle Modified Files',desc:'Show/hide modified files panel',action:function(){var _fp2=document.getElementById('ocFilesP');_fp2.classList.toggle('open');if(_fp2.classList.contains('open'))loadModifiedFiles()}},
+6141: 	{kb:'settings',cmd:'Settings',desc:'Open provider and permission settings',action:function(){document.getElementById('ocSetMod').classList.add('open');loadP()}},
+6142: 	{kb:'keybindings',cmd:'Keybindings',desc:'View and customize keyboard shortcuts',action:function(){renderKeybindings();document.getElementById('ocKbMod').classList.add('open')}},
+6143: 	{kb:'sound',cmd:'Sound Notifications',desc:'Toggle audio alerts on/off',action:function(){_soundEnabled=!_soundEnabled;localStorage.setItem('oc_sound_enabled',_soundEnabled?'1':'0');applySndIcon(_soundEnabled);toast('Sound Notifications - '+(_soundEnabled?'ON':'OFF'),'ok')}},
+6144: 	{kb:'notifications',cmd:'Desktop Notifications',desc:'Toggle desktop notification popups',action:function(){
+6145: 		if(typeof Notification!=='undefined'){
+6146: 			if(Notification.permission==='default')Notification.requestPermission(function(p){_desktopNotifEnabled=(p==='granted');applyNtfIcon(_desktopNotifEnabled)});
+6147: 			else{_desktopNotifEnabled=!_desktopNotifEnabled;applyNtfIcon(_desktopNotifEnabled);toast('Desktop Notifications - '+(_desktopNotifEnabled?'ON':'OFF'),'ok')}
+6148: 		}
+6149: 	}},
+6150: 	{kb:'clear',cmd:'Clear Conversation',desc:'Delete all messages in this session',action:function(){api('clear',{},function(){rMsgs([]);st('Cleared',true)})}},
+6151: 	{kb:'compact',cmd:'Compact Conversation',desc:'Summarize history to free context space',action:function(){st('Compacting...',true);api('compact',{keep_last_n:3},function(e,r){if(!e&&r&&r.success){rMsgs(r.messages||[]);if(r.summary){toast('Nothing to compact','warn')}else{toast('Compacted','ok')}st('Ready',true)}else{toast('Failed','err');st('Ready',true)}})}},
+6152: 	{kb:'export',cmd:'Export as Markdown',desc:'Download conversation with export options',action:function(){showExportDialog()}},
+6153: 	{kb:'copy',cmd:'Copy Transcript',desc:'Copy conversation to clipboard',action:function(){copyTranscript()}},
+6154: 	{kb:'help',cmd:'Help',desc:'Show keyboard shortcuts and FAQ',action:function(){document.getElementById('ocHlBtn').click()}}
+6155: ];
+6156: 
+6157: // Patch the command palette to include new commands
+6158: function toggleCmdPalette(){
+6159: 	var p=document.getElementById('ocCmdP');
+6160: 	if(p.classList.contains('open')){p.classList.remove('open');return}
+6161: 	var inp=document.getElementById('ocCmdIn');
+6162: 	inp.value='';
+6163: 	renderCmdList('');
+6164: 	p.classList.add('open');
+6165: 	setTimeout(function(){inp.focus()},50);
+6166: }
+6167: function renderCmdList(q){
+6168: 	var list=document.getElementById('ocCmdL');
+6169: 	list.innerHTML='';
+6170: 	var lq=(q||'').toLowerCase();
+6171: 	_origCmdCommands.filter(function(c){return !lq||c.cmd.toLowerCase().indexOf(lq)!==-1||(c.desc&&c.desc.toLowerCase().indexOf(lq)!==-1)}).forEach(function(c,i){
+6172: 		var dynKey=c.kb?getKeybinding(c.kb):'';
+6173: 		var div=document.createElement('div');
+6174: 		div.className='ocCmdIt';
+6175: 		div.innerHTML=(dynKey?'<span class="ocCmdItK">'+esc(dynKey)+'</span>':'<span class="ocCmdItK empty"></span>')+'<div style="flex:1;min-width:0"><div class="ocCmdItN">'+esc(c.cmd)+'</div>'+(c.desc?'<div class="ocCmdItD">'+esc(c.desc)+'</div>':'')+'</div>';
+6176: 		div.addEventListener('click',function(){

@@ -1,0 +1,19 @@
+data: {"_event":"iteration-start","conversation_id":"conv_fb48e5723e64","iteration":1}
+data: {"_event":"usage","conversation_id":"conv_fb48e5723e64","usage":{"input_tokens":42,"output_tokens":17,"cached_tokens":7},"context_tokens":6,"tool_calls":0,"iterations":1,"cost":0}
+data: {"_event":"tool-call","id":"call_t1","name":"read_file","input":{"path":"README.md"},"conversation_id":"conv_fb48e5723e64"}
+data: {"_event":"tool-result","id":"call_t1","name":"read_file","input":{"path":"README.md"},"output":"# default\n\nWorking directory managed by the Code with AI server.\nProject path: `/tmp/oc_contract/home/default`\n\nAsk the AI to explore, edit or run commands here.\n","is_error":false,"conversation_id":"conv_fb48e5723e64"}
+data: {"_event":"iteration-start","conversation_id":"conv_fb48e5723e64","iteration":2}
+data: {"_event":"reasoning-delta","text":"Tool output received; wrapping up.","conversation_id":"conv_fb48e5723e64"}
+data: {"_event":"text-delta","text":"TOOLS_DONE ","conversation_id":"conv_fb48e5723e64"}
+data: {"_event":"text-delta","text":"marker=FAKE_A ","conversation_id":"conv_fb48e5723e64"}
+data: {"_event":"text-delta","text":"— ","conversation_id":"conv_fb48e5723e64"}
+data: {"_event":"text-delta","text":"the ","conversation_id":"conv_fb48e5723e64"}
+data: {"_event":"text-delta","text":"tool ","conversation_id":"conv_fb48e5723e64"}
+data: {"_event":"text-delta","text":"ran ","conversation_id":"conv_fb48e5723e64"}
+data: {"_event":"text-delta","text":"and ","conversation_id":"conv_fb48e5723e64"}
+data: {"_event":"text-delta","text":"I ","conversation_id":"conv_fb48e5723e64"}
+data: {"_event":"text-delta","text":"am ","conversation_id":"conv_fb48e5723e64"}
+data: {"_event":"text-delta","text":"done.","conversation_id":"conv_fb48e5723e64"}
+data: {"_event":"usage","conversation_id":"conv_fb48e5723e64","usage":{"input_tokens":84,"output_tokens":34,"cached_tokens":7},"context_tokens":52,"tool_calls":1,"iterations":2,"cost":0}
+data: {"_event":"title","title":"USE_TOOL read the readme","conversation_id":"conv_fb48e5723e64"}
+data: {"_event":"done","conversation_id":"conv_fb48e5723e64","usage":{"input_tokens":84,"output_tokens":34,"cached_tokens":7},"context_tokens":52,"tool_calls":1,"iterations":2,"cost":0,"auto_title":true}

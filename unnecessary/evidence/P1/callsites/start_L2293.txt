@@ -1,0 +1,49 @@
+# route: start  line: 2293  method: POST
+# params(arg): {provider:pp[0],model:pp.slice(1).join('/'),mode:document.getElementById('ocMode').value}
+# response field reads seen in callback: (none/indirect)
+# NOTE: best-effort regex scan; verify against this dump.
+----------------------------------------------------------------------
+2291: 	if(mv){
+2292: 		var pp=mv.split('/');
+2293: 		api('start',{provider:pp[0],model:pp.slice(1).join('/'),mode:document.getElementById('ocMode').value},function(){doSend()});
+2294: 	}else{
+2295: 		doSend();
+2296: 	}
+2297: }
+2298: 
+2299: 	function loadP(cb){
+2300: 	if(_providersCache){
+2301: 		renderProviders(_providersCache);
+2302: 		if(cb)cb(null,_providersCache);
+2303: 		return;
+2304: 	}
+2305: 	if(_providersLoading){
+2306: 		var pollP=setInterval(function(){
+2307: 			if(_providersCache){
+2308: 				clearInterval(pollP);
+2309: 				renderProviders(_providersCache);
+2310: 				if(cb)cb(null,_providersCache);
+2311: 			}
+2312: 		},50);
+2313: 		return;
+2314: 	}
+2315: 	_providersLoading=true;
+2316: 	api('providers',null,function(e,d){
+2317: 		_providersLoading=false;
+2318: 		if(e||!d)return;
+2319: 		_providersCache=d;
+2320: 		renderProviders(d);
+2321: 		if(cb)cb(e,d);
+2322: 	});
+2323: }
+2324: function renderModelSelect(d){
+2325: 		var ms=document.getElementById('ocModel');
+2326: 		if(!ms)return;
+2327: 		ms.innerHTML='<option value="">Select model</option>';
+2328: 
+2329: 		// Favorites optgroup first
+2330: 		if(favModels.length){
+2331: 			var favGrp=document.createElement('optgroup');
+2332: 			favGrp.label='Favorites';
+2333: 			favModels.forEach(function(fm){
+2334: 				var parts=fm.split('/');

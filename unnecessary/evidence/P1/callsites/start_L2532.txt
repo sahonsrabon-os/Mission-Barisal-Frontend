@@ -1,0 +1,49 @@
+# route: start  line: 2532  method: GET
+# params(arg): _sp
+# response field reads seen in callback: connected, id, is_custom_type, models, name, slice
+# NOTE: best-effort regex scan; verify against this dump.
+----------------------------------------------------------------------
+2530: 	if(v){
+2531: 		var _sp={provider:p[0],model:p.slice(1).join('/'),mode:document.getElementById('ocMode').value};
+2532: 		api('start',_sp,function(){});
+2533: 	}
+2534: 	updateVariantBadge();
+2535: }
+2536: function syncModelDropdownSelection(){
+2537: 	var v=document.getElementById('ocModel').value;
+2538: 	var drop=document.getElementById('ocModelDrop');
+2539: 	if(!drop)return;
+2540: 	drop.querySelectorAll('.ocModelOpt').forEach(function(row){
+2541: 		if(row.dataset.value===v)row.classList.add('selected');
+2542: 		else row.classList.remove('selected');
+2543: 	});
+2544: }
+2545: function cssEsc(s){return String(s).replace(/"/g,'&quot;').replace(/'/g,'&#39;')}
+2546: 
+2547: function rPL(d,query){
+2548: 	var l=document.getElementById('ocPL');
+2549: 	l.innerHTML='';
+2550: 	var sorted=d.slice().sort(function(a,b){
+2551: 		if(a.connected&&!b.connected)return -1;
+2552: 		if(!a.connected&&b.connected)return 1;
+2553: 		return(a.name||'').localeCompare(b.name||'');
+2554: 	});
+2555: 	var q=(query||'').toLowerCase();
+2556: 	sorted.forEach(function(p){
+2557: 		if(p.is_custom_type)return;
+2558: 		var div=document.createElement('div');
+2559: 		div.className='ocPi';
+2560: 		div.dataset.id=p.id;
+2561: 		div.dataset.name=(p.name||'').toLowerCase();
+2562: 		if(q&&div.dataset.name.indexOf(q)===-1){
+2563: 			div.className='ocPi ocPiHide';
+2564: 		}
+2565: 		var modelCount=Object.keys(p.models||{}).length;
+2566: 		var sub=modelCount?modelCount+' model'+(modelCount>1?'s':''):'No models';
+2567: 		var badge=p.connected?'<span class="ocPiB">Connected</span>':'<span class="ocPiB ocPiBo">Not set</span>';
+2568: 		var btn=(p.connected
+2569: 			?'<button class="ocB ocBs" data-a="dis" data-id="'+p.id+'">Disconnect</button>'
+2570: 			:'<button class="ocB ocBs" data-a="con" data-id="'+p.id+'">Connect</button>');
+2571: 		div.innerHTML='<span class="ocPiN">'+p.name+'<span class="ocPiSub">'+sub+'</span></span>'+badge+btn;
+2572: 		l.appendChild(div);
+2573: 	});

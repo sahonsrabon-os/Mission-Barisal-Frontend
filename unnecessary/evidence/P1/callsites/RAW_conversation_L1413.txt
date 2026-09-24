@@ -1,0 +1,48 @@
+# raw XHR route: conversation  line: 1413
+----------------------------------------------------------------------
+1409: 	_lastSeen[id]=Math.floor(Date.now()/1000);
+1410: 	updateURL(id);
+1411: 	loadTodos();
+1412: 	loadPromptHistoryForSession();
+1413: 	var u=A+'&ai_php_api=conversation&csrf_token='+C+'&conversation_id='+encodeURIComponent(id);
+1414: 	var x=new XMLHttpRequest();
+1415: 	x.open('GET',u,true);
+1416: 	x.setRequestHeader('Accept','application/json');
+1417: 	x.onload=function(){
+1418: 		if(x.status===200){
+1419: 			try{
+1420: 				var d=JSON.parse(x.responseText);
+1421: 				rMsgs(d.messages||[]);
+1422: 				hlS(id);
+1423: 				if(!d.messages||!d.messages.length){aC=null;updateURL('')}
+1424: 				else{
+1425: 					var userMsgs=[];
+1426: 					var userEls=document.querySelectorAll('.ocMsg.u .ocMbb');
+1427: 					for(var i=0;i<userEls.length;i++){var t=userEls[i].textContent;if(t)userMsgs.push(t)}
+1428: 					if(userMsgs.length){promptHistory=userMsgs.slice(-50);promptHistoryIdx=-1;savePromptHistory()}
+1429: 				}
+1430: 			}catch(e){}
+1431: 		}
+1432: 	};
+1433: 	x.send();
+1434: }
+1435: 
+1436: function switchToSessionIdx(idx){
+1437: 	if(!_sessions||!_sessions[idx])return;
+1438: 	var s=_sessions[idx];
+1439: 	var mv=document.getElementById('ocModel').value;
+1440: 	var pp=mv.split('/');
+1441: 	var _sp={provider:pp[0],model:pp.slice(1).join('/'),mode:document.getElementById('ocMode').value};
+1442: 	api('start',_sp,function(){
+1443: 		aC=s.id;
+1444: 		api('switch_conversation',{conversation_id:s.id},function(){loadC(s.id)});
+1445: 	});
+1446: }
+1447: 
+1448: function loadSL(){
+1449: 	api('conversations',null,function(e,d){
+1450: 		if(e||!d)return;
+1451: 		var ls=document.getElementById('ocSL');
+1452: 		ls.innerHTML='';
+1453: 		if(!d.length){
+1454: 			ls.innerHTML='<div style="padding:20px;color:var(--t3);font-size:12px;text-align:center">No sessions yet</div>';

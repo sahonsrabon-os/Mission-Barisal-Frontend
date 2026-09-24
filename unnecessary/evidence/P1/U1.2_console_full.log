@@ -1,0 +1,8 @@
+[0924/041532.830421:ERROR:third_party/crashpad/crashpad/util/file/file_io_posix.cc:153] open /home/sahon/.config/google-chrome/Crash Reports/pending/3f850c72-87e5-45f1-a6f1-3015961eeddb.lock: File exists (17)
+[0924/041532.830496:ERROR:third_party/crashpad/crashpad/util/file/file_io_posix.cc:153] open /home/sahon/.config/google-chrome/Crash Reports/pending/87872199-63ef-4ec9-9305-aa91d6d28757.lock: File exists (17)
+[25689:25689:0924/041532.906102:INFO:components/enterprise/browser/controller/chrome_browser_cloud_management_controller.cc:241] No machine level policy manager exists.
+[25723:25723:0924/041532.907697:WARNING:sandbox/policy/linux/sandbox_linux.cc:405] InitializeSandbox() called with multiple threads in process gpu-process.
+[25689:25689:0924/041533.216183:WARNING:components/dbus/xdg/portal.cc:126] Failed to register with org.freedesktop.host.portal.Registry
+[25689:25689:0924/041533.687223:INFO:CONSOLE:0] "[DOM] Password field is not contained in a form: (More info: https://goo.gl/9p2vKq) %o", source: http://127.0.0.1:8899/index.html (0)
+[25732:25745:0924/041533.869053:WARNING:net/extras/sqlite/sqlite_persistent_store_backend_base.cc:181] Failed to post task from FlushAndNotifyInBackground@net/extras/sqlite/sqlite_persistent_store_backend_base.cc:231 to client_task_runner_.
+[25732:25745:0924/041533.869165:WARNING:net/extras/sqlite/sqlite_persistent_store_backend_base.cc:181] Failed to post task from FlushAndNotifyInBackground@net/extras/sqlite/sqlite_persistent_store_backend_base.cc:231 to client_task_runner_.
