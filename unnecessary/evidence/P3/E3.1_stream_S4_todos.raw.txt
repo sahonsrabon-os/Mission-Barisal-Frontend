@@ -1,20 +1,20 @@
-data: {"_event":"iteration-start","conversation_id":"conv_0ab64458d2c5","iteration":1}
-data: {"_event":"usage","conversation_id":"conv_0ab64458d2c5","usage":{"input_tokens":42,"output_tokens":17,"cached_tokens":7},"context_tokens":5,"tool_calls":0,"iterations":1,"cost":0}
-data: {"_event":"tool-call","id":"call_d1","name":"todo_write","input":{"todos":[{"content":"Step one","status":"pending","priority":"high"},{"content":"Step two","status":"in_progress","priority":"medium"}]},"conversation_id":"conv_0ab64458d2c5"}
-data: {"_event":"todos","todos":[{"content":"Step one","status":"pending","priority":"high"},{"content":"Step two","status":"pending","priority":"medium"}],"conversation_id":"conv_0ab64458d2c5"}
-data: {"_event":"tool-result","id":"call_d1","name":"todo_write","input":{"todos":[{"content":"Step one","status":"pending","priority":"high"},{"content":"Step two","status":"in_progress","priority":"medium"}]},"output":"Todos updated (2).","is_error":false,"conversation_id":"conv_0ab64458d2c5"}
-data: {"_event":"iteration-start","conversation_id":"conv_0ab64458d2c5","iteration":2}
-data: {"_event":"reasoning-delta","text":"Tool output received; wrapping up.","conversation_id":"conv_0ab64458d2c5"}
-data: {"_event":"text-delta","text":"TOOLS_DONE ","conversation_id":"conv_0ab64458d2c5"}
-data: {"_event":"text-delta","text":"marker=FAKE_A ","conversation_id":"conv_0ab64458d2c5"}
-data: {"_event":"text-delta","text":"— ","conversation_id":"conv_0ab64458d2c5"}
-data: {"_event":"text-delta","text":"the ","conversation_id":"conv_0ab64458d2c5"}
-data: {"_event":"text-delta","text":"tool ","conversation_id":"conv_0ab64458d2c5"}
-data: {"_event":"text-delta","text":"ran ","conversation_id":"conv_0ab64458d2c5"}
-data: {"_event":"text-delta","text":"and ","conversation_id":"conv_0ab64458d2c5"}
-data: {"_event":"text-delta","text":"I ","conversation_id":"conv_0ab64458d2c5"}
-data: {"_event":"text-delta","text":"am ","conversation_id":"conv_0ab64458d2c5"}
-data: {"_event":"text-delta","text":"done.","conversation_id":"conv_0ab64458d2c5"}
-data: {"_event":"usage","conversation_id":"conv_0ab64458d2c5","usage":{"input_tokens":84,"output_tokens":34,"cached_tokens":7},"context_tokens":44,"tool_calls":1,"iterations":2,"cost":0}
-data: {"_event":"title","title":"TODO update the plan","conversation_id":"conv_0ab64458d2c5"}
-data: {"_event":"done","conversation_id":"conv_0ab64458d2c5","usage":{"input_tokens":84,"output_tokens":34,"cached_tokens":7},"context_tokens":44,"tool_calls":1,"iterations":2,"cost":0,"auto_title":true}
+data: {"_event":"iteration-start","conversation_id":"conv_a0dad6288de9","iteration":1}
+data: {"_event":"usage","conversation_id":"conv_a0dad6288de9","usage":{"input_tokens":42,"output_tokens":17,"cached_tokens":7},"context_tokens":5,"tool_calls":0,"iterations":1,"cost":0}
+data: {"_event":"tool-call","id":"call_d1","name":"todo_write","input":{"todos":[{"content":"Step one","status":"pending","priority":"high"},{"content":"Step two","status":"in_progress","priority":"medium"}]},"conversation_id":"conv_a0dad6288de9"}
+data: {"_event":"todos","todos":[{"content":"Step one","status":"pending","priority":"high"},{"content":"Step two","status":"pending","priority":"medium"}],"conversation_id":"conv_a0dad6288de9"}
+data: {"_event":"tool-result","id":"call_d1","name":"todo_write","input":{"todos":[{"content":"Step one","status":"pending","priority":"high"},{"content":"Step two","status":"in_progress","priority":"medium"}]},"output":"Todos updated (2).","is_error":false,"conversation_id":"conv_a0dad6288de9"}
+data: {"_event":"iteration-start","conversation_id":"conv_a0dad6288de9","iteration":2}
+data: {"_event":"reasoning-delta","text":"Tool output received; wrapping up.","conversation_id":"conv_a0dad6288de9"}
+data: {"_event":"text-delta","text":"TOOLS_DONE ","conversation_id":"conv_a0dad6288de9"}
+data: {"_event":"text-delta","text":"marker=FAKE_A ","conversation_id":"conv_a0dad6288de9"}
+data: {"_event":"text-delta","text":"— ","conversation_id":"conv_a0dad6288de9"}
+data: {"_event":"text-delta","text":"the ","conversation_id":"conv_a0dad6288de9"}
+data: {"_event":"text-delta","text":"tool ","conversation_id":"conv_a0dad6288de9"}
+data: {"_event":"text-delta","text":"ran ","conversation_id":"conv_a0dad6288de9"}
+data: {"_event":"text-delta","text":"and ","conversation_id":"conv_a0dad6288de9"}
+data: {"_event":"text-delta","text":"I ","conversation_id":"conv_a0dad6288de9"}
+data: {"_event":"text-delta","text":"am ","conversation_id":"conv_a0dad6288de9"}
+data: {"_event":"text-delta","text":"done.","conversation_id":"conv_a0dad6288de9"}
+data: {"_event":"usage","conversation_id":"conv_a0dad6288de9","usage":{"input_tokens":84,"output_tokens":34,"cached_tokens":7},"context_tokens":44,"tool_calls":1,"iterations":2,"cost":0}
+data: {"_event":"title","title":"TODO update the plan","conversation_id":"conv_a0dad6288de9"}
+data: {"_event":"done","conversation_id":"conv_a0dad6288de9","usage":{"input_tokens":84,"output_tokens":34,"cached_tokens":7},"context_tokens":44,"tool_calls":1,"iterations":2,"cost":0,"auto_title":true}

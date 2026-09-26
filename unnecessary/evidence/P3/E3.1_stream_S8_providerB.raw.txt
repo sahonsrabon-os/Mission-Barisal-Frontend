@@ -1,12 +1,12 @@
-data: {"_event":"iteration-start","conversation_id":"conv_5b3ea98ea0c1","iteration":1}
-data: {"_event":"reasoning-delta","text":"Thinking... the user said: \"Reply with greeting from B\". A concise reply is best.","conversation_id":"conv_5b3ea98ea0c1"}
-data: {"_event":"text-delta","text":"Hello ","conversation_id":"conv_5b3ea98ea0c1"}
-data: {"_event":"text-delta","text":"from ","conversation_id":"conv_5b3ea98ea0c1"}
-data: {"_event":"text-delta","text":"FAKE_B. ","conversation_id":"conv_5b3ea98ea0c1"}
-data: {"_event":"text-delta","text":"This ","conversation_id":"conv_5b3ea98ea0c1"}
-data: {"_event":"text-delta","text":"is ","conversation_id":"conv_5b3ea98ea0c1"}
-data: {"_event":"text-delta","text":"a ","conversation_id":"conv_5b3ea98ea0c1"}
-data: {"_event":"text-delta","text":"streamed ","conversation_id":"conv_5b3ea98ea0c1"}
-data: {"_event":"text-delta","text":"reply.","conversation_id":"conv_5b3ea98ea0c1"}
-data: {"_event":"usage","conversation_id":"conv_5b3ea98ea0c1","usage":{"input_tokens":42,"output_tokens":17,"cached_tokens":7},"context_tokens":53,"tool_calls":0,"iterations":1,"cost":0}
-data: {"_event":"done","conversation_id":"conv_5b3ea98ea0c1","usage":{"input_tokens":42,"output_tokens":17,"cached_tokens":7},"context_tokens":53,"tool_calls":0,"iterations":1,"cost":0}
+data: {"_event":"iteration-start","conversation_id":"conv_586f82ff8821","iteration":1}
+data: {"_event":"reasoning-delta","text":"Thinking... the user said: \"Reply with greeting from B\". A concise reply is best.","conversation_id":"conv_586f82ff8821"}
+data: {"_event":"text-delta","text":"Hello ","conversation_id":"conv_586f82ff8821"}
+data: {"_event":"text-delta","text":"from ","conversation_id":"conv_586f82ff8821"}
+data: {"_event":"text-delta","text":"FAKE_B. ","conversation_id":"conv_586f82ff8821"}
+data: {"_event":"text-delta","text":"This ","conversation_id":"conv_586f82ff8821"}
+data: {"_event":"text-delta","text":"is ","conversation_id":"conv_586f82ff8821"}
+data: {"_event":"text-delta","text":"a ","conversation_id":"conv_586f82ff8821"}
+data: {"_event":"text-delta","text":"streamed ","conversation_id":"conv_586f82ff8821"}
+data: {"_event":"text-delta","text":"reply.","conversation_id":"conv_586f82ff8821"}
+data: {"_event":"usage","conversation_id":"conv_586f82ff8821","usage":{"input_tokens":42,"output_tokens":17,"cached_tokens":7},"context_tokens":53,"tool_calls":0,"iterations":1,"cost":0}
+data: {"_event":"done","conversation_id":"conv_586f82ff8821","usage":{"input_tokens":42,"output_tokens":17,"cached_tokens":7},"context_tokens":53,"tool_calls":0,"iterations":1,"cost":0}

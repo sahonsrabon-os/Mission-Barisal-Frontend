@@ -8,7 +8,7 @@
       "status": 200,
       "content_type": "application/json; charset=utf-8",
       "json_ok": true,
-      "body_sample": "{\"session\":{\"provider\":\"custom:fakea\",\"model\":\"fast\",\"mode\":\"build\",\"active_conversation\":\"conv_5b3ea98ea0c1\"},\"providers\":[{\"id\":\"anthropic\",\"name\":\"Anthropic\",\"connected\":false,\"models\":{\"claude-sonnet-4-20250514\":{\"name\":\"Claude Sonnet 4\",\"context_window\":200000},\"claude-opus-4-20250514\":{\"name\":\"Claude Opus 4\",\"context_window\":200000},\"claude-3-7-sonnet-20250219\":{\"name\":\"Claude 3.7 Sonnet\",\"context_window\":200000},\"claude-3-5-haiku-20241022\":{\"name\":\"Claude 3.5 Haiku\",\"context_window\":200000}},\"is_custom_type\":false,\"default_model\":\"claude-sonnet-4-20250514\",\"base_url\":\"https://api.anthropic.com/v1\"},{\"id\":\"openai\",\"name\":\"OpenAI\",\"connected\":false,\"models\":{\"gpt-4o\":{\"name\":\"GPT-4o\",\"context_window\":128000},\"gpt-4o-mini\":{\"name\":\"GPT-4o mini\",\"context_window\":128000},\"gpt-4.1\":{\"name\":\"GPT-4.1\",\"context_window\":1047576},\"gpt-4.1-mini\":{\"name\":\"GPT-4.1 mini\",\"context_window\":1047576},\"o3-mini\":{\"name\":\"o3-mini\",\"context_window\":200000}},\"is_custom_type\":false,\"default_model\":\"gpt-4o\",\"base_url\":\"https://api.openai.com/v1\"},{\"id\":\"google\",\"name\":\"Google\",\"connected\":false,\"models\":{\"gemini-2.5-pro\":{\"name\":\"Gemini 2.5 Pro\",\"context_window\":1048576},\"gemini-2.5-flash\":{\"name\":\"G"
+      "body_sample": "{\"session\":{\"provider\":\"custom:fakea\",\"model\":\"fast\",\"mode\":\"build\",\"active_conversation\":\"conv_586f82ff8821\"},\"providers\":[{\"id\":\"anthropic\",\"name\":\"Anthropic\",\"connected\":false,\"models\":{\"claude-sonnet-4-20250514\":{\"name\":\"Claude Sonnet 4\",\"context_window\":200000},\"claude-opus-4-20250514\":{\"name\":\"Claude Opus 4\",\"context_window\":200000},\"claude-3-7-sonnet-20250219\":{\"name\":\"Claude 3.7 Sonnet\",\"context_window\":200000},\"claude-3-5-haiku-20241022\":{\"name\":\"Claude 3.5 Haiku\",\"context_window\":200000}},\"is_custom_type\":false,\"default_model\":\"claude-sonnet-4-20250514\",\"base_url\":\"https://api.anthropic.com/v1\"},{\"id\":\"openai\",\"name\":\"OpenAI\",\"connected\":false,\"models\":{\"gpt-4o\":{\"name\":\"GPT-4o\",\"context_window\":128000},\"gpt-4o-mini\":{\"name\":\"GPT-4o mini\",\"context_window\":128000},\"gpt-4.1\":{\"name\":\"GPT-4.1\",\"context_window\":1047576},\"gpt-4.1-mini\":{\"name\":\"GPT-4.1 mini\",\"context_window\":1047576},\"o3-mini\":{\"name\":\"o3-mini\",\"context_window\":200000}},\"is_custom_type\":false,\"default_model\":\"gpt-4o\",\"base_url\":\"https://api.openai.com/v1\"},{\"id\":\"google\",\"name\":\"Google\",\"connected\":false,\"models\":{\"gemini-2.5-pro\":{\"name\":\"Gemini 2.5 Pro\",\"context_window\":1048576},\"gemini-2.5-flash\":{\"name\":\"G"
     },
     {
       "route": "start",
@@ -24,7 +24,7 @@
       "status": 200,
       "content_type": "application/json; charset=utf-8",
       "json_ok": true,
-      "body_sample": "[{\"id\":\"conv_5b3ea98ea0c1\",\"title\":\"Say hello to the contract\",\"updated_at\":1790242848,\"message_count\":4,\"running\":false,\"last_status\":\"completed\"},{\"id\":\"conv_ef94fd81b950\",\"title\":\"Untitled\",\"updated_at\":1790242848,\"message_count\":0,\"running\":false,\"last_status\":\"idle\"},{\"id\":\"conv_fb48e5723e64\",\"title\":\"USE_TOOL read the readme\",\"updated_at\":1790242848,\"message_count\":4,\"running\":false,\"last_status\":\"completed\"},{\"id\":\"conv_058336fc6855\",\"title\":\"USE_WRITE create greeting\",\"updated_at\":1790242848,\"message_count\":4,\"running\":false,\"last_status\":\"completed\"},{\"id\":\"conv_0ab64458d2c5\",\"title\":\"TODO update the plan\",\"updated_at\":1790242848,\"message_count\":4,\"running\":false,\"last_status\":\"completed\"},{\"id\":\"conv_af36076c1714\",\"title\":\"Untitled\",\"updated_at\":1790242848,\"message_count\":1,\"running\":false,\"last_status\":\"completed\"},{\"id\":\"conv_04bc3ec45a79\",\"title\":\"Untitled\",\"updated_at\":1790242848,\"message_count\":1,\"running\":false,\"last_status\":\"error\"}]"
+      "body_sample": "[{\"id\":\"conv_856d8699528c\",\"title\":\"USE_WRITE create greeting\",\"updated_at\":1790427733,\"message_count\":4,\"running\":false,\"last_status\":\"completed\"},{\"id\":\"conv_a0dad6288de9\",\"title\":\"TODO update the plan\",\"updated_at\":1790427733,\"message_count\":4,\"running\":false,\"last_status\":\"completed\"},{\"id\":\"conv_f3987815d1f1\",\"title\":\"Untitled\",\"updated_at\":1790427733,\"message_count\":1,\"running\":false,\"last_status\":\"completed\"},{\"id\":\"conv_d2101a88698f\",\"title\":\"Untitled\",\"updated_at\":1790427733,\"message_count\":1,\"running\":false,\"last_status\":\"error\"},{\"id\":\"conv_586f82ff8821\",\"title\":\"Say hello to the contract\",\"updated_at\":1790427732,\"message_count\":4,\"running\":false,\"last_status\":\"completed\"},{\"id\":\"conv_588b3662b55d\",\"title\":\"Untitled\",\"updated_at\":1790427732,\"message_count\":0,\"running\":false,\"last_status\":\"idle\"},{\"id\":\"conv_e2fb1c11853d\",\"title\":\"USE_TOOL read the readme\",\"updated_at\":1790427732,\"message_count\":4,\"running\":false,\"last_status\":\"completed\"}]"
     },
     {
       "route": "new_session",
@@ -32,7 +32,7 @@
       "status": 200,
       "content_type": "application/json; charset=utf-8",
       "json_ok": true,
-      "body_sample": "{\"id\":\"conv_d1702d31e2f4\",\"title\":\"Untitled\",\"output\":\"\"}"
+      "body_sample": "{\"id\":\"conv_2ccb7bbf7b72\",\"title\":\"Untitled\",\"output\":\"\"}"
     },
     {
       "route": "conversation",
@@ -40,7 +40,7 @@
       "status": 200,
       "content_type": "application/json; charset=utf-8",
       "json_ok": true,
-      "body_sample": "{\"messages\":[{\"id\":\"m_349efdd23c\",\"role\":\"user\",\"content\":\"Say hello to the contract\",\"time\":1790242847},{\"id\":\"m_92af430d77\",\"role\":\"assistant\",\"content\":\"Hello from FAKE_A. This is a streamed reply.\",\"parts\":[{\"type\":\"reasoning\",\"text\":\"Thinking... the user said: \\\"Say hello to the contract\\\". A concise reply is best.\"},{\"type\":\"text\",\"text\":\"Hello from FAKE_A. This is a streamed reply.\"}],\"time\":1790242848,\"model\":\"fast\",\"provider\":\"custom:fakea\",\"usage\":{\"input_tokens\":42,\"output_tokens\":17,\"cached_tokens\":7}},{\"id\":\"m_8fecb85dd7\",\"role\":\"user\",\"content\":\"A second warmup message\",\"time\":1790242848},{\"id\":\"m_d0cf96c738\",\"role\":\"assistant\",\"content\":\"Hello from FAKE_A. This is a streamed reply.\",\"parts\":[{\"type\":\"reasoning\",\"text\":\"Thinking... the user said: \\\"A second warmup message\\\". A concise reply is best.\"},{\"type\":\"text\",\"text\":\"Hello from FAKE_A. This is a streamed reply.\"}],\"time\":1790242848,\"model\":\"fast\",\"provider\":\"custom:fakea\",\"usage\":{\"input_tokens\":42,\"output_tokens\":17,\"cached_tokens\":7}}],\"todos\":[]}"
+      "body_sample": "{\"messages\":[{\"id\":\"m_44315b233a\",\"role\":\"user\",\"content\":\"Say hello to the contract\",\"time\":1790427732},{\"id\":\"m_5c89c36020\",\"role\":\"assistant\",\"content\":\"Hello from FAKE_A. This is a streamed reply.\",\"parts\":[{\"type\":\"reasoning\",\"text\":\"Thinking... the user said: \\\"Say hello to the contract\\\". A concise reply is best.\"},{\"type\":\"text\",\"text\":\"Hello from FAKE_A. This is a streamed reply.\"}],\"time\":1790427732,\"model\":\"fast\",\"provider\":\"custom:fakea\",\"usage\":{\"input_tokens\":42,\"output_tokens\":17,\"cached_tokens\":7}},{\"id\":\"m_1fc54192f7\",\"role\":\"user\",\"content\":\"A second warmup message\",\"time\":1790427732},{\"id\":\"m_d77dcd0572\",\"role\":\"assistant\",\"content\":\"Hello from FAKE_A. This is a streamed reply.\",\"parts\":[{\"type\":\"reasoning\",\"text\":\"Thinking... the user said: \\\"A second warmup message\\\". A concise reply is best.\"},{\"type\":\"text\",\"text\":\"Hello from FAKE_A. This is a streamed reply.\"}],\"time\":1790427732,\"model\":\"fast\",\"provider\":\"custom:fakea\",\"usage\":{\"input_tokens\":42,\"output_tokens\":17,\"cached_tokens\":7}}],\"todos\":[]}"
     },
     {
       "route": "switch_conversation",
@@ -48,7 +48,7 @@
       "status": 200,
       "content_type": "application/json; charset=utf-8",
       "json_ok": true,
-      "body_sample": "{\"success\":true,\"conversation_id\":\"conv_5b3ea98ea0c1\"}"
+      "body_sample": "{\"success\":true,\"conversation_id\":\"conv_586f82ff8821\"}"
     },
     {
       "route": "rename_conversation",
@@ -80,7 +80,7 @@
       "status": 200,
       "content_type": "application/json; charset=utf-8",
       "json_ok": true,
-      "body_sample": "{\"success\":true,\"conversation_id\":\"conv_3b6b510dca8d\",\"title\":\"Renamed session (fork)\",\"forked_content\":\"\"}"
+      "body_sample": "{\"success\":true,\"conversation_id\":\"conv_07d1f9c95063\",\"title\":\"Renamed session (fork)\",\"forked_content\":\"\"}"
     },
     {
       "route": "compact",
@@ -88,7 +88,7 @@
       "status": 200,
       "content_type": "application/json; charset=utf-8",
       "json_ok": true,
-      "body_sample": "{\"success\":true,\"messages\":[{\"id\":\"m_349efdd23c\",\"role\":\"user\",\"content\":\"Say hello to the contract\",\"time\":1790242847},{\"id\":\"m_92af430d77\",\"role\":\"assistant\",\"content\":\"Hello from FAKE_A. This is a streamed reply.\",\"parts\":[{\"type\":\"reasoning\",\"text\":\"Thinking... the user said: \\\"Say hello to the contract\\\". A concise reply is best.\"},{\"type\":\"text\",\"text\":\"Hello from FAKE_A. This is a streamed reply.\"}],\"time\":1790242848,\"model\":\"fast\",\"provider\":\"custom:fakea\",\"usage\":{\"input_tokens\":42,\"output_tokens\":17,\"cached_tokens\":7}}],\"summary\":\"nothing to compact\"}"
+      "body_sample": "{\"success\":true,\"messages\":[{\"id\":\"m_44315b233a\",\"role\":\"user\",\"content\":\"Say hello to the contract\",\"time\":1790427732},{\"id\":\"m_5c89c36020\",\"role\":\"assistant\",\"content\":\"Hello from FAKE_A. This is a streamed reply.\",\"parts\":[{\"type\":\"reasoning\",\"text\":\"Thinking... the user said: \\\"Say hello to the contract\\\". A concise reply is best.\"},{\"type\":\"text\",\"text\":\"Hello from FAKE_A. This is a streamed reply.\"}],\"time\":1790427732,\"model\":\"fast\",\"provider\":\"custom:fakea\",\"usage\":{\"input_tokens\":42,\"output_tokens\":17,\"cached_tokens\":7}}],\"summary\":\"nothing to compact\"}"
     },
     {
       "route": "compact",
@@ -96,7 +96,7 @@
       "status": 200,
       "content_type": "application/json; charset=utf-8",
       "json_ok": true,
-      "body_sample": "{\"success\":true,\"messages\":[{\"id\":\"m_b77eb21f35\",\"role\":\"assistant\",\"content\":\"\",\"parts\":[{\"type\":\"text\",\"text\":\"(Conversation compacted: 1 earlier messages summarized out. Continue from the recent context below.)\"}],\"time\":1790242848},{\"id\":\"m_92af430d77\",\"role\":\"assistant\",\"content\":\"Hello from FAKE_A. This is a streamed reply.\",\"parts\":[{\"type\":\"reasoning\",\"text\":\"Thinking... the user said: \\\"Say hello to the contract\\\". A concise reply is best.\"},{\"type\":\"text\",\"text\":\"Hello from FAKE_A. This is a streamed reply.\"}],\"time\":1790242848,\"model\":\"fast\",\"provider\":\"custom:fakea\",\"usage\":{\"input_tokens\":42,\"output_tokens\":17,\"cached_tokens\":7}}]}"
+      "body_sample": "{\"success\":true,\"messages\":[{\"id\":\"m_133bb96eb3\",\"role\":\"assistant\",\"content\":\"\",\"parts\":[{\"type\":\"text\",\"text\":\"(Conversation compacted: 1 earlier messages summarized out. Continue from the recent context below.)\"}],\"time\":1790427733},{\"id\":\"m_5c89c36020\",\"role\":\"assistant\",\"content\":\"Hello from FAKE_A. This is a streamed reply.\",\"parts\":[{\"type\":\"reasoning\",\"text\":\"Thinking... the user said: \\\"Say hello to the contract\\\". A concise reply is best.\"},{\"type\":\"text\",\"text\":\"Hello from FAKE_A. This is a streamed reply.\"}],\"time\":1790427732,\"model\":\"fast\",\"provider\":\"custom:fakea\",\"usage\":{\"input_tokens\":42,\"output_tokens\":17,\"cached_tokens\":7}}]}"
     },
     {
       "route": "undo",
@@ -112,7 +112,7 @@
       "status": 200,
       "content_type": "application/json; charset=utf-8",
       "json_ok": true,
-      "body_sample": "{\"success\":true,\"messages\":[{\"id\":\"m_b77eb21f35\",\"role\":\"assistant\",\"content\":\"\",\"parts\":[{\"type\":\"text\",\"text\":\"(Conversation compacted: 1 earlier messages summarized out. Continue from the recent context below.)\"}],\"time\":1790242848},{\"id\":\"m_92af430d77\",\"role\":\"assistant\",\"content\":\"Hello from FAKE_A. This is a streamed reply.\",\"parts\":[{\"type\":\"reasoning\",\"text\":\"Thinking... the user said: \\\"Say hello to the contract\\\". A concise reply is best.\"},{\"type\":\"text\",\"text\":\"Hello from FAKE_A. This is a streamed reply.\"}],\"time\":1790242848,\"model\":\"fast\",\"provider\":\"custom:fakea\",\"usage\":{\"input_tokens\":42,\"output_tokens\":17,\"cached_tokens\":7}}]}"
+      "body_sample": "{\"success\":true,\"messages\":[{\"id\":\"m_133bb96eb3\",\"role\":\"assistant\",\"content\":\"\",\"parts\":[{\"type\":\"text\",\"text\":\"(Conversation compacted: 1 earlier messages summarized out. Continue from the recent context below.)\"}],\"time\":1790427733},{\"id\":\"m_5c89c36020\",\"role\":\"assistant\",\"content\":\"Hello from FAKE_A. This is a streamed reply.\",\"parts\":[{\"type\":\"reasoning\",\"text\":\"Thinking... the user said: \\\"Say hello to the contract\\\". A concise reply is best.\"},{\"type\":\"text\",\"text\":\"Hello from FAKE_A. This is a streamed reply.\"}],\"time\":1790427732,\"model\":\"fast\",\"provider\":\"custom:fakea\",\"usage\":{\"input_tokens\":42,\"output_tokens\":17,\"cached_tokens\":7}}]}"
     },
     {
       "route": "abort",
@@ -152,7 +152,7 @@
       "status": 200,
       "content_type": "application/json; charset=utf-8",
       "json_ok": true,
-      "body_sample": "{\"snapshots\":[{\"id\":\"snap_c8bf9afd65ee\",\"message\":\"write_file: greeting.txt\",\"time\":1790242848}]}"
+      "body_sample": "{\"snapshots\":[{\"id\":\"snap_be6b98a4fb6b\",\"message\":\"write_file: greeting.txt\",\"time\":1790427733}]}"
     },
     {
       "route": "diff",
@@ -184,7 +184,7 @@
       "status": 200,
       "content_type": "application/json; charset=utf-8",
       "json_ok": true,
-      "body_sample": "[{\"project_id\":\"default\",\"name\":\"default\",\"path\":\"/tmp/oc_contract/home/default\",\"type\":\"custom\",\"insid\":null,\"created\":1790242847},{\"project_id\":\"proj_6f998484101c\",\"name\":\"ProjB\",\"path\":\"/tmp/oc_contract/home/projb\",\"type\":\"custom\",\"insid\":null,\"created\":1790242848},{\"project_id\":\"proj_4915afe35314\",\"name\":\"ProjClose\",\"path\":\"/tmp/oc_contract/home/projclose\",\"type\":\"custom\",\"insid\":null,\"created\":1790242848},{\"project_id\":\"proj_7e6d71ee8dea\",\"name\":\"ProjDel\",\"path\":\"/tmp/oc_contract/home/projdel\",\"type\":\"custom\",\"insid\":null,\"created\":1790242848}]"
+      "body_sample": "[{\"project_id\":\"default\",\"name\":\"default\",\"path\":\"/tmp/oc_contract/home/default\",\"type\":\"custom\",\"insid\":null,\"created\":1790427732},{\"project_id\":\"proj_86c7d7fd3068\",\"name\":\"ProjB\",\"path\":\"/tmp/oc_contract/home/projb\",\"type\":\"custom\",\"insid\":null,\"created\":1790427732},{\"project_id\":\"proj_9f3d29c2b76c\",\"name\":\"ProjClose\",\"path\":\"/tmp/oc_contract/home/projclose\",\"type\":\"custom\",\"insid\":null,\"created\":1790427732},{\"project_id\":\"proj_7afe6050593b\",\"name\":\"ProjDel\",\"path\":\"/tmp/oc_contract/home/projdel\",\"type\":\"custom\",\"insid\":null,\"created\":1790427732}]"
     },
     {
       "route": "projects_create",
@@ -192,7 +192,7 @@
       "status": 200,
       "content_type": "application/json; charset=utf-8",
       "json_ok": true,
-      "body_sample": "{\"project_id\":\"proj_6128b2798c68\",\"name\":\"MatrixTmp\",\"path\":\"/tmp/oc_contract/home/matrixtmp\"}"
+      "body_sample": "{\"project_id\":\"proj_37802192575d\",\"name\":\"MatrixTmp\",\"path\":\"/tmp/oc_contract/home/matrixtmp\"}"
     },
     {
       "route": "projects_close",
@@ -321,7 +321,7 @@
       "content_type": "text/plain; charset=utf-8",
       "json_ok": false,
       "sse_protocol_ok": true,
-      "body_sample": "data: {\"_event\":\"iteration-start\",\"conversation_id\":\"conv_5b3ea98ea0c1\",\"iteration\":1}\ndata: {\"_event\":\"reasoning-delta\",\"text\":\"Thinking... the user said: \\\"matrix route check\\\". A concise reply is best.\",\"conversation_id\":\"conv_5b3ea98ea0c1\"}\ndata: {\"_event\":\"text-delta\",\"text\":\"Hello \",\"conversation_id\":\"conv_5b3ea98ea0c1\"}\ndata: {\"_event\":\"text-delta\",\"text\":\"from \",\"conversation_id\":\"conv_5b3ea98ea0c1\"}\ndata: {\"_event\":\"text-delta\",\"text\":\"FAKE_A. \",\"conversation_id\":\"conv_5b3ea98ea0c1\"}\ndata: {\"_event\":\"text-delta\",\"text\":\"This \",\"conversation_id\":\"conv_5b3ea98ea0c1\"}\ndata: {\"_event\":\"text-delta\",\"text\":\"is \",\"conversation_id\":\"conv_5b3ea98ea0c1\"}\ndata: {\"_event\":\"text-delta\",\"text\":\"a \",\"conversation_id\":\"conv_5b3ea98ea0c1\"}\ndata: {\"_event\":\"text-delta\",\"text\":\"streamed \",\"conversat"
+      "body_sample": "data: {\"_event\":\"iteration-start\",\"conversation_id\":\"conv_586f82ff8821\",\"iteration\":1}\ndata: {\"_event\":\"reasoning-delta\",\"text\":\"Thinking... the user said: \\\"matrix route check\\\". A concise reply is best.\",\"conversation_id\":\"conv_586f82ff8821\"}\ndata: {\"_event\":\"text-delta\",\"text\":\"Hello \",\"conversation_id\":\"conv_586f82ff8821\"}\ndata: {\"_event\":\"text-delta\",\"text\":\"from \",\"conversation_id\":\"conv_586f82ff8821\"}\ndata: {\"_event\":\"text-delta\",\"text\":\"FAKE_A. \",\"conversation_id\":\"conv_586f82ff8821\"}\ndata: {\"_event\":\"text-delta\",\"text\":\"This \",\"conversation_id\":\"conv_586f82ff8821\"}\ndata: {\"_event\":\"text-delta\",\"text\":\"is \",\"conversation_id\":\"conv_586f82ff8821\"}\ndata: {\"_event\":\"text-delta\",\"text\":\"a \",\"conversation_id\":\"conv_586f82ff8821\"}\ndata: {\"_event\":\"text-delta\",\"text\":\"streamed \",\"conversat"
     }
   ],
   "all_200": true,

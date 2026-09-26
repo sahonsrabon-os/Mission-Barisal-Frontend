@@ -124,7 +124,7 @@
     {
       "route": "conversation",
       "params": {
-        "conversation_id": "conv_5b3ea98ea0c1"
+        "conversation_id": "conv_586f82ff8821"
       },
       "checks": [
         {
@@ -148,7 +148,7 @@
     {
       "route": "switch_conversation",
       "params": {
-        "conversation_id": "conv_5b3ea98ea0c1"
+        "conversation_id": "conv_586f82ff8821"
       },
       "checks": [
         {
@@ -160,7 +160,7 @@
     {
       "route": "rename_conversation",
       "params": {
-        "conversation_id": "conv_5b3ea98ea0c1",
+        "conversation_id": "conv_586f82ff8821",
         "title": "Renamed session"
       },
       "checks": [
@@ -177,7 +177,7 @@
     {
       "route": "delete_conversation",
       "params": {
-        "conversation_id": "conv_ef94fd81b950"
+        "conversation_id": "conv_588b3662b55d"
       },
       "checks": [
         {
@@ -199,7 +199,7 @@
     {
       "route": "fork",
       "params": {
-        "message_id": "m_349efdd23c"
+        "message_id": "m_44315b233a"
       },
       "checks": [
         {
@@ -263,7 +263,7 @@
     {
       "route": "undo",
       "params": {
-        "message_id": "m_349efdd23c"
+        "message_id": "m_44315b233a"
       },
       "checks": [
         {
@@ -381,7 +381,7 @@
     {
       "route": "diff",
       "params": {
-        "id": "snap_c8bf9afd65ee"
+        "id": "snap_be6b98a4fb6b"
       },
       "checks": [
         {
@@ -397,7 +397,7 @@
     {
       "route": "restore",
       "params": {
-        "id": "snap_c8bf9afd65ee"
+        "id": "snap_be6b98a4fb6b"
       },
       "checks": [
         {
@@ -470,7 +470,7 @@
     {
       "route": "projects_close",
       "params": {
-        "project_id": "proj_4915afe35314"
+        "project_id": "proj_9f3d29c2b76c"
       },
       "checks": [
         {
@@ -482,7 +482,7 @@
     {
       "route": "projects_delete",
       "params": {
-        "project_id": "proj_7e6d71ee8dea"
+        "project_id": "proj_7afe6050593b"
       },
       "checks": [
         {

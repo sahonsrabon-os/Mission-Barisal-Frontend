@@ -5,7 +5,7 @@
   "s6_error_message": "AI request failed: HTTP 500 — {\"error\":{\"message\":\"provider exploded (as scripted)\"}}",
   "usage_sample": {
     "_event": "usage",
-    "conversation_id": "conv_5b3ea98ea0c1",
+    "conversation_id": "conv_586f82ff8821",
     "usage": {
       "input_tokens": 42,
       "output_tokens": 17,
@@ -18,7 +18,7 @@
   },
   "question_sample": {
     "_event": "question",
-    "conversation_id": "conv_af36076c1714",
+    "conversation_id": "conv_f3987815d1f1",
     "question": "Which route should I take?",
     "header": "Route",
     "options": [
